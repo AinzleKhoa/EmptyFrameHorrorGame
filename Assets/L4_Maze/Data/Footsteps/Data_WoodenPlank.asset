@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c964e00b715112419fb418bab20ce77, type: 3}
+  m_Name: Data_WoodenPlank
+  m_EditorClassIdentifier: Assembly-CSharp::FootstepData
+  materialTag: WoodenPlank
+  clips:
+  - {fileID: 8300000, guid: 0bfc7e3078f7e214fa5a8f112c7a523f, type: 3}
+  - {fileID: 8300000, guid: b9b4fd5d8d061bb4b900d4751b88c798, type: 3}
+  - {fileID: 8300000, guid: 168c2355d0ae8d441ac74489901dc9b6, type: 3}
+  - {fileID: 8300000, guid: d502406fad8a86149ac1ac605a2e0100, type: 3}
+  - {fileID: 8300000, guid: 6da4d1aa64a21c5428c2647b64ab7106, type: 3}
