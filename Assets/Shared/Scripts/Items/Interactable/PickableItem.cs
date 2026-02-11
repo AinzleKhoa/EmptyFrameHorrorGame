@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class PickableItem : MonoBehaviour, IInteractable
 {
+    [Header("Item Data")]
+    public string ItemName = "New Item";
+    public Sprite ItemIcon;
+
     [Header("UI Message")]
     [SerializeField] private string _promptMessage = "Press 'E' to Pick Up";
     public string PromptMessage => _promptMessage;
@@ -18,35 +22,33 @@ public class PickableItem : MonoBehaviour, IInteractable
         _col = GetComponent<Collider>();
     }
 
-    public void Interact(PlayerInteractor interactor)
+    public void SetPhysics(bool isEnabled)
     {
-        if (interactor.IsHandFull) return;
-        // Tell interactor we are the held item
-        interactor.SetHeldItem(this);
-        // 1. Physics & Collision logic
-        if (_rb) _rb.isKinematic = true;
-        if (_col) _col.enabled = false; // Prevents Minh from "tripping" on the item
-        // 2. Parenting & Positioning
-        transform.SetParent(interactor.HandSocket);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(_heldRotationOffset);
+        if (_rb) _rb.isKinematic = !isEnabled;
+        if (_col) _col.enabled = isEnabled;
 
-        Debug.Log($"{gameObject.name} Picked Up!");
+        if (isEnabled) // Add a little toss when dropped
+        {
+            _rb.AddForce(transform.forward * 2f + Vector3.up * 1f, ForceMode.Impulse);
+        }
     }
 
-    public void Drop()
+    public void Interact(PlayerInteractor interactor)
     {
-        // 1. Detach
-        transform.SetParent(null);
-        // 2. Re-enable Collisions
-        if (_col) _col.enabled = true;
-        // 3. Re-enable Physics & Add "Toss"
-        if (_rb)
-        {
-            _rb.isKinematic = false;
-            _rb.AddForce(transform.forward * 2f + Vector3.up * 0.5f, ForceMode.Impulse);
-        }
+        // 1. Get the Inventory component from the player
+        PlayerInventory inventory = interactor.GetComponentInParent<PlayerInventory>();
 
-        Debug.Log($"{gameObject.name} Dropped!");
+        if (inventory != null)
+        {
+            // 2. Try to add the item to the inventory
+            inventory.AddItem(this);
+        }
+    }
+
+    // Helper for the Inventory to position the item correctly in the hand
+    public void ApplyHandTransform()
+    {
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.Euler(_heldRotationOffset);
     }
 }

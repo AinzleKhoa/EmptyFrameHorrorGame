@@ -587,6 +587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a88bd59a1a6c5740a3fed65c2f59496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickableItem
+  ItemName: Polaroid Camera
+  ItemIcon: {fileID: 21300000, guid: e0a6dbe51a37bf043b8db5f1da7ee14e, type: 3}
   _promptMessage: Press "E" to Pick Up
   _heldRotationOffset: {x: -90, y: 0, z: 0}
 --- !u!23 &5970784110221467600 stripped

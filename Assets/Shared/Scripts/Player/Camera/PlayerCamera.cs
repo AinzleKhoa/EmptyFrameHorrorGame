@@ -20,6 +20,7 @@ public class PlayerCamera : MonoBehaviour
     [Header("FOV Settings")]
     [SerializeField] private float _baseFOV = 50f;
     [SerializeField] private float _sprintFOV = 60f;
+    [SerializeField] private float _exhaustedFOV = 30f;
     [SerializeField] private float _fovStepTime = 10f;
     [HideInInspector] public float fovOverride = 0; // For FOV changer like Polaroid Camera right-click
 
@@ -68,7 +69,12 @@ public class PlayerCamera : MonoBehaviour
         {
             targetFOV = fovOverride;
         }
-        // Priority 2: Sprinting
+        // Priority 2: Exhausted
+        else if (_movement.isExhausted)
+        {
+            targetFOV = _exhaustedFOV;
+        }
+        // Priority 3: Sprinting
         else if (_movement.isSprinting)
         {
             targetFOV = _sprintFOV;

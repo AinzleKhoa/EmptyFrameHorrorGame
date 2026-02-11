@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
+using NUnit.Framework;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -24,6 +25,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool _enableJump = false;
     [SerializeField] private bool _enableCrouch = true;
 
+    [Header("HUD & Stamina settings")]
+    [SerializeField] private PlayerHUD _playerHUD;
+    [SerializeField] private float _maxStamina = 100f;
+    [SerializeField] private float _drainRate = 20f;   // How fast stamina drops
+    [SerializeField] private float _regenRate = 15f;   // How fast it comes back
+    private float _currentStamina;
+
+    [Header("Out of Breath Settings")]
+    [SerializeField] private float _exhaustedSpeed = 2f;      // Very slow movement
+    [SerializeField] private float _recoveryThreshold = 40f; // Must reach certain percent to run again
+    public bool isExhausted = false;
+
     // Internal States (Other scripts like HeadBob or UI can read these)
     [HideInInspector] public bool isWalking, isSprinting, isCrouched, isGrounded;
     [HideInInspector] public bool isOnCamera = false;
@@ -35,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         originalScale = transform.localScale;
+        _currentStamina = _maxStamina; // Start full
     }
 
     private void Update()
@@ -90,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
 
         // 2. Check if we are moving
         isWalking = input.sqrMagnitude > 0.01f && isGrounded;
-        float currentSpeed = _walkSpeed;
+        float currentSpeed;
 
         if (isOnCamera)
         {
@@ -100,12 +114,24 @@ public class PlayerMovement : MonoBehaviour
             // 2. Slow the player down
             currentSpeed = _speedOnCamera;
         }
-        else
+        else // Sprint OR Crouch
         {
-            bool canSprint = Keyboard.current.leftShiftKey.isPressed && isWalking && !isCrouched;
+            bool canSprint = Keyboard.current.leftShiftKey.isPressed && isWalking && !isCrouched && !isExhausted;
+
             isSprinting = canSprint;
 
-            currentSpeed = isSprinting ? _sprintSpeed : _walkSpeed;
+            // Set speed based on exhaustion first, then sprinting
+            if (isExhausted)
+            {
+                currentSpeed = _exhaustedSpeed;
+            }
+            else
+            {
+                currentSpeed = isSprinting ? _sprintSpeed : _walkSpeed;
+            }
+
+            StaminaLogic(input);
+
             if (isCrouched) currentSpeed *= _crouchSpeedReduction;
         }
 
@@ -115,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
 
         // 5. Apply Force using linearVelocity (Version 1.0.2 Fix)
         Vector3 velocity = rb.linearVelocity;
-        Vector3 velocityChange = (targetVelocity - velocity);
+        Vector3 velocityChange = targetVelocity - velocity;
 
         // Only affect X and Z axis, leave Y (Gravity) alone
         velocityChange.x = Mathf.Clamp(velocityChange.x, -_maxVelocityChange, _maxVelocityChange);
@@ -123,5 +149,39 @@ public class PlayerMovement : MonoBehaviour
         velocityChange.y = 0;
 
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
+    }
+
+    private void StaminaLogic(Vector2 input)
+    {
+        // Handle Draining and Regeneration
+        if (isSprinting && input.sqrMagnitude > 0.01f && !isExhausted)
+        {
+            _currentStamina -= _drainRate * Time.deltaTime;
+        }
+        else
+        {
+            _currentStamina += _regenRate * Time.deltaTime;
+        }
+
+        // Logic for entering/exiting Exhaustion
+        if (_currentStamina <= 0 && !isExhausted)
+        {
+            isExhausted = true;
+        }
+
+        // Player must rest until threshold to stop being exhausted
+        if (isExhausted && _currentStamina >= _recoveryThreshold)
+        {
+            isExhausted = false;
+        }
+
+        // Keep stamina between 0 and Max
+        _currentStamina = Mathf.Clamp(_currentStamina, 0, _maxStamina);
+
+        // Update HUD bar
+        if (_playerHUD != null)
+        {
+            _playerHUD.UpdateStamina(_currentStamina, _maxStamina);
+        }
     }
 }
