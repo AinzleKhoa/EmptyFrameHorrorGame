@@ -417,19 +417,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.25333273
+      value: 0.0041485284
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.2550115
+      value: -0.0054607866
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.660211
+      value: 0.7077285
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.65947944
+      value: 0.7064513
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -437,11 +437,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -89.61301
+      value: 45.386
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 92.479
+      value: 133.836
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_Name
@@ -569,12 +569,9 @@ MonoBehaviour:
   _viewfinderOffClip: {fileID: 8300000, guid: 9ffe5c36174182b49b2f958b870aa480, type: 3}
   _cooldown: 1
   _cameraMesh: {fileID: 5970784110221467600}
-  _movement: {fileID: 0}
-  _normalStateGroup: {fileID: 0}
-  _cameraStateGroup: {fileID: 0}
-  _playerCam: {fileID: 0}
   _zoomFOV: 40
   _mainCam: {fileID: 0}
+  _playerCam: {fileID: 0}
 --- !u!114 &4645627230606298054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,7 +586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickableItem
   ItemName: Polaroid Camera
   ItemIcon: {fileID: 21300000, guid: e0a6dbe51a37bf043b8db5f1da7ee14e, type: 3}
-  _promptMessage: Press "E" to Pick Up
+  _promptMessage: Press [E] to Pick Up
   _heldRotationOffset: {x: -90, y: 0, z: 0}
 --- !u!23 &5970784110221467600 stripped
 MeshRenderer:

@@ -52,6 +52,8 @@ public class PlayerCamera : MonoBehaviour
     private void HandleRotation()
     {
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+
+        // We use root for horizontal (Yaw) and local for vertical (Pitch)
         _yaw = transform.root.localEulerAngles.y + mouseDelta.x * _mouseSensitivity * 0.1f;
         _pitch -= mouseDelta.y * _mouseSensitivity * 0.1f;
         _pitch = Mathf.Clamp(_pitch, -_maxLookAngle, _maxLookAngle);
@@ -64,18 +66,18 @@ public class PlayerCamera : MonoBehaviour
     {
         float targetFOV;
 
-        // Priority 1: Viewfinder Zoom
+        // Priority 1: Viewfinder Zoom (Polaroid Camera)
         if (fovOverride > 0)
         {
             targetFOV = fovOverride;
         }
-        // Priority 2: Exhausted
-        else if (_movement.isExhausted)
+        // Priority 2: Exhausted (From Movement Script)
+        else if (_movement != null && _movement.isExhausted)
         {
             targetFOV = _exhaustedFOV;
         }
-        // Priority 3: Sprinting
-        else if (_movement.isSprinting)
+        // Priority 3: Sprinting (From Movement Script)
+        else if (_movement != null && _movement.isSprinting)
         {
             targetFOV = _sprintFOV;
         }
@@ -90,6 +92,8 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleHeadBob()
     {
+        if (_movement == null) return;
+
         float currentBobSpeed;
         Vector3 currentBobAmount;
 
@@ -105,6 +109,7 @@ public class PlayerCamera : MonoBehaviour
             // Idle/Breathing state
             currentBobSpeed = _idleBobSpeed;
             currentBobAmount = _idleBobAmount;
+
             if (!_enableIdleBob)
             {
                 _timer = 0;

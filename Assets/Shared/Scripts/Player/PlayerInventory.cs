@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class PlayerInventory : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private PlayerHUD _hud;
     [SerializeField] private Transform _handSocket;      // Drag 'HandSocket' here
     [SerializeField] private Transform _inventoryStorage; // Drag 'InventoryStorage' here
 
@@ -13,6 +12,12 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Sprite _defaultEmptyIcon;
     private PickableItem[] _slots = new PickableItem[3];
     private int _currentSlotIndex = 0;
+
+    private void Start()
+    {
+        // Initial broadcast to set HUD slot selection
+        GameEvents.OnSlotSelected?.Invoke(_currentSlotIndex);
+    }
 
     private void Update()
     {
@@ -38,7 +43,8 @@ public class PlayerInventory : MonoBehaviour
                 if (i == _currentSlotIndex) Equip(item);
                 else Store(item);
 
-                _hud.UpdateInventorySlotImage(i, item.ItemIcon);
+                // BROADCAST: Tell the HUD to show this new icon
+                GameEvents.OnInventorySlotUpdate?.Invoke(i, item.ItemIcon);
                 return;
             }
         }
@@ -64,8 +70,8 @@ public class PlayerInventory : MonoBehaviour
             Equip(_slots[_currentSlotIndex]);
         }
 
-        // 4. Update the HUD UI
-        _hud.SetSelectedSlot(_currentSlotIndex);
+        // BROADCAST: Tell the HUD to move the selection highlight
+        GameEvents.OnSlotSelected?.Invoke(_currentSlotIndex);
     }
 
     private void Equip(PickableItem item)
@@ -91,6 +97,8 @@ public class PlayerInventory : MonoBehaviour
         item.SetPhysics(true);
 
         _slots[_currentSlotIndex] = null;
-        _hud.UpdateInventorySlotImage(_currentSlotIndex, _defaultEmptyIcon);
+
+        // BROADCAST: Tell the HUD to show the empty icon for this slot
+        GameEvents.OnInventorySlotUpdate?.Invoke(_currentSlotIndex, _defaultEmptyIcon);
     }
 }

@@ -30,38 +30,31 @@ public class PolaroidCamera : MonoBehaviour
 
     [Header("Camera Rules Settings")]
     [SerializeField] private MeshRenderer _cameraMesh;
-    [SerializeField] private PlayerMovement _movement;
-
-    [Header("HUD Management")]
-    [SerializeField] private GameObject _normalStateGroup;
-    [SerializeField] private GameObject _cameraStateGroup;
-
     [Header("Zoom Settings")]
-    [SerializeField] private PlayerCamera _playerCam;
     [SerializeField] private float _zoomFOV = 40f;
 
     [Header("Spectral Vision")]
-    [SerializeField] private Camera _mainCam; // Drag your Main Camera here
 
-    private bool _isAiming = false;
+    [Header("References")]
+    [SerializeField] private Camera _mainCam; // Drag your Main Camera here
+    [SerializeField] private PlayerCamera _playerCam;
+    private bool _isOnCamera = false;
 
     private void Start()
     {
-        _isAiming = false;
+        _isOnCamera = false;
         if (_playerCam != null) _playerCam.fovOverride = 0;
-        if (_movement != null) _movement.isOnCamera = false;
-        if (_normalStateGroup != null) _normalStateGroup.SetActive(true);
-        if (_cameraStateGroup != null) _cameraStateGroup.SetActive(false);
+        // Initial broadcast to make sure everything starts "Normal"
+        GameEvents.OnCameraToggle?.Invoke(false);
     }
 
     private void OnDisable()
     {
         // Reset everything if the camera is put away or dropped
-        _isAiming = false;
+        _isOnCamera = false;
         if (_playerCam != null) _playerCam.fovOverride = 0;
-        if (_movement != null) _movement.isOnCamera = false;
-        if (_normalStateGroup != null) _normalStateGroup.SetActive(true);
-        if (_cameraStateGroup != null) _cameraStateGroup.SetActive(false);
+        // Broadcast that camera is away
+        GameEvents.OnCameraToggle?.Invoke(false);
     }
 
     private void Update()
@@ -79,35 +72,33 @@ public class PolaroidCamera : MonoBehaviour
 
     private void HandleViewfinder()
     {
-        // Check if the button was clicked (not held)
+        // Both Enable & Disable in one method
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
-            _isAiming = !_isAiming; // Flip the state (True -> False / False -> True)
+            _isOnCamera = !_isOnCamera; // Flip the state (True -> False / False -> True)
 
             // Play the appropriate sound for the new state
-            PlayViewfinderSound(_isAiming ? _viewfinderOnClip : _viewfinderOffClip);
+            PlayViewfinderSound(_isOnCamera ? _viewfinderOnClip : _viewfinderOffClip);
 
             // --- 1. HUD Toggle ---
-            if (_normalStateGroup != null) _normalStateGroup.SetActive(!_isAiming);
-            if (_cameraStateGroup != null) _cameraStateGroup.SetActive(_isAiming);
+            // This tells the HUD, Movement, and Interactor what to do!
+            GameEvents.OnCameraToggle?.Invoke(_isOnCamera);
 
             // --- 2. Hide/Show Camera Model ---
-            if (_cameraMesh != null) _cameraMesh.enabled = !_isAiming;
+            if (_cameraMesh != null) _cameraMesh.enabled = !_isOnCamera;
 
-            // --- 3. Modify Movement & FOV ---
-            if (_movement != null) _movement.isOnCamera = _isAiming;
-
+            // --- 3. Camera FOV ---
             if (_playerCam != null)
             {
-                _playerCam.fovOverride = _isAiming ? _zoomFOV : 0;
+                _playerCam.fovOverride = _isOnCamera ? _zoomFOV : 0;
             }
 
             // --- 4. Spectral Vision ---
             if (_mainCam != null)
             {
                 int spectralLayer = LayerMask.NameToLayer("Spectral");
-                if (_isAiming)
-                    _mainCam.cullingMask |= (1 << spectralLayer);
+                if (_isOnCamera)
+                    _mainCam.cullingMask |= 1 << spectralLayer;
                 else
                     _mainCam.cullingMask &= ~(1 << spectralLayer);
             }

@@ -25,6 +25,8 @@ public class PlayerFootsteps : MonoBehaviour
 
     private void Update()
     {
+        if (_movement == null) return;
+
         // Only run timer if moving and on the ground
         if (_movement.isWalking && _movement.isGrounded)
         {

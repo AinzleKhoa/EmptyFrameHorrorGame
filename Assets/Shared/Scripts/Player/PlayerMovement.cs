@@ -1,10 +1,7 @@
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
-using NUnit.Framework;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -26,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool _enableCrouch = true;
 
     [Header("HUD & Stamina settings")]
-    [SerializeField] private PlayerHUD _playerHUD;
     [SerializeField] private float _maxStamina = 100f;
     [SerializeField] private float _drainRate = 20f;   // How fast stamina drops
     [SerializeField] private float _regenRate = 15f;   // How fast it comes back
@@ -39,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Internal States (Other scripts like HeadBob or UI can read these)
     [HideInInspector] public bool isWalking, isSprinting, isCrouched, isGrounded;
-    [HideInInspector] public bool isOnCamera = false;
+    private bool _isUsingCamera = false; // Local state updated by events
 
     private Vector3 originalScale;
 
@@ -49,6 +45,25 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         originalScale = transform.localScale;
         _currentStamina = _maxStamina; // Start full
+    }
+
+    // --- NEW EVENT SYSTEM LOGIC ---
+    private void OnEnable()
+    {
+        // Subscribe to the camera toggle event
+        GameEvents.OnCameraToggle += HandleCameraStateChange;
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe to prevent memory leaks
+        GameEvents.OnCameraToggle -= HandleCameraStateChange;
+    }
+
+    // Handles the signal from the camera
+    private void HandleCameraStateChange(bool isOnCamera)
+    {
+        _isUsingCamera = isOnCamera;
     }
 
     private void Update()
@@ -106,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
         isWalking = input.sqrMagnitude > 0.01f && isGrounded;
         float currentSpeed;
 
-        if (isOnCamera)
+        if (_isUsingCamera) // Not in normal state
         {
             // 1. Force sprinting off
             isSprinting = false;
@@ -154,20 +169,12 @@ public class PlayerMovement : MonoBehaviour
     private void StaminaLogic(Vector2 input)
     {
         // Handle Draining and Regeneration
-        if (isSprinting && input.sqrMagnitude > 0.01f && !isExhausted)
-        {
-            _currentStamina -= _drainRate * Time.deltaTime;
-        }
-        else
-        {
-            _currentStamina += _regenRate * Time.deltaTime;
-        }
+        if (isSprinting && input.sqrMagnitude > 0.01f && !isExhausted) _currentStamina -= _drainRate * Time.deltaTime;
+        else _currentStamina += _regenRate * Time.deltaTime;
 
         // Logic for entering/exiting Exhaustion
-        if (_currentStamina <= 0 && !isExhausted)
-        {
-            isExhausted = true;
-        }
+        if (_currentStamina <= 0 && !isExhausted) isExhausted = true;
+        if (isExhausted && _currentStamina >= _recoveryThreshold) isExhausted = false;
 
         // Player must rest until threshold to stop being exhausted
         if (isExhausted && _currentStamina >= _recoveryThreshold)
@@ -179,9 +186,6 @@ public class PlayerMovement : MonoBehaviour
         _currentStamina = Mathf.Clamp(_currentStamina, 0, _maxStamina);
 
         // Update HUD bar
-        if (_playerHUD != null)
-        {
-            _playerHUD.UpdateStamina(_currentStamina, _maxStamina);
-        }
+        GameEvents.OnStaminaUpdate?.Invoke(_currentStamina, _maxStamina);
     }
 }

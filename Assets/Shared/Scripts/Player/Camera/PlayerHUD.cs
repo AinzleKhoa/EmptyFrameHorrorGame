@@ -21,6 +21,46 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private float _transitionSpeed = 10f;
     private Vector3 _targetPos;
 
+    [Header("Counter Text")]
+    [SerializeField] private TextMeshProUGUI _hudCounterText;
+    [SerializeField] private TextMeshProUGUI _hudStageNameText;
+
+    [Header("HUD Management")]
+    [SerializeField] private GameObject _normalStateGroup;
+    [SerializeField] private GameObject _cameraStateGroup;
+
+    private void OnEnable()
+    {
+        // Listening for the PlayerMovement's stamina broadcast
+        GameEvents.OnStaminaUpdate += UpdateStamina;
+
+        // Listening for the PolaroidCamera's state broadcast
+        GameEvents.OnCameraToggle += HandleCameraStateChange;
+
+        // Listening for the Inventory's slot updates
+        GameEvents.OnInventorySlotUpdate += UpdateInventorySlotImage;
+        GameEvents.OnSlotSelected += SetSelectedSlot;
+
+        // Listening for the Progression Manager's updates
+        GameEvents.OnFragmentUpdate += UpdateFragmentProgression;
+        GameEvents.OnStageNameUpdate += UpdateStageName;
+
+        // Listening for Interactor's prompt requests
+        GameEvents.OnInteractionPromptReq += SetInteractionPrompt;
+    }
+
+    private void OnDisable()
+    {
+        // Always unsubscribe to prevent "Ghost" functions running in the background
+        GameEvents.OnStaminaUpdate -= UpdateStamina;
+        GameEvents.OnCameraToggle -= HandleCameraStateChange;
+        GameEvents.OnInventorySlotUpdate -= UpdateInventorySlotImage;
+        GameEvents.OnSlotSelected -= SetSelectedSlot;
+        GameEvents.OnFragmentUpdate -= UpdateFragmentProgression;
+        GameEvents.OnStageNameUpdate -= UpdateStageName;
+        GameEvents.OnInteractionPromptReq -= SetInteractionPrompt;
+    }
+
     private void Awake()
     {
         _sprintModule.alpha = 0f; // Hide on initalization
@@ -30,6 +70,27 @@ public class PlayerHUD : MonoBehaviour
     {
         // Smoothly slide the highlight to the selected slot
         _selectionHighlight.position = Vector3.Lerp(_selectionHighlight.position, _targetPos, Time.deltaTime * _transitionSpeed);
+    }
+
+    private void HandleCameraStateChange(bool isOnCamera)
+    {
+        if (isOnCamera)
+            EnableCameraState();
+        else
+            EnableNormalState();
+    }
+
+    // --- HUD STATE ---
+    public void EnableNormalState()
+    {
+        if (_normalStateGroup != null) _normalStateGroup.SetActive(true);
+        if (_cameraStateGroup != null) _cameraStateGroup.SetActive(false);
+    }
+
+    public void EnableCameraState()
+    {
+        if (_normalStateGroup != null) _normalStateGroup.SetActive(false);
+        if (_cameraStateGroup != null) _cameraStateGroup.SetActive(true);
     }
 
     // --- STAMINA / SPRINT BAR LOGIC ---
@@ -51,7 +112,7 @@ public class PlayerHUD : MonoBehaviour
             _sprintModule.alpha = 0f; // Hide
         }
     }
-    // --- INTERACTION LOGIC ---
+    // --- INTERACTION PROMPT LOGIC ---
     public void SetInteractionPrompt(string message, bool canInteract)
     {
         if (_promptText == null) return;
@@ -86,5 +147,15 @@ public class PlayerHUD : MonoBehaviour
             _targetPos = _slotPositions[index].position;
             _selectionHighlight.gameObject.SetActive(true);
         }
+    }
+
+    public void UpdateFragmentProgression(int _currentCount, int _totalRequired)
+    {
+        if (_hudCounterText != null) _hudCounterText.text = $"{_currentCount}/{_totalRequired}";
+    }
+
+    public void UpdateStageName(string stageName)
+    {
+        if (_hudStageNameText != null) _hudStageNameText.text = stageName;
     }
 }
