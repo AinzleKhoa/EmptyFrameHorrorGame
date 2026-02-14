@@ -10,16 +10,24 @@ public class PickableItem : MonoBehaviour, IInteractable
     [SerializeField] private string _promptMessage = "Press 'E' to Pick Up";
     public string PromptMessage => _promptMessage;
 
-    [Header("Holding Settings")]
-    [SerializeField] private Vector3 _heldRotationOffset; // The custom rotation for the hand
+    [Header("Hand Transform Settings")]
+    [SerializeField] private Vector3 _heldPositionOffset;
+    [SerializeField] private Vector3 _heldRotationOffset;
+
+    [Tooltip("Scale Multiplier: 1 = same as floor, 2 = double size, 0.5 = half size")]
+    [SerializeField] private float _handScaleMultiplier = 1.0f; // Simplified to a single float
 
     private Rigidbody _rb;
     private Collider _col;
+    private Vector3 _originalScale;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<Collider>();
+
+        // Save the tiny scale it has when it's sitting in the world
+        _originalScale = transform.localScale;
     }
 
     public void SetPhysics(bool isEnabled)
@@ -27,28 +35,29 @@ public class PickableItem : MonoBehaviour, IInteractable
         if (_rb) _rb.isKinematic = !isEnabled;
         if (_col) _col.enabled = isEnabled;
 
-        if (isEnabled) // Add a little toss when dropped
+        if (isEnabled)
         {
+            // Reset to that tiny original scale when dropped
+            transform.localScale = _originalScale;
             _rb.AddForce(transform.forward * 2f + Vector3.up * 1f, ForceMode.Impulse);
         }
     }
 
     public void Interact(PlayerInteractor interactor)
     {
-        // 1. Get the Inventory component from the player
         PlayerInventory inventory = interactor.GetComponentInParent<PlayerInventory>();
-
         if (inventory != null)
         {
-            // 2. Try to add the item to the inventory
             inventory.AddItem(this);
         }
     }
 
-    // Helper for the Inventory to position the item correctly in the hand
     public void ApplyHandTransform()
     {
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = _heldPositionOffset;
         transform.localRotation = Quaternion.Euler(_heldRotationOffset);
+
+        // CALCULATED SCALE: Original size (e.g. 0.01) * Multiplier (e.g. 2.0)
+        transform.localScale = _originalScale * _handScaleMultiplier;
     }
 }

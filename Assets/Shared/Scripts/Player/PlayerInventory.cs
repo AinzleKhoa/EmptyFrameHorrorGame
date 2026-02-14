@@ -13,12 +13,6 @@ public class PlayerInventory : MonoBehaviour
     private PickableItem[] _slots = new PickableItem[3];
     private int _currentSlotIndex = 0;
 
-    private void Start()
-    {
-        // Initial broadcast to set HUD slot selection
-        GameEvents.OnSlotSelected?.Invoke(_currentSlotIndex);
-    }
-
     private void Update()
     {
         // 2. New Input System syntax

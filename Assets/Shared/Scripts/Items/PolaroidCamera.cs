@@ -40,15 +40,10 @@ public class PolaroidCamera : MonoBehaviour
     [SerializeField] private PlayerCamera _playerCam;
     private bool _isOnCamera = false;
 
-    private void Start()
-    {
-        _isOnCamera = false;
-        if (_playerCam != null) _playerCam.fovOverride = 0;
-        // Initial broadcast to make sure everything starts "Normal"
-        GameEvents.OnCameraToggle?.Invoke(false);
-    }
+    private void Start() => ResetLogic();
+    private void OnDisable() => ResetLogic();
 
-    private void OnDisable()
+    private void ResetLogic()
     {
         // Reset everything if the camera is put away or dropped
         _isOnCamera = false;
@@ -60,7 +55,7 @@ public class PolaroidCamera : MonoBehaviour
     private void Update()
     {
         // Only run if the camera is held
-        if (transform.parent == null) return;
+        if (transform.parent == null || !transform.parent.CompareTag("HandSocket")) return;
 
         if (Mouse.current.leftButton.wasPressedThisFrame && Time.time >= _lastPhotoTime + _cooldown)
         {

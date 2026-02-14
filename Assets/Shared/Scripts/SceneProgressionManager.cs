@@ -14,6 +14,9 @@ public class SceneProgressionManager : MonoBehaviour
     [SerializeField] private int _totalRequired = 3;
     private int _currentCount = 0;
 
+    [Header("Stage Transition")]
+    [SerializeField] private string _nextSceneName;
+
     private void Start()
     {
         GameEvents.OnFragmentUpdate?.Invoke(_currentCount, _totalRequired);
@@ -28,7 +31,11 @@ public class SceneProgressionManager : MonoBehaviour
     }
     private void ObjectiveComplete()
     {
+        // 1. Trigger local logic (e.g., a door opening sound in this level)
         Debug.Log("Objective Complete!");
         OnAllCollectedLocal?.Invoke();
+
+        // 2. Trigger global logic (e.g., update UI, enable next level transition)
+        GameEvents.OnLevelTransitionStarted?.Invoke(_nextSceneName);
     }
 }
