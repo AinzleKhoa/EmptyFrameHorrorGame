@@ -13,6 +13,9 @@ public static class GameEvents
     // Lighter
     public static Action<bool> OnLighterToggle; //  true = Lighter is ON, false = Lighter is OFF
 
+    // Flashlight
+    public static Action<bool> OnFlashlightToggle; //  true = Flashlight is ON, false = Flashlight is OFF
+
     // UI & Inventory
     public static Action<float, float> OnStaminaUpdate;
     public static Action<int, Sprite> OnInventorySlotUpdate;

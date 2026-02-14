@@ -3,7 +3,12 @@ guid: 9f87b8d087588274dbd80cc04d4b1359
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: painted_wooden_nightstand
+    second: {fileID: 2100000, guid: b884c0864b841144a87be9ae96c38baa, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

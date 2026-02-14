@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c02e6161aa0a607429af2ce561f6d0a6
+guid: 8e79e0722792b814e9c41b5dd11f8e25
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: wooden_candlestick
-    second: {fileID: 2100000, guid: a63a426a8db842b4fa778fee54e85ad0, type: 2}
+      name: Glass
+    second: {fileID: 2100000, guid: b0487528276d3d249abbabb4af369abd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Flashlight
+    second: {fileID: 2100000, guid: 4147bab536038094c891532842b2b34a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
