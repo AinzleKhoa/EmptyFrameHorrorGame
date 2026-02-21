@@ -506,63 +506,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1001 &87539020
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.0379424
-      objectReference: {fileID: 0}
-    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.0135008
-      objectReference: {fileID: 0}
-    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.942369
-      objectReference: {fileID: 0}
-    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.0072947918
-      objectReference: {fileID: 0}
-    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.70612204
-      objectReference: {fileID: 0}
-    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.032486808
-      objectReference: {fileID: 0}
-    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.70730686
-      objectReference: {fileID: 0}
-    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -3.225
-      objectReference: {fileID: 0}
-    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 89.961
-      objectReference: {fileID: 0}
-    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 177.959
-      objectReference: {fileID: 0}
-    - target: {fileID: 7683744528194572844, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
-      propertyPath: m_Name
-      value: Flashlight
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
 --- !u!43 &88586235
 Mesh:
   m_ObjectHideFlags: 0
@@ -7192,62 +7135,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: _runSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: _chaseSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: _minTravelDistance
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: _roomWaypoints.Array.size
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[0]'
-      value: 
-      objectReference: {fileID: 297225653}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[1]'
-      value: 
-      objectReference: {fileID: 853932268}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[2]'
-      value: 
-      objectReference: {fileID: 1318396237}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[3]'
-      value: 
-      objectReference: {fileID: 2010950075}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[4]'
-      value: 
-      objectReference: {fileID: 816420010}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[5]'
-      value: 
-      objectReference: {fileID: 537083500}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[6]'
-      value: 
-      objectReference: {fileID: 43619595}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[7]'
-      value: 
-      objectReference: {fileID: 2061396903}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[8]'
-      value: 
-      objectReference: {fileID: 1436070983}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[9]'
-      value: 
-      objectReference: {fileID: 786533170}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
       propertyPath: '_roomWaypoints.Array.data[0]'
       value: 
       objectReference: {fileID: 297225653}
@@ -7287,18 +7174,6 @@ PrefabInstance:
       propertyPath: '_roomWaypoints.Array.data[9]'
       value: 
       objectReference: {fileID: 786533170}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[10]'
-      value: 
-      objectReference: {fileID: 747275962}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[11]'
-      value: 
-      objectReference: {fileID: 1498334448}
-    - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
-      propertyPath: 'roomWaypoints.Array.data[12]'
-      value: 
-      objectReference: {fileID: 1309057172}
     - target: {fileID: 604824396602272777, guid: 0430a20c472a6cf46be83b677948abf2, type: 3}
       propertyPath: '_roomWaypoints.Array.data[10]'
       value: 
@@ -56108,7 +55983,6 @@ SceneRoots:
   - {fileID: 945897076}
   - {fileID: 478636366}
   - {fileID: 1015440826}
-  - {fileID: 87539020}
   - {fileID: 645369557}
   - {fileID: 929477097}
   - {fileID: 819819958}
