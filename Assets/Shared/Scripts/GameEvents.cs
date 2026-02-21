@@ -7,6 +7,10 @@ public static class GameEvents
     public static Action<int, int> OnFragmentUpdate;
     public static Action<string> OnStageNameUpdate;
 
+    // Item Status
+    public static Action<string, float> OnItemStatusUpdate; // 0 to 1 representing cooldown progress
+    public static Action<string, Sprite> OnItemEquipped;
+
     // Camera & State
     public static Action<bool> OnCameraToggle; // true = Camera State, false = Normal State
 
@@ -24,4 +28,8 @@ public static class GameEvents
 
     // Level Transition
     public static Action<string> OnLevelTransitionStarted;
+
+    // Monster interactions
+    public static Action<bool> OnMonsterIsHit;
+    public static Action<string> OnPlayerMovementState;
 }

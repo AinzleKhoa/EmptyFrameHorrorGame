@@ -4,10 +4,16 @@ using TMPro; // Highly recommended for future-proof text
 
 public class PlayerHUD : MonoBehaviour
 {
-    [Header("Modules")]
+    [Header("Sprint Modules")]
     [SerializeField] private CanvasGroup _sprintModule; // The SprintBar object
     [SerializeField] private Image _staminaFill;       // The Stamina object
-    [SerializeField] private Image _crosshair;         // The Reticle/Crosshair object
+    [SerializeField] private Image _crosshair;         // The Reticle/Crosshair
+
+    [Header("Item Status Modules")]
+    [SerializeField] private CanvasGroup _itemStatusModule; // The ItemStatus object
+    [SerializeField] private Image _itemStatusIcon;  // The ItemStatusIcon object
+    [SerializeField] private TextMeshProUGUI _statusText; // Drag the 'Charging...' text here
+    [SerializeField] private Image _itemStatusFill;
 
     [Header("Interaction")]
     [SerializeField] private TextMeshProUGUI _promptText; // Drag 'InteractionPrompt' object here
@@ -47,6 +53,9 @@ public class PlayerHUD : MonoBehaviour
 
         // Listening for Interactor's prompt requests
         GameEvents.OnInteractionPromptReq += SetInteractionPrompt;
+
+        GameEvents.OnItemEquipped += HandleItemEquipped;
+        GameEvents.OnItemStatusUpdate += HandleItemStatusUpdate;
     }
 
     private void OnDisable()
@@ -59,11 +68,14 @@ public class PlayerHUD : MonoBehaviour
         GameEvents.OnFragmentUpdate -= UpdateFragmentProgression;
         GameEvents.OnStageNameUpdate -= UpdateStageName;
         GameEvents.OnInteractionPromptReq -= SetInteractionPrompt;
+        GameEvents.OnItemEquipped -= HandleItemEquipped;
+        GameEvents.OnItemStatusUpdate -= HandleItemStatusUpdate;
     }
 
     private void Awake()
     {
         _sprintModule.alpha = 0f; // Hide on initalization
+        _itemStatusModule.alpha = 0f; // Hide on initalization
     }
 
     private void Update()
@@ -81,20 +93,20 @@ public class PlayerHUD : MonoBehaviour
     }
 
     // --- HUD STATE ---
-    public void EnableNormalState()
+    private void EnableNormalState()
     {
         if (_normalStateGroup != null) _normalStateGroup.SetActive(true);
         if (_cameraStateGroup != null) _cameraStateGroup.SetActive(false);
     }
 
-    public void EnableCameraState()
+    private void EnableCameraState()
     {
         if (_normalStateGroup != null) _normalStateGroup.SetActive(false);
         if (_cameraStateGroup != null) _cameraStateGroup.SetActive(true);
     }
 
     // --- STAMINA / SPRINT BAR LOGIC ---
-    public void UpdateStamina(float currentStamina, float maxStamina)
+    private void UpdateStamina(float currentStamina, float maxStamina)
     {
         if (_sprintModule == null || _staminaFill == null) return;
 
@@ -113,7 +125,7 @@ public class PlayerHUD : MonoBehaviour
         }
     }
     // --- INTERACTION PROMPT LOGIC ---
-    public void SetInteractionPrompt(string message, bool canInteract)
+    private void SetInteractionPrompt(string message, bool canInteract)
     {
         if (_promptText == null) return;
 
@@ -131,7 +143,7 @@ public class PlayerHUD : MonoBehaviour
     }
 
     // --- INVENTORY LOGIC ---
-    public void UpdateInventorySlotImage(int index, Sprite icon)
+    private void UpdateInventorySlotImage(int index, Sprite icon)
     {
         if (index < _inventoryItemIcon.Length)
         {
@@ -140,7 +152,7 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
-    public void SetSelectedSlot(int index)
+    private void SetSelectedSlot(int index)
     {
         if (index >= 0 && index < _slotPositions.Length)
         {
@@ -149,12 +161,52 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
-    public void UpdateFragmentProgression(int _currentCount, int _totalRequired)
+    // --- ITEM STATUS LOGIC ---
+    private void HandleItemEquipped(string itemName, Sprite itemStatusIcon) // Interact with PlayerInventory through PickableItem
+    {
+        if (_itemStatusModule == null || _itemStatusIcon == null) return;
+
+        // Only show for the camera for now, can expand later
+        if (itemName != "PolaroidCamera")
+        {
+            _itemStatusModule.alpha = 0f;
+            _itemStatusIcon.sprite = null;
+        }
+        else
+        {
+            _itemStatusModule.alpha = 1f; // Show module
+            _itemStatusIcon.sprite = itemStatusIcon;
+        }
+    }
+
+    private void HandleItemStatusUpdate(string itemName, float progress)
+    {
+        if (_itemStatusModule == null || _statusText == null) return;
+        if (itemName != "PolaroidCamera") return;
+
+        _itemStatusFill.fillAmount = progress;
+
+        if (progress >= 1f)
+        {
+            _statusText.text = "READY";
+            _statusText.color = Color.green; // Optional: Visual cue
+            _itemStatusFill.color = Color.green;
+        }
+        else
+        {
+            _statusText.text = "CHARGING...";
+            _statusText.color = Color.red;
+            _itemStatusFill.color = Color.red;
+        }
+    }
+
+    // --- PROGRESSION HUD LOGIC ---
+    private void UpdateFragmentProgression(int _currentCount, int _totalRequired)
     {
         if (_hudCounterText != null) _hudCounterText.text = $"{_currentCount}/{_totalRequired}";
     }
 
-    public void UpdateStageName(string stageName)
+    private void UpdateStageName(string stageName)
     {
         if (_hudStageNameText != null) _hudStageNameText.text = stageName;
     }

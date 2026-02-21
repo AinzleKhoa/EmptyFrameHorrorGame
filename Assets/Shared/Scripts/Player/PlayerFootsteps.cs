@@ -19,7 +19,6 @@ public class PlayerFootsteps : MonoBehaviour
     [Header("Interval Settings")]
     [SerializeField] private float _baseStepInterval = 0.8f;
     [SerializeField] private float _sprintStepInterval = 0.3f;
-    [SerializeField] private float _crouchStepInterval = 1f;
 
     private float _stepTimer;
 
@@ -27,8 +26,8 @@ public class PlayerFootsteps : MonoBehaviour
     {
         if (_movement == null) return;
 
-        // Only run timer if moving and on the ground
-        if (_movement.isWalking && _movement.isGrounded)
+        // Only run timer if moving and on the ground, or crouched
+        if (_movement.isWalking && _movement.isGrounded && !_movement.isCrouched)
         {
             HandleFootsteps();
         }
@@ -40,6 +39,12 @@ public class PlayerFootsteps : MonoBehaviour
 
     private void HandleFootsteps()
     {
+        // we force the timer down to trigger a sound sooner.
+        if (_movement.isSprinting && _stepTimer > _sprintStepInterval)
+        {
+            _stepTimer = 0; // Force an immediate step when starting a sprint
+        }
+
         _stepTimer -= Time.deltaTime;
 
         if (_stepTimer <= 0)
@@ -49,7 +54,6 @@ public class PlayerFootsteps : MonoBehaviour
             // Calculate next interval
             float interval = _baseStepInterval;
             if (_movement.isSprinting) interval = _sprintStepInterval;
-            else if (_movement.isCrouched) interval = _crouchStepInterval;
 
             _stepTimer = interval;
         }
@@ -79,6 +83,8 @@ public class PlayerFootsteps : MonoBehaviour
     private void PlayRandomClip(AudioClip[] clips)
     {
         int index = Random.Range(0, clips.Length);
+        // Add a random pitch between 0.9 and 1.1
+        _audioSource.pitch = Random.Range(0.9f, 1.1f);
         _audioSource.PlayOneShot(clips[index]);
     }
 }

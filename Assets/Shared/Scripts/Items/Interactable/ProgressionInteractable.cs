@@ -3,7 +3,7 @@ using UnityEngine;
 public class ProgressionInteractable : MonoBehaviour, IInteractable
 {
     [Header("UI Message")]
-    [SerializeField] private string _promptMessage = "Press 'E' to Interact";
+    [SerializeField] private string _promptMessage = "Press [E] to Collect Fragment";
     public string PromptMessage => _promptMessage;
 
     [Header("Reference")]

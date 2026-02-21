@@ -54,7 +54,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -89,7 +89,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -266,15 +266,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.0379424
+      value: -2.5486
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0135008
+      value: 1.0563
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.942369
+      value: -7.9097
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalRotation.w

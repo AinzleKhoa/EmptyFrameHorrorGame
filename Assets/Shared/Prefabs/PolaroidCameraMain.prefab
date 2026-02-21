@@ -305,10 +305,10 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 64
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 20
+  MaxDistance: 40
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -405,31 +405,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.634094
+      value: -3.901
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0135009
+      value: 1.001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.6703515
+      value: -7.618
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6565305
+      value: 0.0041485284
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.65724283
+      value: -0.0054607866
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.26256692
+      value: 0.7077285
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.26087978
+      value: 0.7064513
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -437,11 +437,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 45.384995
+      value: 45.386
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -88.83301
+      value: 133.836
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_Name
@@ -564,14 +564,20 @@ MonoBehaviour:
   _flashColor: {r: 0.9019608, g: 0.9490196, b: 1, a: 0}
   _flashDuration: 0.1
   _audioSource: {fileID: 3132616677380449643}
+  _clickSound: {fileID: 8300000, guid: 13b31874aa850b84498fc61fbdde83c3, type: 3}
   _photoShutter: {fileID: 8300000, guid: 6b8ecd59739b1404ba05ce09f1426316, type: 3}
   _viewfinderOnClip: {fileID: 8300000, guid: 1ae8325f86bf3724a828f0d353930471, type: 3}
   _viewfinderOffClip: {fileID: 8300000, guid: 9ffe5c36174182b49b2f958b870aa480, type: 3}
-  _cooldown: 1
+  _cooldown: 30
   _cameraMesh: {fileID: 5970784110221467600}
   _zoomFOV: 40
   _mainCam: {fileID: 0}
   _playerCam: {fileID: 0}
+  flashRange: 20
+  flashAngle: 60
+  monsterLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &4645627230606298054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a88bd59a1a6c5740a3fed65c2f59496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickableItem
-  ItemName: Polaroid Camera
+  ItemName: PolaroidCamera
   ItemIcon: {fileID: 21300000, guid: e0a6dbe51a37bf043b8db5f1da7ee14e, type: 3}
   _promptMessage: Press [E] to Pick Up
   _heldPositionOffset: {x: 0, y: 0, z: 0}

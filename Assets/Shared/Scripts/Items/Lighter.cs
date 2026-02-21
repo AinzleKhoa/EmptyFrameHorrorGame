@@ -3,6 +3,10 @@ using UnityEngine.InputSystem;
 
 public class Lighter : MonoBehaviour
 {
+    [Header("Item Name: Lighter")]
+
+    [Space(15)]
+
     [Header("Lighter Visuals")]
     [SerializeField] private ParticleSystem _flameParticles;
     [Header("Point Light")]

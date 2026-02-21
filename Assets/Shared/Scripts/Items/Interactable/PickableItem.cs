@@ -5,7 +5,6 @@ public class PickableItem : MonoBehaviour, IInteractable
     [Header("Item Data")]
     public string ItemName = "New Item";
     public Sprite ItemIcon;
-
     [Header("UI Message")]
     [SerializeField] private string _promptMessage = "Press [E] to Pick Up";
     public string PromptMessage => _promptMessage;

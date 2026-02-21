@@ -80,6 +80,9 @@ public class PlayerMovement : MonoBehaviour
         {
             ToggleCrouch();
         }
+
+        // 4. Handle Noise Emission for Monsters
+        HandleNoiseEmission();
     }
 
     private void FixedUpdate()
@@ -98,9 +101,27 @@ public class PlayerMovement : MonoBehaviour
     private void ToggleCrouch()
     {
         isCrouched = !isCrouched;
-        transform.localScale = isCrouched
-                                ? new Vector3(originalScale.x, _crouchHeight, originalScale.z)
-                                : originalScale;
+
+        // Calculate how much we are shrinking
+        float heightDifference = originalScale.y - _crouchHeight;
+
+        if (isCrouched)
+        {
+            // 1. Shrink the player
+            transform.localScale = new Vector3(originalScale.x, _crouchHeight, originalScale.z);
+
+            // 2. Lower the position so the feet stay on the floor 
+            // We move down by half the difference because scaling happens from the center
+            transform.position -= new Vector3(0, heightDifference / 2f, 0);
+        }
+        else
+        {
+            // 1. Return to full size
+            transform.localScale = originalScale;
+
+            // 2. Raise the position back up
+            transform.position += new Vector3(0, heightDifference / 2f, 0);
+        }
     }
 
     private void Jump()
@@ -164,6 +185,37 @@ public class PlayerMovement : MonoBehaviour
         velocityChange.y = 0;
 
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
+    }
+
+    private void HandleNoiseEmission()
+    {
+        if (isCrouched)
+        {
+            GameEvents.OnPlayerMovementState?.Invoke("Crouched");
+            return;
+        }
+
+        // Get the horizontal speed (ignoring falling/jumping speed)
+        float horizontalSpeed = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z).magnitude;
+
+        // Define thresholds based on your speeds
+        // _walkSpeed is 4.5f, _sprintSpeed is 8f
+        bool isMakingRunningNoise = horizontalSpeed > 5.5f;
+        bool isMakingWalkingNoise = horizontalSpeed > 0.1f && !isMakingRunningNoise;
+
+        // We only send a signal if the player is physically moving
+        if (isMakingRunningNoise)
+        {
+            GameEvents.OnPlayerMovementState?.Invoke("Sprinting");
+        }
+        else if (isMakingWalkingNoise)
+        {
+            GameEvents.OnPlayerMovementState?.Invoke("Walking");
+        }
+        else
+        {
+            GameEvents.OnPlayerMovementState?.Invoke("Idle");
+        }
     }
 
     private void StaminaLogic(Vector2 input)

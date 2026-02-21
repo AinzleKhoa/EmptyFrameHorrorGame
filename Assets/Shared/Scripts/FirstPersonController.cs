@@ -260,7 +260,7 @@ public class FirstPersonController : MonoBehaviour
 
             // FIX: Using linearVelocity instead of velocity
             Vector3 velocity = rb.linearVelocity;
-            Vector3 velocityChange = (targetVelocity - velocity);
+            Vector3 velocityChange = targetVelocity - velocity;
             velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
             velocityChange.y = 0;

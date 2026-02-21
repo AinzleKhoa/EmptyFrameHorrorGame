@@ -74,6 +74,9 @@ public class PlayerInventory : MonoBehaviour
         item.gameObject.SetActive(true);
         // Use the item's own logic for its specific rotation
         item.ApplyHandTransform();
+
+        // BROADCAST: Tell the HUD what item is now equipped (for status effects, etc)
+        GameEvents.OnItemEquipped?.Invoke(item.ItemName, item.ItemIcon);
     }
 
     private void Store(PickableItem item)
@@ -94,5 +97,10 @@ public class PlayerInventory : MonoBehaviour
 
         // BROADCAST: Tell the HUD to show the empty icon for this slot
         GameEvents.OnInventorySlotUpdate?.Invoke(_currentSlotIndex, _defaultEmptyIcon);
+        // BROADCAST: Tell the HUD that nothing is equipped (for status effects, etc)
+        if (item.ItemName == "PolaroidCamera")
+        {
+            GameEvents.OnItemEquipped?.Invoke("None", null);
+        }
     }
 }

@@ -3,6 +3,10 @@ using UnityEngine.InputSystem;
 
 public class Flashlight : MonoBehaviour
 {
+    [Header("Item Name: Flashlight")]
+
+    [Space(15)]
+
     [Header("Spot Light")]
     [SerializeField] private Light _spotLight;
     [SerializeField] private float _spotIntensity = 40f;

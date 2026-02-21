@@ -7,6 +7,8 @@ TagManager:
   - Interactable
   - WoodenPlank
   - HandSocket
+  - Monster
+  - Monster_OE
   layers:
   - Default
   - TransparentFX
@@ -17,9 +19,9 @@ TagManager:
   - Ground
   - Interactable
   - Spectral
-  - 
-  - 
-  - 
+  - Wall
+  - Monster
+  - Monster
   - 
   - 
   - 

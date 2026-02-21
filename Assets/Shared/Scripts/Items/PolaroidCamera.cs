@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PolaroidCamera : MonoBehaviour
 {
+    [Header("Item Name: PolaroidCamera")]
+
+    [Space(15)]
+
     [Header("Point Light (Glow)")]
     [SerializeField] private Light _pointLight;
     [SerializeField] private float _pointIntensity = 5f;
@@ -20,12 +24,14 @@ public class PolaroidCamera : MonoBehaviour
 
     [Header("Audio Settings")]
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _clickSound;
     [SerializeField] private AudioClip _photoShutter;
     [SerializeField] private AudioClip _viewfinderOnClip;
     [SerializeField] private AudioClip _viewfinderOffClip;
 
     [Header("Capture Settings")]
-    [SerializeField] private float _cooldown = 2f;
+    [Tooltip("Time in seconds between allowed shots")]
+    [SerializeField] private float _cooldown = 30f;
     private float _lastPhotoTime;
 
     [Header("Camera Rules Settings")]
@@ -33,14 +39,24 @@ public class PolaroidCamera : MonoBehaviour
     [Header("Zoom Settings")]
     [SerializeField] private float _zoomFOV = 40f;
 
-    [Header("Spectral Vision")]
-
     [Header("References")]
     [SerializeField] private Camera _mainCam; // Drag your Main Camera here
     [SerializeField] private PlayerCamera _playerCam;
+
+    [Header("Flash Settings")]
+    public float flashRange = 8f;
+    public float flashAngle = 60f; // The width of the camera's view
+    public LayerMask monsterLayer; // Set this to the layer your monster is on
     private bool _isOnCamera = false;
 
-    private void Start() => ResetLogic();
+    private void Start()
+    {
+        // Mark the last shot as "negative thirty seconds ago" 
+        // This makes (Time.time - _lastPhotoTime) >= _cooldown true immediately.
+        _lastPhotoTime = -_cooldown;
+
+        ResetLogic();
+    }
     private void OnDisable() => ResetLogic();
 
     private void ResetLogic()
@@ -57,12 +73,34 @@ public class PolaroidCamera : MonoBehaviour
         // Only run if the camera is held
         if (transform.parent == null || !transform.parent.CompareTag("HandSocket")) return;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame && Time.time >= _lastPhotoTime + _cooldown)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            TakePhoto();
+            if (Time.time >= _lastPhotoTime + _cooldown)
+            {
+                TakePhoto();
+            }
+            else
+            {
+                Debug.Log("Camera is still recharging...");
+                if (_audioSource != null && _clickSound != null)
+                {
+                    _audioSource.PlayOneShot(_clickSound);
+                }
+            }
         }
 
-        HandleViewfinder(); // Hold not Toggle
+        HandleViewfinder();
+    }
+
+    // Interact with PlayerItemStatusHUD by sending cooldown progress
+    private void LateUpdate()
+    {
+        // Calculate the percentage of the cooldown (0 to 1)
+        float timePassed = Time.time - _lastPhotoTime;
+        float progress = Mathf.Clamp01(timePassed / _cooldown);
+
+        // Update the HUD so the player sees the bar filling up
+        GameEvents.OnItemStatusUpdate?.Invoke("PolaroidCamera", progress);
     }
 
     private void HandleViewfinder()
@@ -110,14 +148,53 @@ public class PolaroidCamera : MonoBehaviour
 
     private void TakePhoto()
     {
-        _lastPhotoTime = Time.time;
+        _lastPhotoTime = Time.time; // Mark the time of the shot immediately
         Debug.Log("Photo Captured!");
 
+        // Audio Feedback
         if (_audioSource != null && _photoShutter != null)
         {
             _audioSource.PlayOneShot(_photoShutter);
         }
 
+        // We send 0 to represent the start of the cooldown (fully empty)
+        GameEvents.OnItemStatusUpdate?.Invoke("PolaroidCamera", 0f);
+
+        // Efficient Detection: Only look at objects on the Monster Layer
+        Collider[] hitMonsters = Physics.OverlapSphere(transform.position, flashRange, monsterLayer);
+
+        foreach (var monster in hitMonsters)
+        {
+            // Viewport Check: Is the monster actually appearing inside the camera frame?
+            // screenPoint.z > 0 ensures it's in front of the camera, not behind.
+            Vector3 screenPoint = _mainCam.WorldToViewportPoint(monster.bounds.center);
+            bool inFrame = screenPoint.z > 0 &&
+                           screenPoint.x > 0.1f && screenPoint.x < 0.9f &&
+                           screenPoint.y > 0.1f && screenPoint.y < 0.9f;
+
+            if (inFrame)
+            {
+                // Occlusion Check: Ensure no walls/obstacles are blocking the light
+                Vector3 dir = (monster.bounds.center - transform.position).normalized;
+                RaycastHit hit;
+
+                // We hit everything (Default + Monster) to see if a wall is in between
+                if (Physics.Raycast(transform.position, dir, out hit, flashRange))
+                {
+                    // If the first thing we hit is the monster, it's a success
+                    if (hit.collider == monster || hit.transform.CompareTag("Monster_OE"))
+                    {
+                        if (monster.TryGetComponent<TheOverexposed>(out var ai))
+                        {
+                            ai.TakeDamage(); // Trigger the Stun
+                            Debug.Log("<color=green>Flash Impact Success on: </color>" + monster.name);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Visual Flash Effect
         StartCoroutine(FlashRoutine());
     }
 
