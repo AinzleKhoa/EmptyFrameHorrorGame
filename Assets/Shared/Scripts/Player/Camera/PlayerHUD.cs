@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Highly recommended for future-proof text
+using TMPro;
+using UnityEngine.InputSystem; // Highly recommended for future-proof text
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private GameObject _normalStateGroup;
     [SerializeField] private GameObject _cameraStateGroup;
 
+    [Header("Readable Item Display")]
+    [SerializeField] private GameObject _readableContentPanel; // A panel to show readable content
+    [SerializeField] private TextMeshProUGUI _readableContentText; // Text component to display the content
+    [SerializeField] private TextMeshProUGUI _readableCloseTextGuidance;
+
     private void OnEnable()
     {
         // Listening for the PlayerMovement's stamina broadcast
@@ -54,8 +60,12 @@ public class PlayerHUD : MonoBehaviour
         // Listening for Interactor's prompt requests
         GameEvents.OnInteractionPromptReq += SetInteractionPrompt;
 
+        // Listening for Item status updates
         GameEvents.OnItemEquipped += HandleItemEquipped;
         GameEvents.OnItemStatusUpdate += HandleItemStatusUpdate;
+
+        // Listening for Readable Item content display
+        GameEvents.OnShowReadableContent += HandleShowReadableContent;
     }
 
     private void OnDisable()
@@ -82,6 +92,12 @@ public class PlayerHUD : MonoBehaviour
     {
         // Smoothly slide the highlight to the selected slot
         _selectionHighlight.position = Vector3.Lerp(_selectionHighlight.position, _targetPos, Time.deltaTime * _transitionSpeed);
+
+        // Readable content can also be closed by pressing E
+        if (_readableContentPanel.activeSelf && Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            CloseReadable();
+        }
     }
 
     private void HandleCameraStateChange(bool isOnCamera)
@@ -209,5 +225,22 @@ public class PlayerHUD : MonoBehaviour
     private void UpdateStageName(string stageName)
     {
         if (_hudStageNameText != null) _hudStageNameText.text = stageName;
+    }
+
+    // --- READABLE ITEM LOGIC ---
+    private void HandleShowReadableContent(string content, bool shouldShow)
+    {
+        if (shouldShow)
+        {
+            _readableContentText.text = content;
+            _readableContentPanel.SetActive(true);
+            _readableCloseTextGuidance.text = "Press [E] to Close";
+        }
+    }
+
+    private void CloseReadable()
+    {
+        _readableContentPanel.SetActive(false);
+        _readableContentText.text = "";
     }
 }

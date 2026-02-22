@@ -12,7 +12,7 @@ public class ProgressionInteractable : MonoBehaviour, IInteractable
     private void Start()
     {
         // Automatically find the manager in the scene when the game starts
-        _manager = Object.FindFirstObjectByType<SceneProgressionManager>();
+        _manager = FindFirstObjectByType<SceneProgressionManager>();
 
         if (_manager == null)
         {

@@ -7,6 +7,9 @@ public static class GameEvents
     public static Action<int, int> OnFragmentUpdate;
     public static Action<string> OnStageNameUpdate;
 
+    // Readable Item
+    public static Action<string, bool> OnShowReadableContent;
+
     // Item Status
     public static Action<string, float> OnItemStatusUpdate; // 0 to 1 representing cooldown progress
     public static Action<string, Sprite> OnItemEquipped;
