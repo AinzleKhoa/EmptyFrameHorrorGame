@@ -65,7 +65,7 @@ public class PolaroidCamera : MonoBehaviour
         _isOnCamera = false;
         if (_playerCam != null) _playerCam.fovOverride = 0;
         // Broadcast that camera is away
-        GameEvents.OnCameraToggle?.Invoke(false);
+        GameBroadcast.OnCameraToggle?.Invoke(false);
     }
 
     private void Update()
@@ -100,7 +100,7 @@ public class PolaroidCamera : MonoBehaviour
         float progress = Mathf.Clamp01(timePassed / _cooldown);
 
         // Update the HUD so the player sees the bar filling up
-        GameEvents.OnItemStatusUpdate?.Invoke("PolaroidCamera", progress);
+        GameBroadcast.OnItemStatusUpdate?.Invoke("PolaroidCamera", progress);
     }
 
     private void HandleViewfinder()
@@ -115,7 +115,7 @@ public class PolaroidCamera : MonoBehaviour
 
             // --- 1. HUD Toggle ---
             // This tells the HUD, Movement, and Interactor what to do!
-            GameEvents.OnCameraToggle?.Invoke(_isOnCamera);
+            GameBroadcast.OnCameraToggle?.Invoke(_isOnCamera);
 
             // --- 2. Hide/Show Camera Model ---
             if (_cameraMesh != null) _cameraMesh.enabled = !_isOnCamera;
@@ -158,7 +158,7 @@ public class PolaroidCamera : MonoBehaviour
         }
 
         // We send 0 to represent the start of the cooldown (fully empty)
-        GameEvents.OnItemStatusUpdate?.Invoke("PolaroidCamera", 0f);
+        GameBroadcast.OnItemStatusUpdate?.Invoke("PolaroidCamera", 0f);
 
         // Efficient Detection: Only look at objects on the Monster Layer
         Collider[] hitMonsters = Physics.OverlapSphere(transform.position, flashRange, monsterLayer);

@@ -13,13 +13,13 @@ public class PlayerInteractor : MonoBehaviour
     private void OnEnable()
     {
         // Start listening for camera toggle
-        GameEvents.OnCameraToggle += HandleCameraToggle;
+        GameBroadcast.OnCameraToggle += HandleCameraToggle;
     }
 
     private void OnDisable()
     {
         // Stop listening
-        GameEvents.OnCameraToggle -= HandleCameraToggle;
+        GameBroadcast.OnCameraToggle -= HandleCameraToggle;
     }
 
     private void HandleCameraToggle(bool isOnCamera)
@@ -38,11 +38,18 @@ public class PlayerInteractor : MonoBehaviour
                 if (hit.collider.TryGetComponent(out IInteractable interactable))
                 {
                     // BROADCAST: Request the HUD to show the prompt
-                    GameEvents.OnInteractionPromptReq?.Invoke(interactable.PromptMessage, true);
+                    GameBroadcast.OnInteractionPromptReq?.Invoke(interactable.PromptMessage, true);
 
                     if (Keyboard.current.eKey.wasPressedThisFrame)
                     {
+                        // 1. Do the base interaction (Show text/Pick up)
                         interactable.Interact(this);
+
+                        // 2. Automatically check for a Signal (Optional)
+                        if (hit.collider.TryGetComponent<SignalTrigger>(out var signal))
+                        {
+                            signal.RaiseSignal();
+                        }
                     }
                     return;
                 }
@@ -50,7 +57,7 @@ public class PlayerInteractor : MonoBehaviour
 
             // If we look away or hit something non-interactable, hide the prompt
             // BROADCAST: Request the HUD to hide the prompt
-            GameEvents.OnInteractionPromptReq?.Invoke("", false);
+            GameBroadcast.OnInteractionPromptReq?.Invoke("", false);
         }
     }
 }

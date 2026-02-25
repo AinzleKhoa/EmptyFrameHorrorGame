@@ -19,14 +19,14 @@ public class SceneProgressionManager : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.OnFragmentUpdate?.Invoke(_currentCount, _totalRequired);
-        GameEvents.OnStageNameUpdate?.Invoke(_stageName);
+        GameBroadcast.OnFragmentUpdate?.Invoke(_currentCount, _totalRequired);
+        GameBroadcast.OnStageNameUpdate?.Invoke(_stageName);
     }
 
     public void AddFragmentProgress()
     {
         _currentCount++;
-        GameEvents.OnFragmentUpdate?.Invoke(_currentCount, _totalRequired);
+        GameBroadcast.OnFragmentUpdate?.Invoke(_currentCount, _totalRequired);
         if (_currentCount >= _totalRequired) ObjectiveComplete();
     }
     private void ObjectiveComplete()
@@ -36,6 +36,6 @@ public class SceneProgressionManager : MonoBehaviour
         OnAllCollectedLocal?.Invoke();
 
         // 2. Trigger global logic (e.g., update UI, enable next level transition)
-        GameEvents.OnLevelTransitionStarted?.Invoke(_nextSceneName);
+        GameBroadcast.OnLevelTransitionStarted?.Invoke(_nextSceneName);
     }
 }

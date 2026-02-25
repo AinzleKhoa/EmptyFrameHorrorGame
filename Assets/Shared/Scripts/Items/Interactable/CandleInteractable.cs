@@ -23,8 +23,8 @@ public class CandleInteractable : MonoBehaviour, IInteractable
         }
     }
 
-    private void OnEnable() => GameEvents.OnLighterToggle += SetLighterState;
-    private void OnDisable() => GameEvents.OnLighterToggle -= SetLighterState;
+    private void OnEnable() => GameBroadcast.OnLighterToggle += SetLighterState;
+    private void OnDisable() => GameBroadcast.OnLighterToggle -= SetLighterState;
 
     // Listening for interaction from the player
     private void SetLighterState(bool isLit) => _playerHasLitLighter = isLit;

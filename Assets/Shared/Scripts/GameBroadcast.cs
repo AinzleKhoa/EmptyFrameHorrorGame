@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public static class GameEvents
+public static class GameBroadcast
 {
     // Progression
     public static Action<int, int> OnFragmentUpdate;

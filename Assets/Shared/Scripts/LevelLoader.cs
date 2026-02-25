@@ -9,18 +9,18 @@ public class LevelLoader : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnLevelTransitionStarted += StartTransition;
+        GameBroadcast.OnLevelTransitionStarted += StartTransition;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnLevelTransitionStarted -= StartTransition;
+        GameBroadcast.OnLevelTransitionStarted -= StartTransition;
     }
 
     private void StartTransition(string sceneName)
     {
         // 1. Tell everyone to stop (Broadcast "CameraToggle true" to disable movement/interaction)
-        GameEvents.OnCameraToggle?.Invoke(true);
+        GameBroadcast.OnCameraToggle?.Invoke(true);
 
         // 2. Start the loading process
         StartCoroutine(LoadSceneRoutine(sceneName));
@@ -31,7 +31,7 @@ public class LevelLoader : MonoBehaviour
         Debug.Log($"Transitioning to {sceneName}...");
 
         // Here you would tell your HUD to "Fade to Black"
-        // GameEvents.OnFadeRequest?.Invoke(true); 
+        // GameBroadcast.OnFadeRequest?.Invoke(true); 
 
         yield return new WaitForSeconds(_transitionDelay);
 

@@ -10155,6 +10155,63 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1001 &878862930
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.232355
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0135008
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.4496813
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.0072947918
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.70612204
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.032486808
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.70730686
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -3.225
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 89.961
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 177.959
+      objectReference: {fileID: 0}
+    - target: {fileID: 7683744528194572844, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
+      propertyPath: m_Name
+      value: Flashlight
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
 --- !u!43 &909976849
 Mesh:
   m_ObjectHideFlags: 0
@@ -17693,6 +17750,10 @@ PrefabInstance:
     - target: {fileID: 7251642786635822068, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713882466811006709, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00048828125
       objectReference: {fileID: 0}
     - target: {fileID: 9176076212685584342, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
       propertyPath: m_AnchorMax.y
@@ -55990,3 +56051,4 @@ SceneRoots:
   - {fileID: 1925789787}
   - {fileID: 178714983}
   - {fileID: 353879212}
+  - {fileID: 878862930}

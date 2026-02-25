@@ -28,7 +28,7 @@ public class Lighter : MonoBehaviour
         _isLit = false;
         if (_flameParticles != null) _flameParticles.Stop();
         if (_pointLight != null) _pointLight.enabled = false;
-        GameEvents.OnLighterToggle?.Invoke(false);
+        GameBroadcast.OnLighterToggle?.Invoke(false);
     }
 
     private void Update()
@@ -69,6 +69,6 @@ public class Lighter : MonoBehaviour
         }
 
         // Broadcast the change
-        GameEvents.OnLighterToggle?.Invoke(_isLit);
+        GameBroadcast.OnLighterToggle?.Invoke(_isLit);
     }
 }

@@ -51,13 +51,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         // Subscribe to the camera toggle event
-        GameEvents.OnCameraToggle += HandleCameraStateChange;
+        GameBroadcast.OnCameraToggle += HandleCameraStateChange;
     }
 
     private void OnDisable()
     {
         // Unsubscribe to prevent memory leaks
-        GameEvents.OnCameraToggle -= HandleCameraStateChange;
+        GameBroadcast.OnCameraToggle -= HandleCameraStateChange;
     }
 
     // Handles the signal from the camera
@@ -191,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isCrouched)
         {
-            GameEvents.OnPlayerMovementState?.Invoke("Crouched");
+            GameBroadcast.OnPlayerMovementState?.Invoke("Crouched");
             return;
         }
 
@@ -206,15 +206,15 @@ public class PlayerMovement : MonoBehaviour
         // We only send a signal if the player is physically moving
         if (isMakingRunningNoise)
         {
-            GameEvents.OnPlayerMovementState?.Invoke("Sprinting");
+            GameBroadcast.OnPlayerMovementState?.Invoke("Sprinting");
         }
         else if (isMakingWalkingNoise)
         {
-            GameEvents.OnPlayerMovementState?.Invoke("Walking");
+            GameBroadcast.OnPlayerMovementState?.Invoke("Walking");
         }
         else
         {
-            GameEvents.OnPlayerMovementState?.Invoke("Idle");
+            GameBroadcast.OnPlayerMovementState?.Invoke("Idle");
         }
     }
 
@@ -238,6 +238,6 @@ public class PlayerMovement : MonoBehaviour
         _currentStamina = Mathf.Clamp(_currentStamina, 0, _maxStamina);
 
         // Update HUD bar
-        GameEvents.OnStaminaUpdate?.Invoke(_currentStamina, _maxStamina);
+        GameBroadcast.OnStaminaUpdate?.Invoke(_currentStamina, _maxStamina);
     }
 }

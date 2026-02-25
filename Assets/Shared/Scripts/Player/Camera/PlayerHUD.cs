@@ -44,42 +44,42 @@ public class PlayerHUD : MonoBehaviour
     private void OnEnable()
     {
         // Listening for the PlayerMovement's stamina broadcast
-        GameEvents.OnStaminaUpdate += UpdateStamina;
+        GameBroadcast.OnStaminaUpdate += UpdateStamina;
 
         // Listening for the PolaroidCamera's state broadcast
-        GameEvents.OnCameraToggle += HandleCameraStateChange;
+        GameBroadcast.OnCameraToggle += HandleCameraStateChange;
 
         // Listening for the Inventory's slot updates
-        GameEvents.OnInventorySlotUpdate += UpdateInventorySlotImage;
-        GameEvents.OnSlotSelected += SetSelectedSlot;
+        GameBroadcast.OnInventorySlotUpdate += UpdateInventorySlotImage;
+        GameBroadcast.OnSlotSelected += SetSelectedSlot;
 
         // Listening for the Progression Manager's updates
-        GameEvents.OnFragmentUpdate += UpdateFragmentProgression;
-        GameEvents.OnStageNameUpdate += UpdateStageName;
+        GameBroadcast.OnFragmentUpdate += UpdateFragmentProgression;
+        GameBroadcast.OnStageNameUpdate += UpdateStageName;
 
         // Listening for Interactor's prompt requests
-        GameEvents.OnInteractionPromptReq += SetInteractionPrompt;
+        GameBroadcast.OnInteractionPromptReq += SetInteractionPrompt;
 
         // Listening for Item status updates
-        GameEvents.OnItemEquipped += HandleItemEquipped;
-        GameEvents.OnItemStatusUpdate += HandleItemStatusUpdate;
+        GameBroadcast.OnItemEquipped += HandleItemEquipped;
+        GameBroadcast.OnItemStatusUpdate += HandleItemStatusUpdate;
 
         // Listening for Readable Item content display
-        GameEvents.OnShowReadableContent += HandleShowReadableContent;
+        GameBroadcast.OnShowReadableContent += HandleShowReadableContent;
     }
 
     private void OnDisable()
     {
         // Always unsubscribe to prevent "Ghost" functions running in the background
-        GameEvents.OnStaminaUpdate -= UpdateStamina;
-        GameEvents.OnCameraToggle -= HandleCameraStateChange;
-        GameEvents.OnInventorySlotUpdate -= UpdateInventorySlotImage;
-        GameEvents.OnSlotSelected -= SetSelectedSlot;
-        GameEvents.OnFragmentUpdate -= UpdateFragmentProgression;
-        GameEvents.OnStageNameUpdate -= UpdateStageName;
-        GameEvents.OnInteractionPromptReq -= SetInteractionPrompt;
-        GameEvents.OnItemEquipped -= HandleItemEquipped;
-        GameEvents.OnItemStatusUpdate -= HandleItemStatusUpdate;
+        GameBroadcast.OnStaminaUpdate -= UpdateStamina;
+        GameBroadcast.OnCameraToggle -= HandleCameraStateChange;
+        GameBroadcast.OnInventorySlotUpdate -= UpdateInventorySlotImage;
+        GameBroadcast.OnSlotSelected -= SetSelectedSlot;
+        GameBroadcast.OnFragmentUpdate -= UpdateFragmentProgression;
+        GameBroadcast.OnStageNameUpdate -= UpdateStageName;
+        GameBroadcast.OnInteractionPromptReq -= SetInteractionPrompt;
+        GameBroadcast.OnItemEquipped -= HandleItemEquipped;
+        GameBroadcast.OnItemStatusUpdate -= HandleItemStatusUpdate;
     }
 
     private void Awake()

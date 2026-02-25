@@ -37,7 +37,7 @@ public class PlayerInventory : MonoBehaviour
                 else Store(item);
 
                 // BROADCAST: Tell the HUD to show this new icon
-                GameEvents.OnInventorySlotUpdate?.Invoke(i, item.ItemIcon);
+                GameBroadcast.OnInventorySlotUpdate?.Invoke(i, item.ItemIcon);
                 return;
             }
         }
@@ -64,7 +64,7 @@ public class PlayerInventory : MonoBehaviour
         }
 
         // BROADCAST: Tell the HUD to move the selection highlight
-        GameEvents.OnSlotSelected?.Invoke(_currentSlotIndex);
+        GameBroadcast.OnSlotSelected?.Invoke(_currentSlotIndex);
     }
 
     private void Equip(PickableItem item)
@@ -75,7 +75,7 @@ public class PlayerInventory : MonoBehaviour
         item.ApplyHandTransform();
 
         // BROADCAST: Tell the HUD what item is now equipped (for status effects, etc)
-        GameEvents.OnItemEquipped?.Invoke(item.ItemName, item.ItemIcon);
+        GameBroadcast.OnItemEquipped?.Invoke(item.ItemName, item.ItemIcon);
     }
 
     private void Store(PickableItem item)
@@ -95,11 +95,11 @@ public class PlayerInventory : MonoBehaviour
         _slots[_currentSlotIndex] = null;
 
         // BROADCAST: Tell the HUD to show the empty icon for this slot
-        GameEvents.OnInventorySlotUpdate?.Invoke(_currentSlotIndex, _defaultEmptyIcon);
+        GameBroadcast.OnInventorySlotUpdate?.Invoke(_currentSlotIndex, _defaultEmptyIcon);
         // BROADCAST: Tell the HUD that nothing is equipped (for status effects, etc)
         if (item.ItemName == "PolaroidCamera")
         {
-            GameEvents.OnItemEquipped?.Invoke("None", null);
+            GameBroadcast.OnItemEquipped?.Invoke("None", null);
         }
     }
 }

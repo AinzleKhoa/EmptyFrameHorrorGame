@@ -80,8 +80,8 @@ public class TheOverexposed : MonoBehaviour
         }
     }
 
-    private void OnEnable() => GameEvents.OnPlayerMovementState += (state) => _currentPlayerMovementState = state;
-    private void OnDisable() => GameEvents.OnPlayerMovementState -= (state) => _currentPlayerMovementState = state;
+    private void OnEnable() => GameBroadcast.OnPlayerMovementState += (state) => _currentPlayerMovementState = state;
+    private void OnDisable() => GameBroadcast.OnPlayerMovementState -= (state) => _currentPlayerMovementState = state;
 
     void Update()
     {

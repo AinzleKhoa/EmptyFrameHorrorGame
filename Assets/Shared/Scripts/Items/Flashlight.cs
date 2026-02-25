@@ -26,7 +26,7 @@ public class Flashlight : MonoBehaviour
     {
         _isLit = false;
         if (_spotLight != null) _spotLight.enabled = false;
-        GameEvents.OnFlashlightToggle?.Invoke(false);
+        GameBroadcast.OnFlashlightToggle?.Invoke(false);
     }
 
     private void Update()
@@ -69,6 +69,6 @@ public class Flashlight : MonoBehaviour
         }
 
         // Broadcast the change
-        GameEvents.OnFlashlightToggle?.Invoke(_isLit);
+        GameBroadcast.OnFlashlightToggle?.Invoke(_isLit);
     }
 }

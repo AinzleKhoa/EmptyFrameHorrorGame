@@ -12,6 +12,6 @@ public class ReadableItem : MonoBehaviour, IInteractable
 
     public void Interact(PlayerInteractor interactor)
     {
-        GameEvents.OnShowReadableContent?.Invoke(_content, true);
+        GameBroadcast.OnShowReadableContent?.Invoke(_content, true);
     }
 }
