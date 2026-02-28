@@ -169,14 +169,14 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6571559605696565557}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 12
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0
-  m_Range: 10
-  m_SpotAngle: 52.40241
-  m_InnerSpotAngle: 37.401886
+  m_Color: {r: 0.96885574, g: 1, b: 0, a: 1}
+  m_Intensity: 100
+  m_Range: 12
+  m_SpotAngle: 55.764256
+  m_InnerSpotAngle: 40.43688
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
     m_Type: 2
@@ -266,43 +266,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5486
+      value: -7.65023
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0563
+      value: 1.0815864
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.9097
+      value: 2.2445955
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0072947918
+      value: 0.03326788
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.70612204
+      value: 0.50044876
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.032486808
+      value: -0.001361954
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.70730686
+      value: -0.8651257
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -3.225
+      value: 1.773
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 89.961
+      value: 299.956
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 177.959
+      value: 183.38
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8e79e0722792b814e9c41b5dd11f8e25, type: 3}
       propertyPath: m_Name
@@ -424,9 +424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Flashlight
   _spotLight: {fileID: 172123601874643137}
-  _spotIntensity: 20
-  _spotRange: 40
-  _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _audioSource: {fileID: 4873273134205091659}
   _flashOnClip: {fileID: 8300000, guid: 614853333c567754290453bb2658dee8, type: 3}
   _flashOffClip: {fileID: 8300000, guid: 7afbfff449eae394e925e9f697e8fe40, type: 3}
