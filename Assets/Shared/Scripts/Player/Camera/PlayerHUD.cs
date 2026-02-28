@@ -28,8 +28,9 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private float _transitionSpeed = 10f;
     private Vector3 _targetPos;
 
-    [Header("Counter Text")]
-    [SerializeField] private TextMeshProUGUI _hudCounterText;
+    [Header("HUD Text (Objective, Stage Name, etc)")]
+    [SerializeField] private TextMeshProUGUI _hudObjectiveText;
+    [SerializeField] private TextMeshProUGUI _hudProgressionCountText;
     [SerializeField] private TextMeshProUGUI _hudStageNameText;
 
     [Header("HUD Management")]
@@ -54,8 +55,9 @@ public class PlayerHUD : MonoBehaviour
         GameBroadcast.OnSlotSelected += SetSelectedSlot;
 
         // Listening for the Progression Manager's updates
-        GameBroadcast.OnFragmentUpdate += UpdateFragmentProgression;
-        GameBroadcast.OnStageNameUpdate += UpdateStageName;
+        GameBroadcast.OnProgressionCountUpdateHUD += UpdateProgressionCountHUD;
+        GameBroadcast.OnStageNameUpdateHUD += UpdateStageNameHUD;
+        GameBroadcast.OnObjectiveUpdateHUD += UpdateObjectiveHUD;
 
         // Listening for Interactor's prompt requests
         GameBroadcast.OnInteractionPromptReq += SetInteractionPrompt;
@@ -75,8 +77,9 @@ public class PlayerHUD : MonoBehaviour
         GameBroadcast.OnCameraToggle -= HandleCameraStateChange;
         GameBroadcast.OnInventorySlotUpdate -= UpdateInventorySlotImage;
         GameBroadcast.OnSlotSelected -= SetSelectedSlot;
-        GameBroadcast.OnFragmentUpdate -= UpdateFragmentProgression;
-        GameBroadcast.OnStageNameUpdate -= UpdateStageName;
+        GameBroadcast.OnProgressionCountUpdateHUD -= UpdateProgressionCountHUD;
+        GameBroadcast.OnStageNameUpdateHUD -= UpdateStageNameHUD;
+        GameBroadcast.OnObjectiveUpdateHUD -= UpdateObjectiveHUD;
         GameBroadcast.OnInteractionPromptReq -= SetInteractionPrompt;
         GameBroadcast.OnItemEquipped -= HandleItemEquipped;
         GameBroadcast.OnItemStatusUpdate -= HandleItemStatusUpdate;
@@ -217,14 +220,19 @@ public class PlayerHUD : MonoBehaviour
     }
 
     // --- PROGRESSION HUD LOGIC ---
-    private void UpdateFragmentProgression(int _currentCount, int _totalRequired)
+    private void UpdateProgressionCountHUD(int _currentCount, int _totalRequired)
     {
-        if (_hudCounterText != null) _hudCounterText.text = $"{_currentCount}/{_totalRequired}";
+        if (_hudProgressionCountText != null) _hudProgressionCountText.text = $"{_currentCount}/{_totalRequired}";
     }
 
-    private void UpdateStageName(string stageName)
+    private void UpdateStageNameHUD(string stageName)
     {
         if (_hudStageNameText != null) _hudStageNameText.text = stageName;
+    }
+
+    private void UpdateObjectiveHUD(string objective)
+    {
+        if (_hudObjectiveText != null) _hudObjectiveText.text = objective;
     }
 
     // --- READABLE ITEM LOGIC ---
@@ -242,5 +250,6 @@ public class PlayerHUD : MonoBehaviour
     {
         _readableContentPanel.SetActive(false);
         _readableContentText.text = "";
+        GameBroadcast.isPlayerFreezed?.Invoke(false); // Unfreeze player when done
     }
 }

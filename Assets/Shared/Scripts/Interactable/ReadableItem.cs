@@ -13,5 +13,6 @@ public class ReadableItem : MonoBehaviour, IInteractable
     public void Interact(PlayerInteractor interactor)
     {
         GameBroadcast.OnShowReadableContent?.Invoke(_content, true);
+        GameBroadcast.isPlayerFreezed?.Invoke(true); // Freeze player while reading
     }
 }

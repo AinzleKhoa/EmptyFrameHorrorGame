@@ -13,4 +13,9 @@ public class SignalTrigger : MonoBehaviour
             _signalToRaise.Raise();
         }
     }
+
+    public void SelfDestruct()
+    {
+        Destroy(this);
+    }
 }

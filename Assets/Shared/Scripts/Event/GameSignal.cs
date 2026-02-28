@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Sig#_L#_NewEvent", menuName = "Signals/Game Signal")]
+[CreateAssetMenu(fileName = "Sig#_L#_NewEvent", menuName = "EmptyFrame/Game Signal Data")]
 public class GameSignal : ScriptableObject
 {
     private readonly List<StoryDirector> _listeners = new List<StoryDirector>();

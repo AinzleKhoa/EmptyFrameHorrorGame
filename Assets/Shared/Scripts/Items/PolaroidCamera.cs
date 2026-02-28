@@ -8,6 +8,10 @@ public class PolaroidCamera : MonoBehaviour
 
     [Space(15)]
 
+    [Header("Polaroid Camera Settings")]
+    [SerializeField] private float _cameraShotCooldown = 30f;
+    [SerializeField] private bool _isCameraStateEnabled = false; // This is the "Viewfinder On" state
+
     [Header("Point Light (Glow)")]
     [SerializeField] private Light _pointLight;
     [SerializeField] private float _pointIntensity = 5f;
@@ -28,10 +32,6 @@ public class PolaroidCamera : MonoBehaviour
     [SerializeField] private AudioClip _photoShutter;
     [SerializeField] private AudioClip _viewfinderOnClip;
     [SerializeField] private AudioClip _viewfinderOffClip;
-
-    [Header("Capture Settings")]
-    [Tooltip("Time in seconds between allowed shots")]
-    [SerializeField] private float _cooldown = 30f;
     private float _lastPhotoTime;
 
     [Header("Camera Rules Settings")]
@@ -53,7 +53,7 @@ public class PolaroidCamera : MonoBehaviour
     {
         // Mark the last shot as "negative thirty seconds ago" 
         // This makes (Time.time - _lastPhotoTime) >= _cooldown true immediately.
-        _lastPhotoTime = -_cooldown;
+        _lastPhotoTime = -_cameraShotCooldown;
 
         ResetLogic();
     }
@@ -75,7 +75,7 @@ public class PolaroidCamera : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            if (Time.time >= _lastPhotoTime + _cooldown)
+            if (Time.time >= _lastPhotoTime + _cameraShotCooldown)
             {
                 TakePhoto();
             }
@@ -89,7 +89,8 @@ public class PolaroidCamera : MonoBehaviour
             }
         }
 
-        HandleViewfinder();
+        if (_isCameraStateEnabled)
+            HandleViewfinder();
     }
 
     // Interact with PlayerItemStatusHUD by sending cooldown progress
@@ -97,7 +98,7 @@ public class PolaroidCamera : MonoBehaviour
     {
         // Calculate the percentage of the cooldown (0 to 1)
         float timePassed = Time.time - _lastPhotoTime;
-        float progress = Mathf.Clamp01(timePassed / _cooldown);
+        float progress = Mathf.Clamp01(timePassed / _cameraShotCooldown);
 
         // Update the HUD so the player sees the bar filling up
         GameBroadcast.OnItemStatusUpdate?.Invoke("PolaroidCamera", progress);

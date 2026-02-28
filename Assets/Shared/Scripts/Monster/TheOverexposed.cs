@@ -371,7 +371,7 @@ public class TheOverexposed : MonoBehaviour
             _screamSource.PlayOneShot(_stunnedClip);
         }
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(6f);
         anim.SetTrigger("isRecovered");
         yield return new WaitForSeconds(2f);
         agent.isStopped = false;

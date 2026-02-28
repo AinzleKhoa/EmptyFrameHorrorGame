@@ -60,4 +60,9 @@ public class PickableItem : MonoBehaviour, IInteractable
         // CALCULATED SCALE: Original size (e.g. 0.01) * Multiplier (e.g. 2.0)
         transform.localScale = _originalScale * _handScaleMultiplier;
     }
+
+    public void setPromptMessage(string newMessage)
+    {
+        _promptMessage = newMessage;
+    }
 }

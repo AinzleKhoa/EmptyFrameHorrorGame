@@ -4,8 +4,12 @@ using UnityEngine;
 public static class GameBroadcast
 {
     // Progression
-    public static Action<int, int> OnFragmentUpdate;
-    public static Action<string> OnStageNameUpdate;
+    public static Action<bool> OnAllFragmentsCollected; // true = all collected, false = reset
+
+    // HUD Updates
+    public static Action<int, int> OnProgressionCountUpdateHUD; // current count, total required
+    public static Action<string> OnStageNameUpdateHUD; // stage name
+    public static Action<string> OnObjectiveUpdateHUD; // objective text
 
     // Readable Item
     public static Action<string, bool> OnShowReadableContent;
@@ -35,4 +39,6 @@ public static class GameBroadcast
     // Monster interactions
     public static Action<bool> OnMonsterIsHit;
     public static Action<string> OnPlayerMovementState;
+    // Player State
+    public static Action<bool> isPlayerFreezed;
 }

@@ -405,31 +405,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.901
+      value: -6.704
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.001
+      value: 1.013
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.618
+      value: 2.604
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0041485284
+      value: 0.6565305
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0054607866
+      value: -0.65724283
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7077285
+      value: -0.26256692
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7064513
+      value: -0.26087978
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -437,11 +437,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 45.386
+      value: 45.384995
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 133.836
+      value: -88.83301
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_Name
@@ -457,7 +457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0064809abb711874693e290a629f4a37, type: 3}
       propertyPath: m_TagString
-      value: Interactable
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -555,6 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8c4d3504600b846ba4cc51a2f9dc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PolaroidCamera
+  _cameraShotCooldown: 30
+  _isCameraStateEnabled: 0
   _pointLight: {fileID: 5350743098587751584}
   _pointIntensity: 10
   _pointRange: 5
@@ -568,7 +570,6 @@ MonoBehaviour:
   _photoShutter: {fileID: 8300000, guid: 6b8ecd59739b1404ba05ce09f1426316, type: 3}
   _viewfinderOnClip: {fileID: 8300000, guid: 1ae8325f86bf3724a828f0d353930471, type: 3}
   _viewfinderOffClip: {fileID: 8300000, guid: 9ffe5c36174182b49b2f958b870aa480, type: 3}
-  _cooldown: 30
   _cameraMesh: {fileID: 5970784110221467600}
   _zoomFOV: 40
   _mainCam: {fileID: 0}

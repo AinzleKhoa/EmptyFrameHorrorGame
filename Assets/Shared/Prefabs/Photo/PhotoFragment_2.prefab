@@ -320,7 +320,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1670
+  m_VersionIndex: 1673
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -345,8 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66b0429b2c9f0c4ab2d619374a29cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProgressionInteractable
-  _promptMessage: Press 'E' to Collect the Fragment
-  _manager: {fileID: 0}
+  _promptMessage: Press [E] to Collect the Fragment
 --- !u!54 &6130650687651557046
 Rigidbody:
   m_ObjectHideFlags: 0
