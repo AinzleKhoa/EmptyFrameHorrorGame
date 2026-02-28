@@ -9,9 +9,6 @@ public class Flashlight : MonoBehaviour
 
     [Header("Spot Light")]
     [SerializeField] private Light _spotLight;
-    [SerializeField] private float _spotIntensity = 40f;
-    [SerializeField] private float _spotRange = 20f;
-    [SerializeField] private Color _flashColor = Color.white;
     [Header("Audio")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _flashOnClip;
@@ -50,9 +47,6 @@ public class Flashlight : MonoBehaviour
             if (_spotLight != null)
             {
                 _spotLight.enabled = true;
-                _spotLight.intensity = _spotIntensity;
-                _spotLight.range = _spotRange;
-                _spotLight.color = _flashColor;
             }
             if (_audioSource != null && _flashOnClip != null)
             {
