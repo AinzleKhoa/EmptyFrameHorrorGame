@@ -260,7 +260,7 @@ public class FirstPersonController : MonoBehaviour
 
             // FIX: Using linearVelocity instead of velocity
             Vector3 velocity = rb.linearVelocity;
-            Vector3 velocityChange = targetVelocity - velocity;
+            Vector3 velocityChange = (targetVelocity - velocity);
             velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
             velocityChange.y = 0;
@@ -351,7 +351,6 @@ public class FirstPersonControllerEditor : Editor
         #region Camera Setup
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         GUILayout.Label("Camera Setup", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold, fontSize = 13 });
-
         fpc.playerCamera = (Camera)EditorGUILayout.ObjectField("Camera", fpc.playerCamera, typeof(Camera), true);
         fpc.fov = EditorGUILayout.Slider("Field of View", fpc.fov, 10, 120);
         fpc.cameraCanMove = EditorGUILayout.ToggleLeft("Enable Camera Rotation", fpc.cameraCanMove);
@@ -406,7 +405,6 @@ public class FirstPersonControllerEditor : Editor
                 }
                 EditorGUI.indentLevel--;
             }
-
             EditorGUILayout.Space();
             GUILayout.Label("Jump & Crouch", EditorStyles.boldLabel);
             fpc.enableJump = EditorGUILayout.ToggleLeft("Enable Jump", fpc.enableJump);
