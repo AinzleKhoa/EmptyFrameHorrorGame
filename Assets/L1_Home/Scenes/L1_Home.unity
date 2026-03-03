@@ -220320,7 +220320,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 89555433249331720, guid: a25046fb9b50af54294f8db1af3414e3, type: 3}
       propertyPath: m_SpotAngle
-      value: 65.68461
+      value: 60.986362
+      objectReference: {fileID: 0}
+    - target: {fileID: 89555433249331720, guid: a25046fb9b50af54294f8db1af3414e3, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 37.11709
       objectReference: {fileID: 0}
     - target: {fileID: 7112415181307214431, guid: a25046fb9b50af54294f8db1af3414e3, type: 3}
       propertyPath: m_LocalPosition.x
