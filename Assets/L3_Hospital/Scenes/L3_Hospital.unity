@@ -2216,6 +2216,7 @@ GameObject:
   - component: {fileID: 23420850}
   - component: {fileID: 23420852}
   - component: {fileID: 23420851}
+  - component: {fileID: 23420853}
   m_Layer: 0
   m_Name: Point Light (40)
   m_TagString: Untagged
@@ -2332,6 +2333,21 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &23420853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23420849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40239699f05843a4fab38b44111d8f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickerLight
+  flickerSpeed: 0.1
+  minIntensity: 0.5
+  maxIntensity: 1.5
 --- !u!1001 &26906893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6927,19 +6943,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 197.05548
+      value: 165.35678
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 177.87404
+      value: 127.17993
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.5842
+      value: 7.3219
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.015
+      value: -0.0152
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6980,7 +6996,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1214691706}
   m_SourcePrefab: {fileID: 100100000, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
 --- !u!1001 &57000952
 PrefabInstance:
@@ -12637,6 +12656,7 @@ GameObject:
   - component: {fileID: 107000990}
   - component: {fileID: 107000992}
   - component: {fileID: 107000991}
+  - component: {fileID: 107000993}
   m_Layer: 0
   m_Name: Point Light (23)
   m_TagString: Untagged
@@ -12753,6 +12773,21 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &107000993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107000989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40239699f05843a4fab38b44111d8f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickerLight
+  flickerSpeed: 0.1
+  minIntensity: 0.5
+  maxIntensity: 1.5
 --- !u!1 &108221862
 GameObject:
   m_ObjectHideFlags: 0
@@ -43378,6 +43413,7 @@ GameObject:
   - component: {fileID: 417360059}
   - component: {fileID: 417360061}
   - component: {fileID: 417360060}
+  - component: {fileID: 417360062}
   m_Layer: 0
   m_Name: Point Light (37)
   m_TagString: Untagged
@@ -43494,6 +43530,21 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &417360062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417360058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40239699f05843a4fab38b44111d8f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickerLight
+  flickerSpeed: 0.1
+  minIntensity: 0.5
+  maxIntensity: 1.5
 --- !u!1001 &419929899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43516,15 +43567,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.73
+      value: -18.675
       objectReference: {fileID: 0}
     - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.31
+      value: 1.476
       objectReference: {fileID: 0}
     - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.29
+      value: -8.417
       objectReference: {fileID: 0}
     - target: {fileID: 7055438970201819286, guid: c970eeff37e345b44bf98be7c3963a31, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62198,6 +62249,32 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db5efd877e66a754388047252b900bc9, type: 3}
+--- !u!1 &674727819 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
+  m_PrefabInstance: {fileID: 1618609207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &674727823
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674727819}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.024056036, y: 0.011369842, z: 0.009586373}
+  m_Center: {x: 0.00000520749, y: 0.00002695551, z: 0.004788258}
 --- !u!1 &674970092
 GameObject:
   m_ObjectHideFlags: 0
@@ -112643,6 +112720,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1214691702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
+  m_PrefabInstance: {fileID: 55941873}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1214691706
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214691702}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.024056034, y: 0.011369842, z: 0.009586373}
+  m_Center: {x: 0.0000052074897, y: 0.00002695551, z: 0.004788258}
 --- !u!1001 &1219206778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112893,6 +112996,7 @@ GameObject:
   - component: {fileID: 1223400109}
   - component: {fileID: 1223400111}
   - component: {fileID: 1223400110}
+  - component: {fileID: 1223400112}
   m_Layer: 0
   m_Name: Point Light (29)
   m_TagString: Untagged
@@ -113009,6 +113113,21 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1223400112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223400108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40239699f05843a4fab38b44111d8f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickerLight
+  flickerSpeed: 0.1
+  minIntensity: 0.5
+  maxIntensity: 1.5
 --- !u!1 &1229835358
 GameObject:
   m_ObjectHideFlags: 0
@@ -134509,17 +134628,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 793853259511338637, guid: e51450f640f1d3c468ba3fe9710ef8f9, type: 3}
+      propertyPath: _cameraShotCooldown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4798392297682363583, guid: e51450f640f1d3c468ba3fe9710ef8f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.69063
+      value: 8.202
       objectReference: {fileID: 0}
     - target: {fileID: 4798392297682363583, guid: e51450f640f1d3c468ba3fe9710ef8f9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.57832116
+      value: 1.266
       objectReference: {fileID: 0}
     - target: {fileID: 4798392297682363583, guid: e51450f640f1d3c468ba3fe9710ef8f9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.51
+      value: 8.339
       objectReference: {fileID: 0}
     - target: {fileID: 4798392297682363583, guid: e51450f640f1d3c468ba3fe9710ef8f9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -140423,19 +140546,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 197.05548
+      value: 162.03873
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 177.87404
+      value: 138.14832
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.015
+      value: -17.5935
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.02
+      value: -0.0202
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -140476,7 +140599,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 674727823}
   m_SourcePrefab: {fileID: 100100000, guid: 38671eb6b7fc15b43bdde58aa3ff33eb, type: 3}
 --- !u!1 &1618665019
 GameObject:
@@ -147040,6 +147166,7 @@ GameObject:
   - component: {fileID: 1676292347}
   - component: {fileID: 1676292349}
   - component: {fileID: 1676292348}
+  - component: {fileID: 1676292350}
   m_Layer: 0
   m_Name: Point Light (34)
   m_TagString: Untagged
@@ -147156,6 +147283,21 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1676292350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676292346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40239699f05843a4fab38b44111d8f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickerLight
+  flickerSpeed: 0.1
+  minIntensity: 0.5
+  maxIntensity: 1.5
 --- !u!1 &1682209668
 GameObject:
   m_ObjectHideFlags: 0
@@ -167071,9 +167213,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1906034203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 823c7612621406e4b956a3a950e24f6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 447929285bc9b784b967a1b42a239c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  lightningLight: {fileID: 1906034207}
+  tiengSam: {fileID: 1906034204}
+  thoiGianChoNhoNhat: 5
+  thoiGianChoLonNhat: 15
 --- !u!114 &1906034206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167113,7 +167259,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+  m_Color: {r: 0.27013904, g: 0, b: 0.54509807, a: 1}
   m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
@@ -167176,13 +167322,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906034203}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 7.84877, y: 0.39, z: -4.67548}
+  m_LocalRotation: {x: 0.49855357, y: -0.7673563, z: 0.1764895, w: 0.3625744}
+  m_LocalPosition: {x: 3.59, y: 32.65, z: 12.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 39.226, y: -150.584, z: -55.336}
 --- !u!1001 &1916668850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -167193,27 +167339,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 32cbb206e489866409ff7e7729d6f6dc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 961.39325
+      value: 2636.0442
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32cbb206e489866409ff7e7729d6f6dc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 863.4179
+      value: 2097.242
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32cbb206e489866409ff7e7729d6f6dc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 989.76
+      value: 2234.977
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32cbb206e489866409ff7e7729d6f6dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.36
+      value: 16.533
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32cbb206e489866409ff7e7729d6f6dc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.24
+      value: 10.029
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32cbb206e489866409ff7e7729d6f6dc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.15
+      value: 9.5215
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32cbb206e489866409ff7e7729d6f6dc, type: 3}
       propertyPath: m_LocalRotation.w
