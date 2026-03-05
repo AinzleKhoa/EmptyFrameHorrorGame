@@ -1,0 +1,276 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6012054117034752902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 445241726468989865}
+  - component: {fileID: 7693270954262638649}
+  m_Layer: 0
+  m_Name: L#_StoryDirector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &445241726468989865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6012054117034752902}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.68645, y: 0.1022, z: 3.22146}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7693270954262638649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6012054117034752902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43de3246923dfab4a9076ea951a0419b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StoryDirector
+  _stageTitle: Maze of Memories
+  _storyActs:
+  - ActName: Pick up the Camera, Lighter
+    Objectives:
+    - rid: 4932521937058922565
+    - rid: 4932521947925577796
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
+  - ActName: Talk to the Shadow
+    Objectives:
+    - rid: 4932521947925577812
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+          m_MethodName: TriggerDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    IsActive: 0
+  - ActName: Finish Talking to the Shadow
+    Objectives:
+    - rid: 4932521947925577810
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
+  - ActName: Read The Note
+    Objectives:
+    - rid: 4932521947925577813
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
+  - ActName: Light Up The Candle
+    Objectives:
+    - rid: 2300694095031959634
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: set_layer
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
+  - ActName: Avoid the Monster
+    Objectives:
+    - rid: 4932521947925577811
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 2300694095031959634
+      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Light Up The Candle
+        _objectiveDescription: "Light up The Candle on the table with a lit Lighter
+          when you're ready to start \n\n(The stage will start when the candle is
+          lit)"
+        _interactionSignal: {fileID: 11400000, guid: 3e86f8d8436b75544ab221cd7ceaaa2f, type: 2}
+        _targetCount: 1
+    - rid: 4932521937058922565
+      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Pick up the Camera
+        _objectiveDescription: Pick up the Camera on the table
+        _interactionSignal: {fileID: 11400000, guid: 19a7d61fe6046c74198f87f36b93efa0, type: 2}
+        _targetCount: 1
+    - rid: 4932521947925577796
+      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Pick up the Lighter on the table
+        _objectiveDescription: Pick up the Lighter on the table
+        _interactionSignal: {fileID: 11400000, guid: 30870f5c4ffe4f242a0ec0ca9e06adc2, type: 2}
+        _targetCount: 1
+    - rid: 4932521947925577810
+      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Finish Talking to the Shadow
+        _objectiveDescription: Finish Talking to the Shadow
+        _interactionSignal: {fileID: 11400000, guid: 1b6f4cec8a98a754d86a5e5426425b41, type: 2}
+        _targetCount: 1
+    - rid: 4932521947925577811
+      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Avoid the Monster
+        _objectiveDescription: 'Evade the OverExposed''s glare and reclaim the 3
+          Fragments.
+
+
+
+          (Refer to the note on the table for clues.)'
+        _interactionSignal: {fileID: 0}
+        _targetCount: 1
+    - rid: 4932521947925577812
+      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Talk to the Shadow
+        _objectiveDescription: Talk to the Shadow figure
+        _interactionSignal: {fileID: 11400000, guid: 877b197ab5fe3d740a02274d740b240f, type: 2}
+        _targetCount: 1
+    - rid: 4932521947925577813
+      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Read The Note
+        _objectiveDescription: Read The Note on the table
+        _interactionSignal: {fileID: 11400000, guid: bb350eca4524c514c9a3192c4d5a36b6, type: 2}
+        _targetCount: 1

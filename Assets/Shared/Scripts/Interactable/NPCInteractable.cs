@@ -8,7 +8,11 @@ public class NPCInteractable : MonoBehaviour, IInteractable
 
     public void Interact(PlayerInteractor interactor)
     {
-        // This will only trigger the SignalTrigger for StoryDirector for now.
+        // Always raise signal, it will be null if no signal trigger existed.
+        if (TryGetComponent<SignalTrigger>(out var signal))
+        {
+            signal.RaiseSignal();
+        }
     }
 
     public void setPromptMessage(string newMessage)

@@ -55,12 +55,6 @@ public class PlayerInteractor : MonoBehaviour
                 {
                     // 1. Do the base interaction (Show text/Pick up)
                     interactable.Interact(this);
-
-                    // 2. Automatically check for a Signal (Optional)
-                    if (hit.collider.TryGetComponent<SignalTrigger>(out var signal))
-                    {
-                        signal.RaiseSignal();
-                    }
                 }
                 return;
             }

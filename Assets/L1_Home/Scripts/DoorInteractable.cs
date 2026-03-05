@@ -56,6 +56,12 @@ public class DoorInteractable : MonoBehaviour, IInteractable
         }
 
         StartCoroutine(RotateDoor(!_isOpen));
+
+        // Always raise signal, it will be null if no signal trigger existed.
+        if (TryGetComponent<SignalTrigger>(out var signal))
+        {
+            signal.RaiseSignal();
+        }
     }
 
     private IEnumerator RotateDoor(bool open)

@@ -14,5 +14,10 @@ public class ReadableItem : MonoBehaviour, IInteractable
     {
         GameBroadcast.OnShowReadableContent?.Invoke(_content, true);
         GameBroadcast.isPlayerFreezed?.Invoke(true); // Freeze player while reading
+        // Always raise signal, it will be null if no signal trigger existed.
+        if (TryGetComponent<SignalTrigger>(out var signal))
+        {
+            signal.RaiseSignal();
+        }
     }
 }

@@ -50,6 +50,11 @@ public class PickableItem : MonoBehaviour, IInteractable
         {
             inventory.AddItem(this);
         }
+        // Always raise signal, it will be null if no signal trigger existed.
+        if (TryGetComponent<SignalTrigger>(out var signal))
+        {
+            signal.RaiseSignal();
+        }
     }
 
     public void ApplyHandTransform()

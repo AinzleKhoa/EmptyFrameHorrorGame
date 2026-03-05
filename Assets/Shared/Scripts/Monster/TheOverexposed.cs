@@ -39,7 +39,7 @@ public class TheOverexposed : MonoBehaviour
 
     [Header("Speeds")]
     [SerializeField] private float _walkSpeed = 4f;
-    [SerializeField] private float _runSpeed = 7f;
+    [SerializeField] private float _runSpeed = 6f;
     [SerializeField] private float _chaseSpeed = 10f;
 
     [Header("Vision & Hearing Settings")]
@@ -47,6 +47,9 @@ public class TheOverexposed : MonoBehaviour
     [SerializeField] private float _detectionRange = 20f;
     private string _currentPlayerMovementState = "Idle";
     private float _noiseCheckTimer;
+
+    [Header("Jumpscare Setup")]
+    [SerializeField] private Camera _jumpscareCamera; // Drag the new Camera here
 
     private NavMeshAgent agent;
     private Animator anim;
@@ -85,6 +88,9 @@ public class TheOverexposed : MonoBehaviour
 
     void Update()
     {
+        // SAFETY CHECK: If the agent is disabled (e.g., during jumpscare), skip all logic
+        if (!agent.enabled) return;
+
         // 1. Always Sync Animation
         anim.SetFloat("Speed", agent.velocity.magnitude);
 
@@ -423,17 +429,71 @@ public class TheOverexposed : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 1. Check if the thing the monster touched is Minh
         if (other.CompareTag("Player"))
         {
-            Debug.Log("<color=red>GAME OVER:</color> The Overexposed caught Minh!");
+            // 1. Prevent multiple jumpscares from firing
+            if (currentState == MonsterState.Stunned) return;
 
-            // 2. Stop the Unity Play Mode
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit(); // This would close the actual game build
-#endif
+            InitiateJumpscare();
         }
+    }
+
+    private void InitiateJumpscare()
+    {
+        Debug.Log("<color=red>JUMPSCARE:</color> Caught the player!");
+
+        // Stop the monster and the player logic
+        agent.isStopped = true;
+        agent.enabled = false; // Stop navigation entirely
+
+        // Trigger the broadcast so the Player script knows to lock movement
+        GameBroadcast.isPlayerFreezed?.Invoke(true);
+
+        // Look at player immediately
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+
+        // Play Jumpscare Animation
+        anim.SetTrigger("isJumpscare");
+
+        // Play Jumpscare Sound
+        if (_screamSource != null && _screamClip != null)
+        {
+            _screamSource.pitch = 0.7f; // Make it deeper and scarier
+            _screamSource.PlayOneShot(_screamClip);
+        }
+
+        Camera mainCam = player.GetComponentInChildren<Camera>();
+
+        if (mainCam == null)
+        {
+            mainCam = Camera.main;
+        }
+
+        // Perform the swap logic
+        if (mainCam != null && _jumpscareCamera != null)
+        {
+            // Turn on the "Movie" camera
+            _jumpscareCamera.enabled = true;
+            _jumpscareCamera.targetDisplay = 0;
+
+            Debug.Log("Cameras Swapped: Player should now see Jumpscare View.");
+        }
+        else
+        {
+            Debug.LogError("Jumpscare Failed: Cameras are not assigned in the Inspector!");
+        }
+
+        // 3. Play the visuals and sounds
+        anim.SetTrigger("Jumpscare");
+        _screamSource.PlayOneShot(_screamClip);
+
+        StartCoroutine(GameOverSequence());
+    }
+
+    IEnumerator GameOverSequence()
+    {
+        yield return new WaitForSeconds(2.5f);
+        // Add your SceneManager.LoadScene here or show your Game Over UI
+        Debug.Log("Reloading Level...");
     }
 }

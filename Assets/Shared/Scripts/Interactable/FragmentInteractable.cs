@@ -27,6 +27,12 @@ public class FragmentInteractable : MonoBehaviour, IInteractable
             _manager.AddFragmentProgress();
 
             Destroy(gameObject);
+
+            // Always raise signal, it will be null if no signal trigger existed.
+            if (TryGetComponent<SignalTrigger>(out var signal))
+            {
+                signal.RaiseSignal();
+            }
         }
     }
 }

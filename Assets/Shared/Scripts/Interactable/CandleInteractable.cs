@@ -47,6 +47,12 @@ public class CandleInteractable : MonoBehaviour, IInteractable
             }
             // Optional: Trigger a local event for the level designer
             Debug.Log("Candle lit! Surrounding area illuminated.");
+
+            // Always raise signal, it will be null if no signal trigger existed.
+            if (TryGetComponent<SignalTrigger>(out var signal))
+            {
+                signal.RaiseSignal();
+            }
         }
     }
 }
