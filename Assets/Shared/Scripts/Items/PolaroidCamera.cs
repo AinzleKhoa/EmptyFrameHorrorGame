@@ -8,10 +8,6 @@ public class PolaroidCamera : MonoBehaviour
 
     [Space(15)]
 
-    [Header("Polaroid Camera Settings")]
-    [SerializeField] private float _cameraShotCooldown = 30f;
-    [SerializeField] private bool _isCameraStateEnabled = false; // This is the "Viewfinder On" state
-
     [Header("Point Light (Glow)")]
     [SerializeField] private Light _pointLight;
     [SerializeField] private float _pointIntensity = 5f;
@@ -32,16 +28,25 @@ public class PolaroidCamera : MonoBehaviour
     [SerializeField] private AudioClip _photoShutter;
     [SerializeField] private AudioClip _viewfinderOnClip;
     [SerializeField] private AudioClip _viewfinderOffClip;
-    private float _lastPhotoTime;
 
     [Header("Camera Rules Settings")]
     [SerializeField] private MeshRenderer _cameraMesh;
     [Header("Zoom Settings")]
     [SerializeField] private float _zoomFOV = 40f;
+    [Space(15)]
 
-    [Header("References")]
-    [SerializeField] private Camera _mainCam; // Drag your Main Camera here
-    [SerializeField] private PlayerCamera _playerCam;
+
+    [Header("UPGRADE")]
+
+    [Header("Lens Upgrade Settings")]
+    [SerializeField] private LayerMask _interactableLayer;
+    [SerializeField] private float _lensScanRange = 20f;
+    private bool _hasSpectralLens = false;
+
+
+    private ItemCooldown _cooldown;
+    private Camera _mainCam;
+    private PlayerCamera _playerCam;
 
     [Header("Flash Settings")]
     public float flashRange = 8f;
@@ -51,12 +56,18 @@ public class PolaroidCamera : MonoBehaviour
 
     private void Start()
     {
-        // Mark the last shot as "negative thirty seconds ago" 
-        // This makes (Time.time - _lastPhotoTime) >= _cooldown true immediately.
-        _lastPhotoTime = -_cameraShotCooldown;
+        // Automatic Player Search
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            _playerCam = playerObj.GetComponentInChildren<PlayerCamera>();
+        }
+
+        if (_mainCam == null) _mainCam = Camera.main;
 
         ResetLogic();
     }
+
     private void OnDisable() => ResetLogic();
 
     private void ResetLogic()
@@ -68,74 +79,83 @@ public class PolaroidCamera : MonoBehaviour
         GameBroadcast.OnCameraToggle?.Invoke(false);
     }
 
+    private void Awake()
+    {
+        _cooldown = GetComponent<ItemCooldown>();
+    }
+
     private void Update()
     {
-        // Only run if the camera is held
         if (transform.parent == null || !transform.parent.CompareTag("HandSocket")) return;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (_isOnCamera && _hasSpectralLens)
         {
-            if (Time.time >= _lastPhotoTime + _cameraShotCooldown)
+            HandleSpectralLens();
+        }
+    }
+
+    public void OnPrimaryAction()
+    {
+        // Check if the component exists on this object
+        ItemCooldown cooldown = GetComponent<ItemCooldown>();
+
+        if (cooldown != null)
+        {
+            // Follow Cooldown Rules
+            if (cooldown.IsReady)
             {
+                cooldown.Use();
                 TakePhoto();
             }
             else
             {
-                Debug.Log("Camera is still recharging...");
+                // Play 'Click' sound because it's still charging
                 if (_audioSource != null && _clickSound != null)
-                {
                     _audioSource.PlayOneShot(_clickSound);
-                }
             }
         }
-
-        if (_isCameraStateEnabled)
-            HandleViewfinder();
+        else
+        {
+            // No Cooldown Component found? Shoot freely!
+            TakePhoto();
+        }
     }
 
-    // Interact with PlayerItemStatusHUD by sending cooldown progress
-    private void LateUpdate()
+    public void OnSecondaryAction()
     {
-        // Calculate the percentage of the cooldown (0 to 1)
-        float timePassed = Time.time - _lastPhotoTime;
-        float progress = Mathf.Clamp01(timePassed / _cameraShotCooldown);
-
-        // Update the HUD so the player sees the bar filling up
-        GameBroadcast.OnItemStatusUpdate?.Invoke("PolaroidCamera", progress);
+        // Toggle the viewfinder/zoom
+        HandleViewfinder();
     }
 
     private void HandleViewfinder()
     {
         // Both Enable & Disable in one method
-        if (Mouse.current.rightButton.wasPressedThisFrame)
+        _isOnCamera = !_isOnCamera; // Flip the state (True -> False / False -> True)
+
+        // Play the appropriate sound for the new state
+        PlayViewfinderSound(_isOnCamera ? _viewfinderOnClip : _viewfinderOffClip);
+
+        // --- 1. HUD Toggle ---
+        // This tells the HUD, Movement, and Interactor what to do!
+        GameBroadcast.OnCameraToggle?.Invoke(_isOnCamera);
+
+        // --- 2. Hide/Show Camera Model ---
+        if (_cameraMesh != null) _cameraMesh.enabled = !_isOnCamera;
+
+        // --- 3. Camera FOV ---
+        if (_playerCam != null)
         {
-            _isOnCamera = !_isOnCamera; // Flip the state (True -> False / False -> True)
+            _playerCam.fovOverride = _isOnCamera ? _zoomFOV : 0;
+        }
 
-            // Play the appropriate sound for the new state
-            PlayViewfinderSound(_isOnCamera ? _viewfinderOnClip : _viewfinderOffClip);
-
-            // --- 1. HUD Toggle ---
-            // This tells the HUD, Movement, and Interactor what to do!
-            GameBroadcast.OnCameraToggle?.Invoke(_isOnCamera);
-
-            // --- 2. Hide/Show Camera Model ---
-            if (_cameraMesh != null) _cameraMesh.enabled = !_isOnCamera;
-
-            // --- 3. Camera FOV ---
-            if (_playerCam != null)
-            {
-                _playerCam.fovOverride = _isOnCamera ? _zoomFOV : 0;
-            }
-
-            // --- 4. Spectral Vision ---
-            if (_mainCam != null)
-            {
-                int spectralLayer = LayerMask.NameToLayer("Spectral");
-                if (_isOnCamera)
-                    _mainCam.cullingMask |= 1 << spectralLayer;
-                else
-                    _mainCam.cullingMask &= ~(1 << spectralLayer);
-            }
+        // --- 4. Spectral Vision ---
+        if (_mainCam != null)
+        {
+            int spectralLayer = LayerMask.NameToLayer("Spectral");
+            if (_isOnCamera)
+                _mainCam.cullingMask |= 1 << spectralLayer;
+            else
+                _mainCam.cullingMask &= ~(1 << spectralLayer);
         }
     }
 
@@ -149,7 +169,6 @@ public class PolaroidCamera : MonoBehaviour
 
     private void TakePhoto()
     {
-        _lastPhotoTime = Time.time; // Mark the time of the shot immediately
         Debug.Log("Photo Captured!");
 
         // Audio Feedback
@@ -238,5 +257,29 @@ public class PolaroidCamera : MonoBehaviour
         // 3. Final Cleanup
         if (_pointLight != null) _pointLight.enabled = false;
         if (_spotLight != null) _spotLight.enabled = false;
+    }
+
+    public void UnlockSpectralLens(bool status) => _hasSpectralLens = status;
+
+    private void HandleSpectralLens()
+    {
+        if (!_hasSpectralLens || !_isOnCamera) return;
+
+        // INCREASE THIS RANGE to 200 to match your request
+        Collider[] items = Physics.OverlapSphere(transform.position, 200f, _interactableLayer);
+
+        foreach (var item in items)
+        {
+            Vector3 screenPoint = _mainCam.WorldToViewportPoint(item.bounds.center);
+            bool inFrame = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
+
+            if (inFrame)
+            {
+                if (item.TryGetComponent<OutlineManager>(out var manager))
+                {
+                    manager.SignalLensPresence();
+                }
+            }
+        }
     }
 }

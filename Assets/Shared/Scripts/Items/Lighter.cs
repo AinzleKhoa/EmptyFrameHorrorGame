@@ -35,11 +35,11 @@ public class Lighter : MonoBehaviour
     {
         // Only run if is held
         if (transform.parent == null || !transform.parent.CompareTag("HandSocket")) return;
+    }
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            ToggleLighter();
-        }
+    public void OnPrimaryAction()
+    {
+        ToggleLighter();
     }
 
     private void ToggleLighter()

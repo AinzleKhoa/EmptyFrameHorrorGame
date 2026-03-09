@@ -12,16 +12,14 @@ public class PlayerInventory : MonoBehaviour
     private PickableItem[] _slots = new PickableItem[3];
     private int _currentSlotIndex = 0;
 
-    private void Update()
-    {
-        // 2. New Input System syntax
-        if (Keyboard.current.digit1Key.wasPressedThisFrame) SwapToSlot(0);
-        if (Keyboard.current.digit2Key.wasPressedThisFrame) SwapToSlot(1);
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) SwapToSlot(2);
+    // --- INPUT MESSAGES ---
+    public void OnSlot1() => SwapToSlot(0);
+    public void OnSlot2() => SwapToSlot(1);
+    public void OnSlot3() => SwapToSlot(2);
 
-        // Q to Drop
-        if (Keyboard.current.qKey.wasPressedThisFrame) DropCurrentItem();
-    }
+    public void OnDrop() => DropCurrentItem();
+
+    // --- LOGIC ---
     public void AddItem(PickableItem item)
     {
         for (int i = 0; i < _slots.Length; i++)
@@ -32,16 +30,20 @@ public class PlayerInventory : MonoBehaviour
 
                 // TELL THE ITEM: Stop being a physical object in the world
                 item.SetPhysics(false);
+                item.HideOutline();
 
                 if (i == _currentSlotIndex) Equip(item);
                 else Store(item);
 
                 // BROADCAST: Tell the HUD to show this new icon
-                GameBroadcast.OnInventorySlotUpdate?.Invoke(i, item.ItemIcon);
+                // Get Identity from ItemData for the HUD Icon
+                if (item.TryGetComponent<ItemData>(out var data))
+                {
+                    GameBroadcast.OnInventorySlotUpdate?.Invoke(i, data.ItemIcon);
+                }
                 return;
             }
         }
-        // For later prompt inventory full
     }
 
     private void SwapToSlot(int newIndex)
@@ -62,6 +64,14 @@ public class PlayerInventory : MonoBehaviour
         {
             Equip(_slots[_currentSlotIndex]);
         }
+        else
+        {
+            // If the new slot is empty, hide the description ---
+            // Assuming ItemData is on the same object as PlayerMovement (the parent of Inventory)
+            ShowPlayerStatus();
+
+            GameBroadcast.OnItemEquipped?.Invoke("None", null);
+        }
 
         // BROADCAST: Tell the HUD to move the selection highlight
         GameBroadcast.OnSlotSelected?.Invoke(_currentSlotIndex);
@@ -74,8 +84,12 @@ public class PlayerInventory : MonoBehaviour
         // Use the item's own logic for its specific rotation
         item.ApplyHandTransform();
 
-        // BROADCAST: Tell the HUD what item is now equipped (for status effects, etc)
-        GameBroadcast.OnItemEquipped?.Invoke(item.ItemName, item.ItemIcon);
+        // Broadcast Name, Icon, and Description from ItemData
+        if (item.TryGetComponent<ItemData>(out var data))
+        {
+            GameBroadcast.OnUpdateItemDescription?.Invoke(data.FullDescription);
+            GameBroadcast.OnItemEquipped?.Invoke(data.ItemName, data.ItemIcon);
+        }
     }
 
     private void Store(PickableItem item)
@@ -91,15 +105,42 @@ public class PlayerInventory : MonoBehaviour
         PickableItem item = _slots[_currentSlotIndex];
         item.transform.SetParent(null);
         item.SetPhysics(true);
+        item.ShowOutline();
 
         _slots[_currentSlotIndex] = null;
-
-        // BROADCAST: Tell the HUD to show the empty icon for this slot
         GameBroadcast.OnInventorySlotUpdate?.Invoke(_currentSlotIndex, _defaultEmptyIcon);
-        // BROADCAST: Tell the HUD that nothing is equipped (for status effects, etc)
-        if (item.ItemName == "PolaroidCamera")
+        PlayerData pData = GetComponentInParent<PlayerData>();
+        ShowPlayerStatus();
+
+        GameBroadcast.OnItemEquipped?.Invoke("None", null);
+    }
+
+    public PickableItem GetItemByName(string itemName)
+    {
+        foreach (var item in _slots)
         {
-            GameBroadcast.OnItemEquipped?.Invoke("None", null);
+            // Search through the ItemData component of each slotted item
+            if (item != null && item.TryGetComponent<ItemData>(out var data))
+            {
+                if (data.ItemName == itemName) return item;
+            }
         }
+        return null;
+    }
+
+    // Returns the item in the current active slot
+    public PickableItem GetCurrentlyEquippedItem()
+    {
+        return _slots[_currentSlotIndex];
+    }
+
+    // Simple helper to show the player's own status when no item is equipped
+    private void ShowPlayerStatus()
+    {
+        PlayerData pData = GetComponentInParent<PlayerData>();
+        if (pData != null)
+            GameBroadcast.OnUpdateItemDescription?.Invoke(pData.FullStatusDescription);
+        else
+            GameBroadcast.OnUpdateItemDescription?.Invoke("");
     }
 }

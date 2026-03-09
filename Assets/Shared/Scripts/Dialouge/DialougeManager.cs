@@ -34,32 +34,29 @@ public class DialogueManager : MonoBehaviour
         _currentDialogueLines = data.Lines;
         _lineIndex = 0;
 
-        // 1. Block Player
-        GameBroadcast.isPlayerFreezed?.Invoke(true); // Broadcast to freeze player interactions
+        // 1. Switch to UI State (Unlocks mouse, freezes movement/camera)
+        GameBroadcast.OnInputStateChange?.Invoke("UI");
 
         // 2. Show UI
         _dialoguePanel.SetActive(true);
         StartCoroutine(TypeLine());
     }
 
-    private void Update()
+    public void OnClose()
     {
         if (!_isActive) return;
 
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (_isTyping)
         {
-            if (_isTyping)
-            {
-                // Instant skip typing
-                StopAllCoroutines();
-                _textDisplay.text = _currentDialogueLines[_lineIndex];
-                _isTyping = false;
-                _continuePrompt.SetActive(true);
-            }
-            else
-            {
-                NextLine();
-            }
+            // Instant skip typing
+            StopAllCoroutines();
+            _textDisplay.text = _currentDialogueLines[_lineIndex];
+            _isTyping = false;
+            _continuePrompt.SetActive(true);
+        }
+        else
+        {
+            NextLine();
         }
     }
 
@@ -97,8 +94,8 @@ public class DialogueManager : MonoBehaviour
         _isActive = false;
         _dialoguePanel.SetActive(false);
 
-        // 1. Unblock Player
-        GameBroadcast.isPlayerFreezed?.Invoke(false); // Broadcast to unfreeze player interactions
+        // 1. Switch back to Gameplay state
+        GameBroadcast.OnInputStateChange?.Invoke("Player");
 
         // 2. Tell the StoryDirector we are done
         _onDialogueFinishedSignal?.Raise();

@@ -1344,6 +1344,8 @@ GameObject:
   - component: {fileID: 8221377568279620258}
   - component: {fileID: 8606706636664393102}
   - component: {fileID: 5896073276746521686}
+  - component: {fileID: 6261771946907917605}
+  - component: {fileID: 4960513507276797260}
   m_Layer: 7
   m_Name: L4_TheShadowNPC
   m_TagString: Untagged
@@ -1450,8 +1452,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03a7163db8a24445877fe6c7614631b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  _dialogueManager: {fileID: 0}
   _data: {fileID: 11400000, guid: 6c7f885da0eac9d48b359cb758689386, type: 2}
+--- !u!114 &6261771946907917605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8213263754897970148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &4960513507276797260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8213263754897970148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c318f6706c483144696ce35610c49f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineManager
+  _detectionRange: 8
 --- !u!1 &8232358652353786047
 GameObject:
   m_ObjectHideFlags: 0

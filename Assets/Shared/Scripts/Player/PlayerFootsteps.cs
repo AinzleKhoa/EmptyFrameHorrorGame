@@ -26,6 +26,9 @@ public class PlayerFootsteps : MonoBehaviour
     {
         if (_movement == null) return;
 
+        // If movement is silenced, don't even run the step timer
+        if (_movement.isSilenced) return;
+
         // Only run timer if moving and on the ground, or crouched
         if (_movement.isWalking && _movement.isGrounded && !_movement.isCrouched)
         {

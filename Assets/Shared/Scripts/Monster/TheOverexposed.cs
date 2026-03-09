@@ -7,7 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(AudioSource))]
 public class TheOverexposed : MonoBehaviour
 {
-    public enum MonsterState { Roaming, Investigating, Alerting, Chasing, Stunned }
+    public enum MonsterState { Roaming, Investigating, Alerting, Chasing, Stunned, Stalking }
 
     [Header("Status")]
     public MonsterState currentState = MonsterState.Roaming;
@@ -55,6 +55,8 @@ public class TheOverexposed : MonoBehaviour
     private Animator anim;
     private Transform player;
 
+    private bool _isStalkingPlayer = false;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -83,8 +85,17 @@ public class TheOverexposed : MonoBehaviour
         }
     }
 
-    private void OnEnable() => GameBroadcast.OnPlayerMovementState += (state) => _currentPlayerMovementState = state;
-    private void OnDisable() => GameBroadcast.OnPlayerMovementState -= (state) => _currentPlayerMovementState = state;
+    private void OnEnable()
+    {
+        GameBroadcast.OnPlayerMovementState += (state) => _currentPlayerMovementState = state;
+        GameBroadcast.OnFragmentCollected += HandleProgressionUpdate; // Listen here
+    }
+
+    private void OnDisable()
+    {
+        GameBroadcast.OnPlayerMovementState -= (state) => _currentPlayerMovementState = state;
+        GameBroadcast.OnFragmentCollected -= HandleProgressionUpdate;
+    }
 
     void Update()
     {
@@ -101,8 +112,26 @@ public class TheOverexposed : MonoBehaviour
         if (currentState == MonsterState.Alerting || currentState == MonsterState.Stunned) return;
 
         // 3. Perception (Inputs that change the Enum)
+        if (currentState == MonsterState.Chasing) // Only check if the monster is chasing
+        {
+            CheckForLightExposure();
+        }
         CheckForPlayerVisual();
-        if (currentState == MonsterState.Roaming) ListenForNoise();
+
+        // PROGRESSION LOGIC ====
+        // If we are at 4/5 fragments, force the state to Stalking
+        // Only force Stalking if the monster is currently Roaming or Investigating.
+        if (_isStalkingPlayer)
+        {
+            if (currentState == MonsterState.Roaming || currentState == MonsterState.Investigating)
+            {
+                currentState = MonsterState.Stalking;
+            }
+        }
+        else if (currentState == MonsterState.Roaming)
+        {
+            ListenForNoise();
+        }
 
         // 4. State Execution (The Switch)
         switch (currentState)
@@ -110,6 +139,7 @@ public class TheOverexposed : MonoBehaviour
             case MonsterState.Roaming: ExecuteRoaming(); break;
             case MonsterState.Investigating: ExecuteInvestigating(); break;
             case MonsterState.Chasing: ExecuteChasing(); break;
+            case MonsterState.Stalking: ExecuteStalking(); break;
         }
     }
 
@@ -130,6 +160,7 @@ public class TheOverexposed : MonoBehaviour
             }
         }
     }
+
     private void PlayFootstep()
     {
         if (_footstepClips.Length == 0) return;
@@ -162,7 +193,7 @@ public class TheOverexposed : MonoBehaviour
         float dist = Vector3.Distance(transform.position, player.position);
 
         // When investigating, if player is sprinting, immediately update the destination to chase them dynamically
-        if (_currentPlayerMovementState == "Sprinting" || dist < _detectionRange * 0.5f)
+        if (_currentPlayerMovementState == "Sprinting" || dist < _detectionRange)
         {
             _investigationPoint = player.position;
             agent.SetDestination(_investigationPoint);
@@ -173,6 +204,17 @@ public class TheOverexposed : MonoBehaviour
             // After checking the noise, wait a bit then go back to roaming
             HandleWaitAndRepath(MonsterState.Roaming);
         }
+    }
+
+    private void ExecuteStalking()
+    {
+        agent.speed = _runSpeed;
+
+        // Continuously track the player's transform directly
+        agent.SetDestination(player.position);
+
+        // Keep the animation moving
+        anim.SetFloat("Speed", agent.velocity.magnitude);
     }
 
     private void ExecuteChasing()
@@ -230,6 +272,33 @@ public class TheOverexposed : MonoBehaviour
         }
     }
 
+    private void CheckForLightExposure()
+    {
+        if (currentState == MonsterState.Stunned) return;
+
+        // 1. Scan for any colliders near the monster's chest
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position + Vector3.up, 3f);
+
+        foreach (var hit in hitColliders)
+        {
+            // 2. Look for the script on the hit object OR any of its parents
+            CandleInteractable candle = hit.GetComponentInParent<CandleInteractable>();
+
+            if (candle != null && candle.IsLit)
+            {
+                Debug.Log("<color=yellow>Monster hit by light from: </color>" + hit.name);
+
+                // 3. Trigger the stun
+                TakeDamage(1f);
+
+                // 4. DESTROY the candle so it cannot be used again
+                Destroy(candle.gameObject);
+
+                break;
+            }
+        }
+    }
+
     private void ListenForNoise()
     {
         if (_currentPlayerMovementState == "Idle" || _currentPlayerMovementState == "Crouched") return;
@@ -243,7 +312,7 @@ public class TheOverexposed : MonoBehaviour
             // Range cap for hearing
             if (dist > _detectionRange) return;
 
-            float baseChance = (_currentPlayerMovementState == "Sprinting") ? 0.5f : 0.05f;
+            float baseChance = (_currentPlayerMovementState == "Sprinting") ? 0.1f : 0.05f;
 
             // 4. THE SMOOTH CURVE (InverseLerp + Power)
             // 20m = 0.0 (Silent), 0m = 1.0 (Maximum volume)
@@ -333,7 +402,7 @@ public class TheOverexposed : MonoBehaviour
         agent.SetDestination(_roomWaypoints[targetIndex].position);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float stunDuration = 6f)
     {
         if (currentState == MonsterState.Stunned) return;
 
@@ -342,7 +411,7 @@ public class TheOverexposed : MonoBehaviour
         StopAllCoroutines();
         agent.isStopped = true;
 
-        StartCoroutine(StunnedRoutine());
+        StartCoroutine(StunnedRoutine(stunDuration));
     }
 
     #endregion
@@ -365,7 +434,7 @@ public class TheOverexposed : MonoBehaviour
         currentState = MonsterState.Chasing;
     }
 
-    IEnumerator StunnedRoutine()
+    IEnumerator StunnedRoutine(float duration)
     {
         currentState = MonsterState.Stunned;
         agent.isStopped = true;
@@ -377,12 +446,31 @@ public class TheOverexposed : MonoBehaviour
             _screamSource.PlayOneShot(_stunnedClip);
         }
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(duration);
         anim.SetTrigger("isRecovered");
         yield return new WaitForSeconds(2f);
         agent.isStopped = false;
-        currentState = MonsterState.Roaming;
-        SetNextDestination();
+
+        // PROGRESSION LOGIC ======
+        // If at 4/5 fragments collected stage, monster will always scream when get up, indicated it is looking for player again.
+        if (_isStalkingPlayer)
+        {
+            currentState = MonsterState.Stalking;
+
+            // Play the investigate scream immediately as it gets back up
+            if (_investigateClip != null)
+            {
+                _screamSource.PlayOneShot(_investigateClip);
+            }
+
+            Debug.Log("<color=red>Monster recovered and is immediately Stalking again!</color>");
+        }
+        else
+        {
+            // Normal behavior for Stages 0-3
+            currentState = MonsterState.Roaming;
+            SetNextDestination();
+        }
     }
 
     #endregion
@@ -425,6 +513,12 @@ public class TheOverexposed : MonoBehaviour
             Gizmos.color = Color.Lerp(Color.yellow, Color.red, intensity);
             Gizmos.DrawLine(transform.position + Vector3.up * 1.5f, player.position + Vector3.up * 1.5f);
         }
+
+        // --- SENSOR SURROUNDING DEBUGGER ---
+        // Add this to the end of your OnDrawGizmos method
+        Gizmos.color = Color.white;
+        Vector3 sensorPos = transform.position + Vector3.up;
+        Gizmos.DrawWireSphere(sensorPos, 3f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -446,7 +540,6 @@ public class TheOverexposed : MonoBehaviour
         agent.isStopped = true;
         agent.enabled = false; // Stop navigation entirely
 
-        // Trigger the broadcast so the Player script knows to lock movement
         GameBroadcast.isPlayerFreezed?.Invoke(true);
 
         // Look at player immediately
@@ -495,5 +588,36 @@ public class TheOverexposed : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         // Add your SceneManager.LoadScene here or show your Game Over UI
         Debug.Log("Reloading Level...");
+    }
+
+    // Progression Logic
+    private void HandleProgressionUpdate(int count)
+    {
+        switch (count)
+        {
+            case 1: // 1/5: Walk speed increase
+                _walkSpeed += 1.5f;
+                Debug.Log("<color=orange>Monster: Walking Faster...</color>");
+                break;
+
+            case 2: // 2/5: Always in running state
+                _walkSpeed = _runSpeed; // Forces Roaming to be as fast as Investigating
+                Debug.Log("<color=orange>Monster: No longer walking. Only running.</color>");
+                break;
+
+            case 3: // 3/5: Even faster
+                _chaseSpeed += 2f;
+                _walkSpeed += 2f;
+                _runSpeed += 2f;
+                Debug.Log("<color=red>Monster: Lethal speeds reached.</color>");
+                break;
+
+            case 4: // 4/5: Always know your location
+                _isStalkingPlayer = true;
+                if (_investigateClip != null)
+                    _screamSource.PlayOneShot(_investigateClip);
+                Debug.Log("<color=purple>Monster: I SEE YOU EVERYWHERE.</color>");
+                break;
+        }
     }
 }

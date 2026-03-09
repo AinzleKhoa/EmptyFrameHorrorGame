@@ -1,0 +1,1 @@
+public interface IUpgradeEffect { void ExecuteUpgrade(PickableItem target); }

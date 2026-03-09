@@ -6,7 +6,7 @@ public class PlayerInteractor : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float _interactDistance = 3f;
     [SerializeField] private LayerMask _interactLayer;
-    private bool _isPlayerFreezed = false; // Local state to track if player is frozen
+    private IInteractable _currentInteractable; // Store what we are looking at
 
     // Local state to track if we should block interaction
     private bool _isOnCamera = false;
@@ -15,48 +15,44 @@ public class PlayerInteractor : MonoBehaviour
     {
         // Start listening for camera toggle
         GameBroadcast.OnCameraToggle += HandleCameraToggle;
-        GameBroadcast.isPlayerFreezed += HandlePlayerFreeze;
     }
 
     private void OnDisable()
     {
         // Stop listening
         GameBroadcast.OnCameraToggle -= HandleCameraToggle;
-        GameBroadcast.isPlayerFreezed -= HandlePlayerFreeze;
     }
-
-    private void HandlePlayerFreeze(bool isFreezed)
-    {
-        _isPlayerFreezed = isFreezed;
-    }
-
     private void HandleCameraToggle(bool isOnCamera)
     {
         _isOnCamera = isOnCamera;
     }
 
+    public void OnInteract()
+    {
+        // If we are looking at something valid, interact with it
+        if (_currentInteractable != null)
+        {
+            _currentInteractable.Interact(this);
+        }
+    }
+
     private void Update()
     {
-        // If we look away or hit something non-interactable, hide the prompt
+        // Default state: no interaction
+        _currentInteractable = null;
         GameBroadcast.OnInteractionPromptReq?.Invoke("", false);
 
-        if (_isPlayerFreezed) return; // If player is frozen, skip interaction checks
-
+        // We still need the Raycast in Update to show the "Press E" prompt
         Ray ray = new Ray(transform.position, transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, _interactDistance, _interactLayer))
         {
             if (hit.collider.TryGetComponent(out IInteractable interactable))
             {
-                // BROADCAST: Request the HUD to show the prompt
-                GameBroadcast.OnInteractionPromptReq?.Invoke(interactable.PromptMessage, true);
+                _currentInteractable = interactable;
 
-                if (Keyboard.current.eKey.wasPressedThisFrame)
-                {
-                    // 1. Do the base interaction (Show text/Pick up)
-                    interactable.Interact(this);
-                }
-                return;
+                // BROADCAST: Show the prompt on screen
+                GameBroadcast.OnInteractionPromptReq?.Invoke(interactable.PromptMessage, true);
             }
         }
     }

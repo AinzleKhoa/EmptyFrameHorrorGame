@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5779329830826086401
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.289676
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.289676
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.289676
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.1996
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0103
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.9912
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.535897
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5358972
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.46131805
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.461318
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -81.446
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c3dcbc0a87b1e2c4dbafb9d4a6c56e74, type: 2}
+    - target: {fileID: 919132149155446097, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_Name
+      value: Upgrade_CameraLens
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 413360806816595950}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7385730407405741183}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9047342096551341475}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1533591702241683127}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 525951310175326163}
+  m_SourcePrefab: {fileID: 100100000, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+--- !u!1 &6698299661221375312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b0081ddbc57036e4aa1244c7008adc2b, type: 3}
+  m_PrefabInstance: {fileID: 5779329830826086401}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &413360806816595950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698299661221375312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.78431374, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &7385730407405741183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698299661221375312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c318f6706c483144696ce35610c49f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineManager
+  _detectionRange: 8
+--- !u!65 &9047342096551341475
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698299661221375312}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0069850045, y: 0.024001226, z: 0.024003003}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1533591702241683127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698299661221375312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1aa650ed345d74fbb35fbc1ba163e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraViewfinderUpgrade
+  _upgradeName: Spectral Lens
+  _upgradeLore: Reveals important items through the viewfinder.
+--- !u!114 &525951310175326163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698299661221375312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b282cba51d5115d42a3011e41f336cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeInteractable
+  _targetItemName: PolaroidCamera
+  _readyPrompt: Press [E] to Upgrade
+  _missingPrompt: Requires Polaroid Camera

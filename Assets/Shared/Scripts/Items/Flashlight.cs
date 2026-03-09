@@ -30,11 +30,11 @@ public class Flashlight : MonoBehaviour
     {
         // Only run if is held
         if (transform.parent == null || !transform.parent.CompareTag("HandSocket")) return;
+    }
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            ToggleFlashlight();
-        }
+    public void OnPrimaryAction()
+    {
+        ToggleFlashlight();
     }
 
     private void ToggleFlashlight()

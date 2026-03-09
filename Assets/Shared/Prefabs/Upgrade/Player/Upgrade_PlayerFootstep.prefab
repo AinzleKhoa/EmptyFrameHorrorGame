@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3977830153113791883
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.83136076
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.83136076
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.83136076
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.057
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0064
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.819
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2513545
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.2513545
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.66092443
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.66092426
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -138.356
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_Name
+      value: Upgrade_PlayerFootstep
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 224362629937184394}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7969268053492461870}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1209582336042228007}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8099993784294259276}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4165018243413492601}
+  m_SourcePrefab: {fileID: 100100000, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+--- !u!1 &4320498656095654106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
+  m_PrefabInstance: {fileID: 3977830153113791883}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &224362629937184394
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320498656095654106}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.46047947, y: 0.3289964, z: 0.24169731}
+  m_Center: {x: 0.00047640537, y: -0.009291515, z: 0.10052569}
+--- !u!114 &7969268053492461870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320498656095654106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.78431374, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &1209582336042228007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320498656095654106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c318f6706c483144696ce35610c49f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineManager
+  _detectionRange: 8
+--- !u!114 &8099993784294259276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320498656095654106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b282cba51d5115d42a3011e41f336cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeInteractable
+  _targetItemName: Player
+  _readyPrompt: Press [E] to Upgrade
+  _missingPrompt: Nothing
+--- !u!114 &4165018243413492601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320498656095654106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b06d3e81e3bd7e4a9e66ac5669b8260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFootstepUpgrade
+  _upgradeName: Soft-Soled Boots
+  _upgradeLore: Running and walking no longer emits noise.

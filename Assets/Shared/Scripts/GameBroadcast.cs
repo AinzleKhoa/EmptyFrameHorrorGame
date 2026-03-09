@@ -5,6 +5,7 @@ public static class GameBroadcast
 {
     // Progression
     public static Action<bool> OnAllFragmentsCollected; // true = all collected, false = reset
+    public static Action<int> OnFragmentCollected;
 
     // HUD Updates
     public static Action<int, int> OnProgressionCountUpdateHUD; // current count, total required
@@ -17,6 +18,10 @@ public static class GameBroadcast
     // Item Status
     public static Action<string, float> OnItemStatusUpdate; // 0 to 1 representing cooldown progress
     public static Action<string, Sprite> OnItemEquipped;
+
+    // Upgrades
+    // public static System.Action<string, bool> OnUpgradeAcquired; // string = upgrade name, bool = true for acquired, false for removed/reset
+    public static System.Action<string> OnUpdateItemDescription;
 
     // Camera & State
     public static Action<bool> OnCameraToggle; // true = Camera State, false = Normal State
@@ -40,5 +45,6 @@ public static class GameBroadcast
     public static Action<bool> OnMonsterIsHit;
     public static Action<string> OnPlayerMovementState;
     // Player State
+    public static Action<string> OnInputStateChange;
     public static Action<bool> isPlayerFreezed;
 }

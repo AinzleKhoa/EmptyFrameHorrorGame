@@ -23,6 +23,7 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float _exhaustedFOV = 30f;
     [SerializeField] private float _fovStepTime = 10f;
     [HideInInspector] public float fovOverride = 0; // For FOV changer like Polaroid Camera right-click
+    [HideInInspector] public float fovCamera = 0; // For FOV changer like Polaroid Camera right-click
 
     [Header("Head Bob")]
     [SerializeField] private bool _enableHeadBob = true;
@@ -35,6 +36,13 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private bool _enableIdleBob = true;
     [SerializeField] private float _idleBobSpeed = 2f;
     [SerializeField] private Vector3 _idleBobAmount = new Vector3(0.02f, 0.02f, 0f);
+
+    private Vector2 _lookInput;
+
+    public void OnLook(InputValue value)
+    {
+        _lookInput = value.Get<Vector2>();
+    }
 
     private void Start()
     {
@@ -51,11 +59,12 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleRotation()
     {
-        Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+        // We use the stored _lookInput instead of hardware Mouse.current
+        float mouseX = _lookInput.x * _mouseSensitivity * 0.1f;
+        float mouseY = _lookInput.y * _mouseSensitivity * 0.1f;
 
-        // We use root for horizontal (Yaw) and local for vertical (Pitch)
-        _yaw = transform.root.localEulerAngles.y + mouseDelta.x * _mouseSensitivity * 0.1f;
-        _pitch -= mouseDelta.y * _mouseSensitivity * 0.1f;
+        _yaw = transform.root.localEulerAngles.y + mouseX;
+        _pitch -= mouseY;
         _pitch = Mathf.Clamp(_pitch, -_maxLookAngle, _maxLookAngle);
 
         transform.root.localEulerAngles = new Vector3(0, _yaw, 0);
@@ -66,17 +75,23 @@ public class PlayerCamera : MonoBehaviour
     {
         float targetFOV;
 
-        // Priority 1: Viewfinder Zoom (Polaroid Camera)
+        // Override FOV if set by any item
         if (fovOverride > 0)
         {
             targetFOV = fovOverride;
+            Debug.Log($"FOV Overridden to: {targetFOV}");
         }
-        // Priority 2: Exhausted (From Movement Script)
+        else if (fovCamera > 0)
+        {
+            targetFOV = fovCamera;
+            Debug.Log($"FOV Overridden to: {targetFOV}");
+        }
+        // Exhausted (From Movement Script)
         else if (_movement != null && _movement.isExhausted)
         {
             targetFOV = _exhaustedFOV;
         }
-        // Priority 3: Sprinting (From Movement Script)
+        // Sprinting (From Movement Script)
         else if (_movement != null && _movement.isSprinting)
         {
             targetFOV = _sprintFOV;

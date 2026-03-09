@@ -159,6 +159,28 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     IsActive: 0
+  - ActName: Light Up The Candle
+    Objectives:
+    - rid: 2300694095031959634
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
   - ActName: Avoid the Monster
     Objectives:
     - rid: 4932521947925577811
@@ -196,6 +218,15 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 2300694095031959634
+      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Light Up The Candle
+        _objectiveDescription: "Light up The Candle on the table with a lit Lighter
+          when you're ready to start \n\n(The stage will start when the candle is
+          lit)"
+        _interactionSignal: {fileID: 11400000, guid: 3e86f8d8436b75544ab221cd7ceaaa2f, type: 2}
+        _targetCount: 1
     - rid: 4932521937058922565
       type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
       data:
@@ -221,13 +252,12 @@ MonoBehaviour:
       type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
       data:
         _objectiveName: Avoid the Monster
-        _objectiveDescription: 'Evade the OverExposed''s glare and reclaim the [5
-          shattered exposures].
+        _objectiveDescription: 'Evade the OverExposed''s glare and reclaim the 5
+          Fragments.
 
-          
 
-          (Refer to the note on the
-          table for clues.)'
+
+          (Refer to the note on the table for clues.)'
         _interactionSignal: {fileID: 0}
         _targetCount: 1
     - rid: 4932521947925577812

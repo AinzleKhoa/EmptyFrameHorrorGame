@@ -1,0 +1,121 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(CanvasGroup))]
+public class DialougeHUD : MonoBehaviour
+{
+    [Header("UI References")]
+    [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private TextMeshProUGUI _textDisplay;
+    [SerializeField] private GameObject _continuePrompt;
+
+    [Header("Settings")]
+    [SerializeField] private float _typingSpeed = 0.05f;
+    [SerializeField] private GameSignal _onDialogueFinishedSignal;
+
+    private List<string> _currentDialogueLines;
+    private int _lineIndex;
+    private bool _isTyping;
+    private bool _isActive;
+
+    private void Awake()
+    {
+        // Ensure we have the reference
+        if (_canvasGroup == null) _canvasGroup = GetComponent<CanvasGroup>();
+        HideUI();
+    }
+
+    // Called by StoryDirector via UnityEvent
+    public void StartDialogue(DialogueData data)
+    {
+        if (data == null || data.Lines.Count == 0) return;
+
+        _isActive = true;
+        _currentDialogueLines = data.Lines;
+        _lineIndex = 0;
+
+        // 1. Switch to UI State via your switch-case controller
+        GameBroadcast.OnInputStateChange?.Invoke("UI");
+
+        // 2. Show UI via Alpha
+        ShowUI();
+        StartCoroutine(TypeLine());
+    }
+
+    // Broadcast Message: Triggered when 'E' is pressed in UI Map
+    public void OnClose()
+    {
+        if (!_isActive) return;
+
+        if (_isTyping)
+        {
+            // Instant skip typing
+            StopAllCoroutines();
+            _textDisplay.text = _currentDialogueLines[_lineIndex];
+            _isTyping = false;
+            _continuePrompt.SetActive(true);
+        }
+        else
+        {
+            NextLine();
+        }
+    }
+
+    private IEnumerator TypeLine()
+    {
+        _isTyping = true;
+        _continuePrompt.SetActive(false);
+        _textDisplay.text = "";
+
+        foreach (char c in _currentDialogueLines[_lineIndex].ToCharArray())
+        {
+            _textDisplay.text += c;
+            yield return new WaitForSeconds(_typingSpeed);
+        }
+
+        _isTyping = false;
+        _continuePrompt.SetActive(true);
+    }
+
+    private void NextLine()
+    {
+        if (_lineIndex < _currentDialogueLines.Count - 1)
+        {
+            _lineIndex++;
+            StartCoroutine(TypeLine());
+        }
+        else
+        {
+            EndDialogue();
+        }
+    }
+
+    private void EndDialogue()
+    {
+        _isActive = false;
+        HideUI();
+
+        // 1. Switch back to Gameplay state
+        GameBroadcast.OnInputStateChange?.Invoke("Player");
+
+        // 2. Signal the StoryDirector
+        _onDialogueFinishedSignal?.Raise();
+    }
+
+    private void ShowUI()
+    {
+        _canvasGroup.alpha = 1f;
+        _canvasGroup.blocksRaycasts = true;
+        _canvasGroup.interactable = true;
+    }
+
+    private void HideUI()
+    {
+        _canvasGroup.alpha = 0f;
+        _canvasGroup.blocksRaycasts = false;
+        _canvasGroup.interactable = false;
+    }
+}

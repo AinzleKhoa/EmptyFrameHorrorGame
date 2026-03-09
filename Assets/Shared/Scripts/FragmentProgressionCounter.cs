@@ -9,6 +9,7 @@ public class FragmentProgressionCounter : MonoBehaviour
     private void Start()
     {
         GameBroadcast.OnProgressionCountUpdateHUD?.Invoke(_currentCount, _totalRequired);
+        GameBroadcast.OnFragmentCollected?.Invoke(_currentCount);
     }
 
     public void AddFragmentProgress()
@@ -17,6 +18,7 @@ public class FragmentProgressionCounter : MonoBehaviour
 
         _currentCount++;
         GameBroadcast.OnProgressionCountUpdateHUD?.Invoke(_currentCount, _totalRequired);
+        GameBroadcast.OnFragmentCollected?.Invoke(_currentCount);
 
         if (_currentCount >= _totalRequired) GameBroadcast.OnAllFragmentsCollected?.Invoke(true);
         Debug.Log($"Fragment Progress: {_currentCount}/{_totalRequired}");

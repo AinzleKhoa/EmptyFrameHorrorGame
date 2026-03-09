@@ -7,6 +7,9 @@ using Vector2 = UnityEngine.Vector2;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
+    private Vector2 _moveInput; // Stores WASD movement
+    private bool _isSprintingInput = false;
+
 
     [Header("Movement Speeds")]
     [SerializeField] private float _walkSpeed = 4.5f;
@@ -33,12 +36,35 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _recoveryThreshold = 40f; // Must reach certain percent to run again
     public bool isExhausted = false;
 
+    [Header("Upgrade Status")]
+    public bool isSilenced = false; // Set by Upgrade
+
     // Internal States (Other scripts like HeadBob or UI can read these)
     [HideInInspector] public bool isWalking, isSprinting, isCrouched, isGrounded;
     private bool _isUsingCamera = false; // Local state updated by events
-    private bool _isPlayerFreezed = false; // Local state to track if player is frozen
 
     private Vector3 originalScale;
+
+    public void OnMovement(InputValue value) => _moveInput = value.Get<Vector2>();
+
+    public void OnSprint(InputValue value) => _isSprintingInput = value.isPressed;
+
+    public void OnJump()
+    {
+        if (_enableJump && isGrounded) Jump();
+    }
+
+    public void OnCrouch()
+    {
+        if (_enableCrouch) ToggleCrouch();
+    }
+
+    private void FixedUpdate()
+    {
+        CheckGround();
+        MovePlayer();
+        HandleNoiseEmission(); // Moved from Update for better physics sync
+    }
 
     private void Awake()
     {
@@ -53,19 +79,12 @@ public class PlayerMovement : MonoBehaviour
     {
         // Subscribe to the camera toggle event
         GameBroadcast.OnCameraToggle += HandleCameraStateChange;
-        GameBroadcast.isPlayerFreezed += HandlePlayerFreeze;
     }
 
     private void OnDisable()
     {
         // Unsubscribe to prevent memory leaks
         GameBroadcast.OnCameraToggle -= HandleCameraStateChange;
-        GameBroadcast.isPlayerFreezed -= HandlePlayerFreeze;
-    }
-
-    private void HandlePlayerFreeze(bool isFreezed)
-    {
-        _isPlayerFreezed = isFreezed;
     }
 
     // Handles the signal from the camera
@@ -73,34 +92,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _isUsingCamera = isOnCamera;
     }
-
-    private void Update()
-    {
-        // 1. Check ground
-        CheckGround();
-
-        if (_isPlayerFreezed) return; // If player is frozen, skip movement and input checks
-
-        // 2. Handle Jump Input
-        if (_enableJump && Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
-        {
-            Jump();
-        }
-        // 3. Handle Crouch Input
-        if (_enableCrouch && Keyboard.current.leftCtrlKey.wasPressedThisFrame)
-        {
-            ToggleCrouch();
-        }
-
-        // 4. Handle Noise Emission for Monsters
-        HandleNoiseEmission();
-    }
-
-    private void FixedUpdate()
-    {
-        MovePlayer();
-    }
-
 
     private void CheckGround()
     {
@@ -143,53 +134,30 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        float horizontal = 0f;
-        float vertical = 0f;
-
-        if (!_isPlayerFreezed)
-        {
-            // 1. Get Input (Modern Input System) - Only read if NOT frozen
-            horizontal = (Keyboard.current.dKey.isPressed ? 1f : 0f) - (Keyboard.current.aKey.isPressed ? 1f : 0f);
-            vertical = (Keyboard.current.wKey.isPressed ? 1f : 0f) - (Keyboard.current.sKey.isPressed ? 1f : 0f);
-        }
-
-        Vector2 input = new Vector2(horizontal, vertical);
-
         // 2. Check if we are moving
-        isWalking = input.sqrMagnitude > 0.01f && isGrounded;
+        isWalking = _moveInput.sqrMagnitude > 0.01f && isGrounded;
         float currentSpeed;
 
-        if (_isUsingCamera) // Not in normal state
+        if (_isUsingCamera)
         {
-            // 1. Force sprinting off
             isSprinting = false;
-
-            // 2. Slow the player down
             currentSpeed = _speedOnCamera;
         }
-        else // Sprint OR Crouch
+        else
         {
-            bool canSprint = Keyboard.current.leftShiftKey.isPressed && isWalking && !isCrouched && !isExhausted;
+            // Use the stored message value instead of Keyboard.current
+            isSprinting = _isSprintingInput && isWalking && !isCrouched && !isExhausted;
 
-            isSprinting = canSprint;
+            if (isExhausted) currentSpeed = _exhaustedSpeed;
+            else currentSpeed = isSprinting ? _sprintSpeed : _walkSpeed;
 
-            // Set speed based on exhaustion first, then sprinting
-            if (isExhausted)
-            {
-                currentSpeed = _exhaustedSpeed;
-            }
-            else
-            {
-                currentSpeed = isSprinting ? _sprintSpeed : _walkSpeed;
-            }
-
-            StaminaLogic(input);
+            StaminaLogic(_moveInput);
 
             if (isCrouched) currentSpeed *= _crouchSpeedReduction;
         }
 
         // 4. Calculate Direction (Relative to where the player is facing)
-        Vector3 moveDir = (transform.forward * input.y) + (transform.right * input.x);
+        Vector3 moveDir = (transform.forward * _moveInput.y) + (transform.right * _moveInput.x);
         Vector3 targetVelocity = moveDir.normalized * currentSpeed;
 
         // 5. Apply Force using linearVelocity (Version 1.0.2 Fix)
@@ -206,9 +174,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleNoiseEmission()
     {
+        // Crouching makes no noise at all, so we check that first
         if (isCrouched)
         {
             GameBroadcast.OnPlayerMovementState?.Invoke("Crouched");
+            return;
+        }
+
+        // If we have the silence upgrade, we always broadcast "Idle" (no noise)
+        if (isSilenced)
+        {
+            GameBroadcast.OnPlayerMovementState?.Invoke("Idle");
             return;
         }
 
@@ -256,5 +232,25 @@ public class PlayerMovement : MonoBehaviour
 
         // Update HUD bar
         GameBroadcast.OnStaminaUpdate?.Invoke(_currentStamina, _maxStamina);
+    }
+
+    // UPGRADE LOGIC ===============================================================
+    public void UpgradeMaxStamina(float amount)
+    {
+        _maxStamina += amount;
+        _currentStamina = _maxStamina; // Fill it up on upgrade
+        Debug.Log($"<color=green>Stamina Upgraded!</color> New Max: {_maxStamina}");
+    }
+
+    public void UpgradeRegenRate(float amount)
+    {
+        _regenRate += amount;
+        Debug.Log($"<color=green>Regen Upgraded!</color> New Rate: {_regenRate}");
+    }
+
+    public void UnlockSilentFeet()
+    {
+        isSilenced = true;
+        Debug.Log("<color=cyan>Silence Unlocked:</color> Player is now completely silent.");
     }
 }

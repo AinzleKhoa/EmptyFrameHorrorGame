@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6471707722986975753}
   m_Layer: 0
   m_Name: Candle_Light
-  m_TagString: Untagged
+  m_TagString: LightSource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,11 +40,11 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7769888095090421491}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.9330224, g: 1, b: 0, a: 1}
-  m_Intensity: 0
+  m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -343,27 +343,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 100
+      value: 88.48318
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 100.00002
+      value: 88.48323
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
       propertyPath: m_LocalScale.z
-      value: 100.00002
+      value: 88.48323
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.6812704
+      value: -2.978
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9515847
+      value: 0.9493
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.8942056
+      value: -7.723
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -419,10 +419,16 @@ PrefabInstance:
       addedObject: {fileID: 5731493641780597229}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 817928379288002544}
+      addedObject: {fileID: 2327761622217036186}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2189838070035289415}
+      addedObject: {fileID: 3134739669011188795}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5129052131177710996}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2651434385418622000}
   m_SourcePrefab: {fileID: 100100000, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}
 --- !u!1 &8328791322839442126 stripped
 GameObject:
@@ -443,10 +449,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CandleInteractable
   _candleFlame: {fileID: 2853828059897863818}
   _pointLight: {fileID: 2822985258956583170}
-  _pointIntensity: 4
-  _pointRange: 10
-  _pointColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
---- !u!65 &817928379288002544
+--- !u!114 &2327761622217036186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8328791322839442126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c318f6706c483144696ce35610c49f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineManager
+  _detectionRange: 8
+  _playerTag: Player
+--- !u!114 &3134739669011188795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8328791322839442126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &5129052131177710996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8328791322839442126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c318f6706c483144696ce35610c49f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectHighlighter
+  _detectionRange: 8
+  _playerTag: Player
+--- !u!65 &2651434385418622000
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -461,39 +510,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.00097222877, y: 0.000986747, z: 0.0021965997}
-  m_Center: {x: 0.0000010000949, y: 0.0000007516357, z: 0.0010982999}
---- !u!54 &2189838070035289415
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8328791322839442126}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Size: {x: 0.0009722287, y: 0.000986747, z: 0.0021965997}
+  m_Center: {x: 0.0000010000948, y: 0.0000007516357, z: 0.0010982994}
 --- !u!4 &8709433055103891572 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c02e6161aa0a607429af2ce561f6d0a6, type: 3}

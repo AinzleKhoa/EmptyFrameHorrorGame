@@ -9,6 +9,7 @@ TagManager:
   - HandSocket
   - Monster
   - Monster_OE
+  - LightSource
   layers:
   - Default
   - TransparentFX

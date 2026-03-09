@@ -13,20 +13,16 @@ MonoBehaviour:
   m_Name: L4_TheShadowTalk
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   Lines:
-  - "So, we\u2019re back. Back to the very spot where the 'Click' became a curse."
-  - "Look at this sun, Minh. It\u2019s disgusting how beautiful it is, isn't it?"
-  - As if the universe didn't even notice that your heart stopped beating right here,
-    on this very bench.
-  - "They told you to 'be normal'. Mom and Dad want their high-achiever back. Your
-    sister? She\u2019s just too scared to be broken like we are."
-  - "What? You\u2019re looking at me like I\u2019m the monster? I am the only part
-    of you that didn't lie!"
-  - Look...
-  - "I\u2019m not the monster, Minh. I\u2019m just the only part of you that stayed
-    in the dark room when everyone else walked away."
-  - "But I\u2019m tired. I\u2019m so tired of crying red tears and holding this heavy
-    camera. We\u2019re running out of film."
-  - "It\u2019s time to decide. Do we let the sun finally set and walk back to a world
-    that doesn't understand us?"
-  - Or do we stay here? Frozen in this perfect moment, before everything went wrong?
-  - Just give me the word, 'shutter-bug'. Do we move on... or do we stay?
+  - You remember this smell, don't you? Chemicals and old paper. The red light...
+    it's the only thing that keeps her from fading.
+  - "Grandma always said that film is fragile. Once the harsh, white light touches
+    it, the image is gone forever. That\u2019s what they want to do to us, Minh.
+    The doctors, your parents... even Nam. They want to 'fix' you by bleaching your
+    mind until she\u2019s nothing but a blank, white page."
+  - "Look around you. This maze is everything you\u2019ve ever captured. It\u2019s
+    messy and cold, but it\u2019s the only place where she still exists."
+  - "But he\u2019s here now. The Overexposed. He is the glare of their judgment.
+    He wants to burn this attic to the ground so you have nowhere left to hide."
+  - "Don't let him see you. Find the fragments of her before the white light erases
+    them. If these photos burn... then she\u2019s truly gone. And so are we."
+  - Good luck, my naive self.
