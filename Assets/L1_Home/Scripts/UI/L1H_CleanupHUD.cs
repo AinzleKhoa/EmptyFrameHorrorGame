@@ -4,35 +4,30 @@ using UnityEngine;
 public class L1H_CleanupHUD : MonoBehaviour
 {
     [Header("UI References")]
-    [SerializeField] private TMP_Text _objectiveText;
+    [SerializeField] private TMP_Text _cleanProgressText;
     [SerializeField] private TMP_Text _timeText;
-
-    [Header("Optional")]
-    [SerializeField] private L1H_CountdownSignalTimer _timer;
 
     private void OnEnable()
     {
-        GameBroadcast.OnObjectiveUpdateHUD += UpdateObjective;
+        L1H_CleanupHUDSignals.OnCleanProgressChanged += UpdateCleanProgress;
+        L1H_CleanupHUDSignals.OnTimeChanged += UpdateTime;
     }
 
     private void OnDisable()
     {
-        GameBroadcast.OnObjectiveUpdateHUD -= UpdateObjective;
+        L1H_CleanupHUDSignals.OnCleanProgressChanged -= UpdateCleanProgress;
+        L1H_CleanupHUDSignals.OnTimeChanged -= UpdateTime;
     }
 
-    private void Update()
+    private void UpdateCleanProgress(int current, int goal)
     {
-        if (_timeText != null && _timer != null)
-        {
-            _timeText.text = $"Time: {Mathf.CeilToInt(_timer.RemainingTime)}s";
-        }
+        if (_cleanProgressText == null) return;
+        _cleanProgressText.text = $"Cleaned: {current}/{goal}";
     }
 
-    private void UpdateObjective(string text)
+    private void UpdateTime(float remaining)
     {
-        if (_objectiveText != null)
-        {
-            _objectiveText.text = text;
-        }
+        if (_timeText == null) return;
+        _timeText.text = $"Time: {Mathf.CeilToInt(remaining)}s";
     }
 }

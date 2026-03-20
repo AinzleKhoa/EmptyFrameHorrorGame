@@ -17,6 +17,7 @@ public class L1_CountObjective : ActObjectiveBase
     public override void OnObjectiveStarted()
     {
         Reset();
+        L1H_CleanupHUDSignals.OnCleanProgressChanged?.Invoke(_currentProgress, _goalAmount);
     }
 
     public override void OnSignalRaised(GameSignal signal)
@@ -27,12 +28,15 @@ public class L1_CountObjective : ActObjectiveBase
         {
             _currentProgress++;
             Debug.Log($"{_objectiveName} progress: {_currentProgress}/{_goalAmount}");
+
+            L1H_CleanupHUDSignals.OnCleanProgressChanged?.Invoke(_currentProgress, _goalAmount);
         }
     }
 
     public override void Reset()
     {
         _currentProgress = 0;
+        L1H_CleanupHUDSignals.OnCleanProgressChanged?.Invoke(_currentProgress, _goalAmount);
     }
 
     public override List<GameSignal> GetAllRequiredSignals()

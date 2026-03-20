@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class DoorInteractable : MonoBehaviour, IInteractable
+public class L1H_DoorInteractable : MonoBehaviour, IInteractable
 {
     [Header("Prompt")]
     [SerializeField] private string _openPrompt = "Press 'E' to Open Door";
@@ -12,7 +12,7 @@ public class DoorInteractable : MonoBehaviour, IInteractable
     [SerializeField] private bool _openInward = true;
     [SerializeField] private bool _isLocked = false;
     [SerializeField] private float _openAngle = 90f;
-    [SerializeField] private float _openDuration = 2.2f; // seconds
+    [SerializeField] private float _openDuration = 2.2f;
 
     [Tooltip("Local axis to rotate around (usually Y for a hinge door)")]
     [SerializeField] private Vector3 _localAxis = new Vector3(0, 1, 0);
@@ -38,6 +38,9 @@ public class DoorInteractable : MonoBehaviour, IInteractable
         }
     }
 
+    public bool IsOpen => _isOpen;
+    public bool IsLocked => _isLocked;
+
     private void Awake()
     {
         _closedRot = transform.localRotation;
@@ -56,12 +59,6 @@ public class DoorInteractable : MonoBehaviour, IInteractable
         }
 
         StartCoroutine(RotateDoor(!_isOpen));
-
-        // Always raise signal, it will be null if no signal trigger existed.
-        if (TryGetComponent<SignalTrigger>(out var signal))
-        {
-            signal.RaiseSignal();
-        }
     }
 
     private IEnumerator RotateDoor(bool open)
@@ -90,5 +87,26 @@ public class DoorInteractable : MonoBehaviour, IInteractable
         _isMoving = false;
     }
 
-    public void SetLocked(bool locked) => _isLocked = locked;
+    public void SetLocked(bool locked)
+    {
+        _isLocked = locked;
+    }
+
+    public void ForceCloseDoor()
+    {
+        if (_isMoving) return;
+        if (_isLocked) return;
+        if (!_isOpen) return;
+
+        StartCoroutine(RotateDoor(false));
+    }
+
+    public void ForceOpenDoor()
+    {
+        if (_isMoving) return;
+        if (_isLocked) return;
+        if (_isOpen) return;
+
+        StartCoroutine(RotateDoor(true));
+    }
 }

@@ -29,6 +29,9 @@ public class L1H_CountdownSignalTimer : MonoBehaviour
         if (!_isRunning || _hasRaisedTimeUp) return;
 
         _remainingTime -= Time.deltaTime;
+        if (_remainingTime < 0f) _remainingTime = 0f;
+
+        L1H_CleanupHUDSignals.OnTimeChanged?.Invoke(_remainingTime);
 
         if (_remainingTime <= 0f)
         {
@@ -48,6 +51,8 @@ public class L1H_CountdownSignalTimer : MonoBehaviour
     public void StartTimer()
     {
         _isRunning = true;
+        L1H_CleanupHUDSignals.OnTimeChanged?.Invoke(_remainingTime);
+        Debug.Log("[L1 Timer] Started");
     }
 
     public void StopTimer()
@@ -60,5 +65,7 @@ public class L1H_CountdownSignalTimer : MonoBehaviour
         _remainingTime = _timeLimitSeconds;
         _isRunning = false;
         _hasRaisedTimeUp = false;
+
+        L1H_CleanupHUDSignals.OnTimeChanged?.Invoke(_remainingTime);
     }
 }

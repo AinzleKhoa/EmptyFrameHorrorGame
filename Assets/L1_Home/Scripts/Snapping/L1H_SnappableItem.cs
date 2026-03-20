@@ -20,19 +20,19 @@ public class L1H_SnappableItem : MonoBehaviour, IInteractable
     [Tooltip("Disable physics when holding/snapped")]
     [SerializeField] private bool disablePhysics = true;
 
+    [Header("State")]
+    [SerializeField] private bool _canInteractAtStart = true;
+
     private bool _isHeld;
     private bool _isSnapped;
+    private bool _canInteract;
 
     private Rigidbody _rb;
     private Collider _col;
     private Transform _originalParent;
-
-    // cache all colliders in player so we can ignore collision while held
     private Collider[] _playerColliders;
-
     private SignalTrigger _signalTrigger;
 
-    // ✅ expose for spot script
     public string ItemId => itemId;
     public bool IsSnapped => _isSnapped;
 
@@ -40,7 +40,10 @@ public class L1H_SnappableItem : MonoBehaviour, IInteractable
     {
         get
         {
+            if (!_canInteract) return "";
             if (_isSnapped) return "";
+            if (!L1H_InteractRules.CanInteractWithThisSnappable(this)) return "";
+
             return _isHeld ? placePrompt : pickPrompt;
         }
     }
@@ -51,35 +54,39 @@ public class L1H_SnappableItem : MonoBehaviour, IInteractable
         _col = GetComponent<Collider>();
         _originalParent = transform.parent;
         _signalTrigger = GetComponent<SignalTrigger>();
+        _canInteract = _canInteractAtStart;
     }
 
     public void Interact(PlayerInteractor interactor)
     {
+        if (!_canInteract) return;
         if (_isSnapped) return;
+        if (!L1H_InteractRules.CanInteractWithThisSnappable(this)) return;
+
+
+        // Nếu chưa cầm món này, nhưng đang cầm món khác rồi -> không cho nhặt
+        if (!_isHeld && L1H_HeldRegistry.CurrentHeld != null && L1H_HeldRegistry.CurrentHeld != this)
+            return;
 
         if (!_isHeld)
         {
-            // PICK UP
             Transform anchor = ResolveHoldAnchor(interactor);
             if (anchor == null) return;
 
             _isHeld = true;
-            L1H_HeldRegistry.SetHeld(this); // ✅ NOW HELD
+            L1H_HeldRegistry.SetHeld(this);
 
             transform.SetParent(anchor);
             transform.localPosition = holdLocalPos;
             transform.localRotation = Quaternion.Euler(holdLocalEuler);
 
-            // make it kinematic so it doesn't fight physics
             SetPhysics(false);
 
-            // keep collider ON for raycast, but ignore collision with player
             CachePlayerColliders(interactor);
             IgnorePlayerCollisions(true);
         }
         else
         {
-            // (Optional fallback) PLACE by looking at item itself
             L1H_SnapSpot spot = FindClosestSpot();
             if (spot != null && spot.SpotId == itemId)
             {
@@ -92,12 +99,11 @@ public class L1H_SnappableItem : MonoBehaviour, IInteractable
         }
     }
 
-    // ✅ Spot gọi hàm này để đặt
     public void PlaceOn(Transform spot)
     {
+        if (!_canInteract) return;
         if (_isSnapped) return;
 
-        // restore collision with player
         IgnorePlayerCollisions(false);
 
         transform.SetParent(spot);
@@ -109,15 +115,12 @@ public class L1H_SnappableItem : MonoBehaviour, IInteractable
         _isHeld = false;
         _isSnapped = true;
 
-        // 🔥 1) TẮT collider của spot
         var spotCol = spot.GetComponent<Collider>();
         if (spotCol != null)
             spotCol.enabled = false;
 
-        // 🔥 2) BẬT lại physics cho gối (tắt kinematic)
         if (_rb != null)
         {
-            // 🎯 Chỉ áp dụng cho ghế
             if (itemId == "chair")
             {
                 transform.localRotation = Quaternion.Euler(-90f, 0f, 0f);
@@ -125,28 +128,31 @@ public class L1H_SnappableItem : MonoBehaviour, IInteractable
 
             _rb.isKinematic = false;
             _rb.useGravity = true;
-
             _rb.linearVelocity = Vector3.zero;
             _rb.angularVelocity = Vector3.zero;
-
             _rb.constraints = RigidbodyConstraints.FreezeRotationX
                             | RigidbodyConstraints.FreezeRotationZ;
         }
 
-        // Giữ collider của gối bật để nó nằm lên giường
         if (_col != null)
             _col.enabled = true;
 
-        L1H_HeldRegistry.ClearHeld(this); // ✅ no longer held
+        L1H_HeldRegistry.ClearHeld(this);
 
         if (_signalTrigger != null)
-        {
             _signalTrigger.RaiseSignal();
-        }
         else
-        {
             Debug.LogWarning($"[L1 Snap] {name} has no SignalTrigger attached.");
-        }
+    }
+
+    public void EnableInteract()
+    {
+        _canInteract = true;
+    }
+
+    public void DisableInteract()
+    {
+        _canInteract = false;
     }
 
     private Transform ResolveHoldAnchor(PlayerInteractor interactor)
@@ -188,10 +194,9 @@ public class L1H_SnappableItem : MonoBehaviour, IInteractable
         _isHeld = false;
 
         IgnorePlayerCollisions(false);
-        L1H_HeldRegistry.ClearHeld(this); // ✅ no longer held
+        L1H_HeldRegistry.ClearHeld(this);
 
         transform.SetParent(_originalParent);
-
         SetPhysics(true);
 
         if (_rb != null)
@@ -203,7 +208,6 @@ public class L1H_SnappableItem : MonoBehaviour, IInteractable
     private void SetPhysics(bool enabled)
     {
         if (!disablePhysics) return;
-
         if (_rb != null) _rb.isKinematic = !enabled;
     }
 
