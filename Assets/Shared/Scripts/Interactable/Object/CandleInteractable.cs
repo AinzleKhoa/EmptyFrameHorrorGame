@@ -20,8 +20,24 @@ public class CandleInteractable : InteractableBase
         }
     }
 
-    private void OnEnable() => GameBroadcast.OnLighterToggle += SetLighterState;
-    private void OnDisable() => GameBroadcast.OnLighterToggle -= SetLighterState;
+    private void OnEnable()
+    {
+        GameBroadcast.OnLighterToggle += SetLighterState;
+
+        // 2. THE FIX: Check the current state immediately upon spawning
+        _playerHasLitLighter = Lighter.IsLitGlobal;
+
+        // it must physically force itself to be unlit first.
+        _isAlreadyLit = false;
+        if (_candleFlame != null) _candleFlame.SetActive(false);
+        if (_pointLight != null) _pointLight.enabled = false;
+    }
+    private void OnDisable()
+    {
+        GameBroadcast.OnLighterToggle -= SetLighterState;
+        // Safety: ensure it's unlit when it goes away
+        _isAlreadyLit = false;
+    }
 
     // Listening for interaction from the player
     private void SetLighterState(bool isLit) => _playerHasLitLighter = isLit;
@@ -48,4 +64,12 @@ public class CandleInteractable : InteractableBase
     }
 
     public bool IsLit => _isAlreadyLit;
+
+    // Add this so the Manager can force the candle to be lit or unlit
+    public void SetLit(bool lit)
+    {
+        _isAlreadyLit = lit;
+        if (_candleFlame != null) _candleFlame.SetActive(lit);
+        if (_pointLight != null) _pointLight.enabled = lit;
+    }
 }

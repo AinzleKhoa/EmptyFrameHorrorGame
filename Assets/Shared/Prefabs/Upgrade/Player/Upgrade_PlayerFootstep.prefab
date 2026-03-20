@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.83136076
+      value: 0.8313607
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.83136076
+      value: 0.8313607
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalScale.z
@@ -22,31 +22,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.057
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0064
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.819
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.2513545
+      value: 0.64738417
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.2513545
+      value: -0.64738446
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.66092443
+      value: -0.28441796
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.66092426
+      value: -0.28441793
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -138.356
+      value: -47.435
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1a56693b5cfd59d4989a24cacc275f26, type: 3}
       propertyPath: m_Name
@@ -172,5 +172,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b06d3e81e3bd7e4a9e66ac5669b8260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerFootstepUpgrade
-  _upgradeName: Soft-Soled Boots
+  _upgradeName: Silent Boots
   _upgradeLore: Running and walking no longer emits noise.

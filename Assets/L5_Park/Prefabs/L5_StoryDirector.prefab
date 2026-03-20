@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43de3246923dfab4a9076ea951a0419b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StoryDirector
-  _stageTitle: The Sunset Park
   _storyActs:
   - ActName: Read the Letter
     Objectives:
@@ -64,14 +63,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: OutlineManager, Assembly-CSharp
+          m_MethodName: SetOutlineActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnActFinished:
-      m_PersistentCalls:
-        m_Calls: []
-    IsActive: 0
-  - ActName: Talk to the Shadow
-    Objectives:
-    - rid: 4932521947925577800
-    OnActStarted:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 0}
@@ -86,21 +90,16 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+    IsActive: 0
+  - ActName: Talk to the Shadow
+    Objectives:
+    - rid: 4932521947925577800
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls: []
     OnActFinished:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: set_layer
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
           m_MethodName: TriggerDialogue
@@ -122,19 +121,7 @@ MonoBehaviour:
         m_Calls: []
     OnActFinished:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     IsActive: 0
   - ActName: The Decision
     Objectives:
@@ -166,6 +153,54 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: OutlineManager, Assembly-CSharp
+          m_MethodName: SetOutlineActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 7
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
     OnActFinished:
       m_PersistentCalls:
         m_Calls:
@@ -173,6 +208,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: set_layer
           m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: OutlineManager, Assembly-CSharp
+          m_MethodName: SetOutlineActive
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -194,9 +241,9 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     IsActive: 0
-  - ActName: Bad End
+  - ActName: Bad End Start
     Objectives:
-    - rid: 4932521947925577803
+    - rid: 2300694228566016082
     OnActStarted:
       m_PersistentCalls:
         m_Calls: []
@@ -204,9 +251,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     IsActive: 0
-  - ActName: Good End
+  - ActName: Good End Start
     Objectives:
-    - rid: 4932521947925577805
+    - rid: 2300694228566016080
     OnActStarted:
       m_PersistentCalls:
         m_Calls: []
@@ -217,6 +264,20 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 2300694228566016080
+      type: {class: L0_SwitchDirectorObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Good End
+        _objectiveDescription: '"The Final Exposure"'
+        _nextDirector: {fileID: 0}
+        _disableSelf: 1
+    - rid: 2300694228566016082
+      type: {class: L0_SwitchDirectorObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Bad End
+        _objectiveDescription: '"The Still Frame"'
+        _nextDirector: {fileID: 0}
+        _disableSelf: 1
     - rid: 4932521947925577799
       type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
       data:
@@ -229,7 +290,7 @@ MonoBehaviour:
       data:
         _objectiveName: Talk to the Shadow
         _objectiveDescription: Talk to the Shadow figure.
-        _interactionSignal: {fileID: 11400000, guid: f51537106cbc5354e816d09200863f5d, type: 2}
+        _interactionSignal: {fileID: 11400000, guid: 200be7bc007196447b9e98816b7e03ec, type: 2}
         _targetCount: 1
     - rid: 4932521947925577802
       type: {class: L0_MultiBranchObjective, ns: , asm: Assembly-CSharp}
@@ -248,26 +309,12 @@ MonoBehaviour:
         - {fileID: 11400000, guid: 58079e49955e7e141828c486e286527a, type: 2}
         - {fileID: 11400000, guid: e939495087532794aaa2933a715def23, type: 2}
         _targetActNames:
-        - Bad End
-        - Good End
-    - rid: 4932521947925577803
-      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
-      data:
-        _objectiveName: Bad End
-        _objectiveDescription: Bad End
-        _interactionSignal: {fileID: 0}
-        _targetCount: 1
+        - Bad End Start
+        - Good End Start
     - rid: 4932521947925577804
       type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
       data:
         _objectiveName: Finish Talking to the Shadow
         _objectiveDescription: Finish Talking to the Shadow
         _interactionSignal: {fileID: 11400000, guid: 1b6f4cec8a98a754d86a5e5426425b41, type: 2}
-        _targetCount: 1
-    - rid: 4932521947925577805
-      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
-      data:
-        _objectiveName: Good End
-        _objectiveDescription: Good End
-        _interactionSignal: {fileID: 0}
         _targetCount: 1

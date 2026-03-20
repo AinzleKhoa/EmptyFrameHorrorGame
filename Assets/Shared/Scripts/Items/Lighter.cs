@@ -18,6 +18,8 @@ public class Lighter : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _igniteClip;
 
+    public static bool IsLitGlobal { get; private set; }
+
     private bool _isLit = false;
     // Always ensure we start and end in a "Safe" state
     private void Start() => ResetLogic();
@@ -26,6 +28,7 @@ public class Lighter : MonoBehaviour
     private void ResetLogic()
     {
         _isLit = false;
+        IsLitGlobal = _isLit;
         if (_flameParticles != null) _flameParticles.Stop();
         if (_pointLight != null) _pointLight.enabled = false;
         GameBroadcast.OnLighterToggle?.Invoke(false);
@@ -45,6 +48,7 @@ public class Lighter : MonoBehaviour
     private void ToggleLighter()
     {
         _isLit = !_isLit;
+        IsLitGlobal = _isLit; // Update the global state
 
         // Visuals
         if (_isLit)

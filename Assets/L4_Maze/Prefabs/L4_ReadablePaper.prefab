@@ -1,0 +1,484 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7408256546194580001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3282871612470106507}
+  - component: {fileID: 1007924897203214126}
+  - component: {fileID: 5159210442778691881}
+  - component: {fileID: 5200053469467003800}
+  - component: {fileID: 6493625691987436098}
+  - component: {fileID: 1808861362227382243}
+  - component: {fileID: 767681851554003319}
+  - component: {fileID: 6187061524617666538}
+  - component: {fileID: 3031254540180046213}
+  - component: {fileID: 1732310239566960600}
+  - component: {fileID: 3887959194890732955}
+  m_Layer: 7
+  m_Name: L4_ReadablePaper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3282871612470106507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.1339574, y: -0.011738181, z: 0.55341077}
+  m_LocalScale: {x: 0.88046736, y: 1, z: 1.1850172}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007924897203214126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ProBuilder::UnityEngine.ProBuilder.ProBuilderMesh
+  m_MeshFormatVersion: 2
+  m_Faces:
+  - m_Indexes: 000000000100000002000000010000000300000002000000
+    m_SmoothingGroup: 0
+    m_Uv:
+      m_UseWorldSpace: 0
+      m_FlipU: 0
+      m_FlipV: 0
+      m_SwapUV: 0
+      m_Fill: 1
+      m_Scale: {x: 1, y: 1}
+      m_Offset: {x: 0, y: 0}
+      m_Rotation: 0
+      m_Anchor: 0
+    m_Material: {fileID: 0}
+    m_SubmeshIndex: 0
+    m_ManualUV: 0
+    elementGroup: -1
+    m_TextureGroup: -1
+  - m_Indexes: 040000000500000006000000050000000700000006000000
+    m_SmoothingGroup: 0
+    m_Uv:
+      m_UseWorldSpace: 0
+      m_FlipU: 0
+      m_FlipV: 0
+      m_SwapUV: 0
+      m_Fill: 1
+      m_Scale: {x: 1, y: 1}
+      m_Offset: {x: 0, y: 0}
+      m_Rotation: 0
+      m_Anchor: 0
+    m_Material: {fileID: 0}
+    m_SubmeshIndex: 0
+    m_ManualUV: 0
+    elementGroup: -1
+    m_TextureGroup: -1
+  - m_Indexes: 08000000090000000a000000090000000b0000000a000000
+    m_SmoothingGroup: 0
+    m_Uv:
+      m_UseWorldSpace: 0
+      m_FlipU: 0
+      m_FlipV: 0
+      m_SwapUV: 0
+      m_Fill: 1
+      m_Scale: {x: 1, y: 1}
+      m_Offset: {x: 0, y: 0}
+      m_Rotation: 0
+      m_Anchor: 0
+    m_Material: {fileID: 0}
+    m_SubmeshIndex: 0
+    m_ManualUV: 0
+    elementGroup: -1
+    m_TextureGroup: -1
+  - m_Indexes: 0c0000000d0000000e0000000d0000000f0000000e000000
+    m_SmoothingGroup: 0
+    m_Uv:
+      m_UseWorldSpace: 0
+      m_FlipU: 0
+      m_FlipV: 0
+      m_SwapUV: 0
+      m_Fill: 1
+      m_Scale: {x: 1, y: 1}
+      m_Offset: {x: 0, y: 0}
+      m_Rotation: 0
+      m_Anchor: 0
+    m_Material: {fileID: 0}
+    m_SubmeshIndex: 0
+    m_ManualUV: 0
+    elementGroup: -1
+    m_TextureGroup: -1
+  - m_Indexes: 100000001100000012000000110000001300000012000000
+    m_SmoothingGroup: 0
+    m_Uv:
+      m_UseWorldSpace: 0
+      m_FlipU: 0
+      m_FlipV: 0
+      m_SwapUV: 0
+      m_Fill: 1
+      m_Scale: {x: 1, y: 1}
+      m_Offset: {x: 0, y: 0}
+      m_Rotation: 0
+      m_Anchor: 0
+    m_Material: {fileID: 0}
+    m_SubmeshIndex: 0
+    m_ManualUV: 0
+    elementGroup: -1
+    m_TextureGroup: -1
+  - m_Indexes: 140000001500000016000000150000001700000016000000
+    m_SmoothingGroup: 0
+    m_Uv:
+      m_UseWorldSpace: 0
+      m_FlipU: 0
+      m_FlipV: 0
+      m_SwapUV: 0
+      m_Fill: 1
+      m_Scale: {x: 1, y: 1}
+      m_Offset: {x: 0, y: 0}
+      m_Rotation: 0
+      m_Anchor: 0
+    m_Material: {fileID: 0}
+    m_SubmeshIndex: 0
+    m_ManualUV: 0
+    elementGroup: -1
+    m_TextureGroup: -1
+  m_SharedVertices:
+  - m_Vertices: 000000000d00000016000000
+  - m_Vertices: 010000000400000017000000
+  - m_Vertices: 020000000f00000010000000
+  - m_Vertices: 030000000600000011000000
+  - m_Vertices: 050000000800000015000000
+  - m_Vertices: 070000000a00000013000000
+  - m_Vertices: 090000000c00000014000000
+  - m_Vertices: 0b0000000e00000012000000
+  m_SharedTextures: []
+  m_Positions:
+  - {x: -0.11034441, y: 0, z: 0.104785204}
+  - {x: 0.094594955, y: 0, z: 0.104785204}
+  - {x: -0.11034441, y: 0.004720688, z: 0.104785204}
+  - {x: 0.094594955, y: 0.004720688, z: 0.104785204}
+  - {x: 0.094594955, y: 0, z: 0.104785204}
+  - {x: 0.094594955, y: 0, z: -0.12492871}
+  - {x: 0.094594955, y: 0.004720688, z: 0.104785204}
+  - {x: 0.094594955, y: 0.004720688, z: -0.12492871}
+  - {x: 0.094594955, y: 0, z: -0.12492871}
+  - {x: -0.11034441, y: 0, z: -0.12492871}
+  - {x: 0.094594955, y: 0.004720688, z: -0.12492871}
+  - {x: -0.11034441, y: 0.004720688, z: -0.12492871}
+  - {x: -0.11034441, y: 0, z: -0.12492871}
+  - {x: -0.11034441, y: 0, z: 0.104785204}
+  - {x: -0.11034441, y: 0.004720688, z: -0.12492871}
+  - {x: -0.11034441, y: 0.004720688, z: 0.104785204}
+  - {x: -0.11034441, y: 0.004720688, z: 0.104785204}
+  - {x: 0.094594955, y: 0.004720688, z: 0.104785204}
+  - {x: -0.11034441, y: 0.004720688, z: -0.12492871}
+  - {x: 0.094594955, y: 0.004720688, z: -0.12492871}
+  - {x: -0.11034441, y: 0, z: -0.12492871}
+  - {x: 0.094594955, y: 0, z: -0.12492871}
+  - {x: -0.11034441, y: 0, z: 0.104785204}
+  - {x: 0.094594955, y: 0, z: 0.104785204}
+  m_Textures0:
+  - {x: 0.20493937, y: 0.9952793}
+  - {x: 0, y: 0.9952793}
+  - {x: 0.20493937, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0.22971392, y: 0.9952793}
+  - {x: 0, y: 0.9952793}
+  - {x: 0.22971392, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0.20493937, y: 0.9952793}
+  - {x: 0, y: 0.9952793}
+  - {x: 0.20493937, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0.22971392, y: 0.9952793}
+  - {x: 0, y: 0.9952793}
+  - {x: 0.22971392, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0.20493937, y: 1}
+  - {x: 0, y: 0.7702861}
+  - {x: 0.20493937, y: 0.7702861}
+  - {x: 0.20493937, y: 0.7702861}
+  - {x: 0, y: 0.7702861}
+  - {x: 0.20493937, y: 1}
+  - {x: 0, y: 1}
+  m_Textures2: []
+  m_Textures3: []
+  m_Tangents:
+  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: 0, y: 0, z: 1, w: -1}
+  - {x: 0, y: 0, z: 1, w: -1}
+  - {x: 0, y: 0, z: 1, w: -1}
+  - {x: 0, y: 0, z: 1, w: -1}
+  - {x: 1, y: 0, z: 0, w: -1}
+  - {x: 1, y: 0, z: 0, w: -1}
+  - {x: 1, y: 0, z: 0, w: -1}
+  - {x: 1, y: 0, z: 0, w: -1}
+  - {x: 0, y: 0, z: -1, w: -1}
+  - {x: 0, y: 0, z: -1, w: -1}
+  - {x: 0, y: 0, z: -1, w: -1}
+  - {x: 0, y: 0, z: -1, w: -1}
+  - {x: 1, y: 0, z: 0, w: -1}
+  - {x: 1, y: 0, z: 0, w: -1}
+  - {x: 1, y: 0, z: 0, w: -1}
+  - {x: 1, y: 0, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: -1}
+  - {x: -1, y: 0, z: 0, w: -1}
+  m_Colors: []
+  m_UnwrapParameters:
+    m_HardAngle: 88
+    m_PackMargin: 20
+    m_AngleError: 8
+    m_AreaError: 15
+  m_PreserveMeshAssetOnDestroy: 0
+  assetGuid: 
+  m_Mesh: {fileID: 0}
+  m_VersionIndex: 3187
+  m_IsSelectable: 1
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
+--- !u!114 &5159210442778691881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca002da428252441b92f28d83c8a65f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ProBuilder::UnityEngine.ProBuilder.Shapes.ProBuilderShape
+  m_Shape:
+    rid: 4932521587928989769
+  m_ShapeRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_UnmodifiedMeshVersion: 3118
+  m_Size: {x: 0.20493937, y: 0.004720688, z: 0.22971392}
+  m_LocalCenter: {x: -0.007874727, y: 0.002360344, z: -0.010071754}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4932521587928989769
+      type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
+--- !u!23 &5200053469467003800
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: ebd2c61221be0e74c8aa14b5ea2282f4, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &6493625691987436098
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  m_Mesh: {fileID: 0}
+--- !u!64 &1808861362227382243
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!114 &767681851554003319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac98efaeff4b83c48a626ae5b22d32f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReadableItem
+  _promptMessage: Press [E] to Read
+  _content: "<align=center><b><b><size=110%>SURVIVAL GUIDE</size></b></align>\r\n\r\n<color=#00FFC0><b>MOVEMENT
+    & STAMINA</b></color>\r\n\u2022 <b>Running:</b> Hold <b><color=#C0C0C0>[Shift]</color></b>
+    to sprint. This drains your <b><color=green>Stamina</color></b>. If it hits zero,
+    you become <b><color=red>Exhausted</color></b>\u2014moving slowly until you recover.\r\n\u2022
+    <b>Crouching:</b> Press <b><color=#C0C0C0>[Ctrl]</color></b> to toggle. Crouching
+    makes you <b>Silent</b> and significantly reduces the <b>Monster's Vision</b>.\r\n\r\n<color=#00FFC0><b>INVENTORY
+    & INTERACTION</b></color>\r\n\u2022 <b>Storage:</b> You can carry up to <b>3
+    items</b>. Swap between them using <b><color=#C0C0C0>[1]</color></b>, <b><color=#C0C0C0>[2]</color></b>,
+    and <b><color=#C0C0C0>[3]</color></b>.\r\n\u2022 <b>Pickup:</b> Press <b><color=#C0C0C0>[E]</color></b>
+    when looking at an item to add it to your inventory.\r\n\u2022 <b>Drop:</b> Press
+    <b><color=#C0C0C0>[Q]</color></b> to drop the item currently in your hand.\r\n\u2022
+    <b>Interact:</b> Watch your <b><color=#C0C0C0>Cursor</color></b>. A text prompt
+    will appear underneath it whenever an object can be used or picked up. <b><color=#C0C0C0>[E]</color></b>\r\n\r\n<align=center><b><b><size=120%>MAZE
+    OF MEMORIES</size></b></align>\r\n\r\n<voffset=0.5em><b><color=#00FFC0>THE OBJECTIVE</color></b>\r\nFind
+    <b><color=#FF00FF>5 Fragments (Purple outline)</color></b> to open the exit.\r\n\r\n<color=#00FFC0><b>THE
+    THREAT: OVEREXPOSED</b></color>\r\n\u2022 <b><color=#C0C0C0>Listen:</color></b>
+    Use headphones. Your footsteps can drown out his. Crouch or stand still to pinpoint
+    his location.\r\n\u2022 <b><color=#C0C0C0>Sound Trap:</color></b> If footsteps
+    are very close, <b>STOP MOVING</b>. Walking or running alerts him instantly.\r\n\u2022
+    <b><color=#C0C0C0>The Scream:</color></b> If he screams, he has spotted you.
+    <b>RUN.</b> He is faster than you\u2014reach a <b><color=yellow>Lit Candle</color></b>
+    or use your <b>Camera Flash</b>.\r\n\u2022 <b><color=#C0C0C0>Stealth:</color></b>
+    Crouching is your best defense. Use it to sneak past him or hide in dark corners.\r\n\r\n<color=#00FFC0><b>DEFENSE
+    TOOLS</b></color>\r\n\u2022 <b>Camera:</b> Flash to <b>Stun</b> him for <b>8
+    seconds</b> (30s Cooldown). Toggle Viewfinder with <b><color=#C0C0C0>[Right-Click]</color></b>.\r\n\u2022
+    <b>Lighter:</b> Provides basic light and is used to ignite candles.\r\n\u2022
+    <b><color=yellow>Candles:</color></b> Create <b>Safe Zones</b>. He is stunned
+    for <b>3 seconds</b> if he touches the light.\r\n\r\n<i>(Can be found scattered
+    around the maze)</i>\r\n<color=#00FFC0><b>PERMANENT UPGRADES</b></color>\r\n\u2022
+    <b><color=#C0C0C0>Silent Boots:</color></b> Running and walking no longer emits
+    noise.\r\n\u2022 <b><color=#C0C0C0>Adrenaline Shot:</color></b> Increases max
+    stamina and recovery speed.\r\n\u2022 <b><color=#C0C0C0>Industrial Battery:</color></b>
+    Reduces Camera Cooldown to 15 seconds.\r\n\u2022 <b><color=#C0C0C0>Spectral Lens:</color></b>
+    Highlights items through the Viewfinder.\r\n\r\n<color=#00FFC0><b>GLOWING OUTLINES</b></color>\r\n\u2022
+    <b><color=#00C8FF>BLUE:</color></b> Upgrades (Priority #1)\r\n\u2022 <b><color=#FF00FF>PURPLE:</color></b>
+    Mission Progress\r\n\u2022 <b><color=yellow>YELLOW:</color></b> Candles & Interactive
+    Objects\r\n\u2022 <b><color=white>WHITE:</color></b> General Items\r\n\u2022
+    <b><color=#FF6400>ORANGE:</color></b> Story Records\r\n\r\n<color=#00FFC0><b>DANGER
+    LEVELS</b></color>\r\n\u2022 <b>1-2 Shards:</b> Faster movement. <b>(Agile)</b>\r\n\u2022
+    <b>3 Shards:</b> Extreme speeds. <b>(Lethal)</b>\r\n\u2022 <b>4 Shards:</b> <b>OMNISCIENT.</b>
+    He always sees you. <b>KEEP RUNNING.</b>\r\n\r\n<color=red><b>!!! CRITICAL ADVICE
+    !!!</b></color>\r\n<b>Collect <color=#00C8FF>BLUE UPGRADES</color> first.</b>
+    If you progress too fast without them, you <b>will</b> be caught."
+--- !u!65 &6187061524617666538
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.20493937, y: 0.004720688, z: 0.22971392}
+  m_Center: {x: -0.007874727, y: 0.002360344, z: -0.010071754}
+--- !u!114 &3031254540180046213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.3930598, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &1732310239566960600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c318f6706c483144696ce35610c49f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineManager
+  _detectionRange: 8
+--- !u!114 &3887959194890732955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408256546194580001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b54651af81a346a2c85075ad39adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SignalTrigger
+  _signalToRaise: {fileID: 11400000, guid: bb350eca4524c514c9a3192c4d5a36b6, type: 2}

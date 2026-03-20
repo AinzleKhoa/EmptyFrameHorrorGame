@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5cbb483bddf4c478998c8960188805, type: 3}
+  m_Name: L5_ShadowBadEndIntro
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  Lines:
+  - (His voice softens, losing its edge. It sounds relieved, almost like a tired
+    sigh.)
+  - Good choice. Why run when you can finally rest?
+  - "Look at the sun. It\u2019s perfect right there, isn't it? Just an inch above
+    the horizon. If we don\u2019t move, it never has to set. If we don\u2019t move,
+    she never has to leave."
+  - "Sit down, Minh. Put the camera away. You don\u2019t need to capture anything
+    else, because nothing after this moment is worth remembering."
+  - Let the world outside move on. Let them go to school, let them work, let them
+    grow old and forget.
+  - "We\u2019ll stay here in the golden hour, where the tea is still warm and her
+    hand is still on your shoulder."
+  - "Close your eyes. No more 'clicks.' No more 'flashes.' Just... silence. We\u2019re
+    finally a finished photograph..."
+  - ... And photographs never have to say goodbye.

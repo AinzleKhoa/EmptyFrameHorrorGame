@@ -8,6 +8,11 @@ public class PolaroidCamera : MonoBehaviour
 
     [Space(15)]
 
+    [Header("Point Light Viewfinder")]
+    [SerializeField] private Light _pointLightViewfinder;
+    [SerializeField] private float _pointIntensityViewfinder = 5f;
+    [SerializeField] private float _pointRangeViewfinder = 5f;
+
     [Header("Point Light (Glow)")]
     [SerializeField] private Light _pointLight;
     [SerializeField] private float _pointIntensity = 5f;
@@ -30,6 +35,7 @@ public class PolaroidCamera : MonoBehaviour
     [SerializeField] private AudioClip _viewfinderOffClip;
 
     [Header("Camera Rules Settings")]
+    [SerializeField] private float _photoCooldown = 2.0f;
     [SerializeField] private MeshRenderer _cameraMesh;
     [Header("Zoom Settings")]
     [SerializeField] private float _zoomFOV = 40f;
@@ -69,6 +75,7 @@ public class PolaroidCamera : MonoBehaviour
     }
 
     private void OnDisable() => ResetLogic();
+    private void OnEnable() => ResetLogic();
 
     private void ResetLogic()
     {
@@ -77,11 +84,45 @@ public class PolaroidCamera : MonoBehaviour
         if (_playerCam != null) _playerCam.fovOverride = 0;
         // Broadcast that camera is away
         GameBroadcast.OnCameraToggle?.Invoke(false);
+        StopAllCoroutines();
+        // TURN OFF ALL LIGHTS
+        if (_pointLight != null) _pointLight.enabled = false;
+        if (_spotLight != null) _spotLight.enabled = false;
+        if (_pointLightViewfinder != null) _pointLightViewfinder.enabled = false;
     }
 
     private void Awake()
     {
         _cooldown = GetComponent<ItemCooldown>();
+
+        if (_cooldown != null)
+        {
+            _cooldown.setBaseCooldown(_photoCooldown);
+        }
+
+        if (_pointLight != null)
+        {
+            _pointLight.enabled = false;
+            _pointLight.intensity = _pointIntensity;
+            _pointLight.range = _pointRange;
+            _pointLight.color = _flashColor;
+        }
+
+        if (_pointLightViewfinder != null)
+        {
+            _pointLightViewfinder.enabled = false;
+            _pointLightViewfinder.intensity = _pointIntensityViewfinder;
+            _pointLightViewfinder.range = _pointRangeViewfinder;
+            _pointLightViewfinder.color = _flashColor;
+        }
+
+        if (_spotLight != null)
+        {
+            _spotLight.enabled = false;
+            _spotLight.intensity = _spotIntensity;
+            _spotLight.range = _spotRange;
+            _spotLight.color = _flashColor;
+        }
     }
 
     private void Update()
@@ -134,6 +175,11 @@ public class PolaroidCamera : MonoBehaviour
 
         // Play the appropriate sound for the new state
         PlayViewfinderSound(_isOnCamera ? _viewfinderOnClip : _viewfinderOffClip);
+
+        if (_pointLightViewfinder != null)
+        {
+            _pointLightViewfinder.enabled = _isOnCamera ? true : false;
+        }
 
         // --- 1. HUD Toggle ---
         // This tells the HUD, Movement, and Interactor what to do!
@@ -202,12 +248,18 @@ public class PolaroidCamera : MonoBehaviour
                 if (Physics.Raycast(transform.position, dir, out hit, flashRange))
                 {
                     // If the first thing we hit is the monster, it's a success
-                    if (hit.collider == monster || hit.transform.CompareTag("Monster_OE"))
+                    if (hit.collider == monster || hit.transform.CompareTag("Monster"))
                     {
-                        if (monster.TryGetComponent<TheOverexposed>(out var ai))
+                        Debug.Log($"<color=green>SUCCESS:</color> Captured {monster.name} in frame.");
+                        // Check for TheOverexposed
+                        if (monster.TryGetComponent<TheOverexposed>(out var oe))
                         {
-                            ai.TakeDamage(); // Trigger the Stun
-                            Debug.Log("<color=green>Flash Impact Success on: </color>" + monster.name);
+                            oe.TakeDamage();
+                        }
+                        // Check for Shadow
+                        if (monster.TryGetComponent<L5_ShadowMonster>(out var shadow))
+                        {
+                            shadow.TakeFlash();
                         }
                     }
                 }
@@ -221,21 +273,13 @@ public class PolaroidCamera : MonoBehaviour
     private IEnumerator FlashRoutine()
     {
         // 1. Initial Burst
-        if (_pointLight != null)
-        {
-            _pointLight.enabled = true;
-            _pointLight.intensity = _pointIntensity;
-            _pointLight.range = _pointRange;
-            _pointLight.color = _flashColor;
-        }
+        // RESET intensities before enabling
+        if (_pointLight != null) _pointLight.intensity = _pointIntensity;
+        if (_spotLight != null) _spotLight.intensity = _spotIntensity;
 
-        if (_spotLight != null)
-        {
-            _spotLight.enabled = true;
-            _spotLight.intensity = _spotIntensity;
-            _spotLight.range = _spotRange;
-            _spotLight.color = _flashColor;
-        }
+        // Now enable them
+        if (_pointLight != null) _pointLight.enabled = true;
+        if (_spotLight != null) _spotLight.enabled = true;
 
         yield return new WaitForSeconds(_flashDuration);
 

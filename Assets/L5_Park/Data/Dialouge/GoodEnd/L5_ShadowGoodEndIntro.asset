@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5cbb483bddf4c478998c8960188805, type: 3}
+  m_Name: L5_ShadowGoodEndIntro
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  Lines:
+  - (His voice turns cold, sharp, and trembling with betrayal.)
+  - "So... you\u2019re really going to do it? You\u2019re going to pick up that machine
+    and walk toward a tomorrow that doesn't care about you?"
+  - "You think you\u2019re 'healing'? No, Minh. You\u2019re just erasing her! Every
+    step you take away from this bench is a layer of dust on her face....?"
+  - "You\u2019re choosing the harsh white light of 'normalcy' over the only warmth
+    we have left!"
+  - "You say you have the resolve to carry the pain? I don't believe you. I\u2019ve
+    seen you cry in the dark for months. I\u2019ve felt your heart skip beats in
+    that hospital hallway."
+  - You aren't strong enough to carry this weight alone!
+  - "If you want to leave, you\u2019ll have to tear the film right out of my hands.
+    You\u2019ll have to prove to me that your 'hope' is brighter than my darkness."
+  - "Fine. Look through your lens, 'shutter-bug.' Let\u2019s see if you can handle
+    the truth without blinking."
+  - Show me your light!

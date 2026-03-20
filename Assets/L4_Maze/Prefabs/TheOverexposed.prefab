@@ -1053,6 +1053,12 @@ MonoBehaviour:
   _viewAngle: 60
   _detectionRange: 20
   _jumpscareCamera: {fileID: 6075735255918035325}
+  _threatLevelNames:
+  - <b>Agile:</b> Increased movement speed.
+  - <b>Relentless:</b> Never stops running.
+  - <b>Lethal:</b> Maximum chase velocity.
+  - <color=orange><b>OMNISCIENT:</b></color> <size=120%><b>I SEE YOU.</b></size>
+    YOUR LOCATION IS KNOWN. <size=150%><b>KEEP RUNNING.</b></size>
 --- !u!65 &3026160826702327092
 BoxCollider:
   m_ObjectHideFlags: 0

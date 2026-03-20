@@ -10,7 +10,6 @@ public class DialougeHUD : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private TextMeshProUGUI _textDisplay;
-    [SerializeField] private GameObject _continuePrompt;
 
     [Header("Settings")]
     [SerializeField] private float _typingSpeed = 0.05f;
@@ -20,12 +19,39 @@ public class DialougeHUD : MonoBehaviour
     private int _lineIndex;
     private bool _isTyping;
     private bool _isActive;
+    private Coroutine _typingRoutine;
 
     private void Awake()
     {
         // Ensure we have the reference
         if (_canvasGroup == null) _canvasGroup = GetComponent<CanvasGroup>();
         HideUI();
+    }
+
+    public void OnSkip()
+    {
+        if (!_isActive) return;
+
+        Debug.Log("Dialogue fully skipped via Input Message");
+        EndDialogue();
+    }
+
+    // Broadcast Message: Triggered when 'E' is pressed in UI Map
+    public void OnClose()
+    {
+        if (!_isActive) return;
+
+        if (_isTyping)
+        {
+            // Instant skip typing
+            StopAllCoroutines();
+            _textDisplay.text = _currentDialogueLines[_lineIndex];
+            _isTyping = false;
+        }
+        else
+        {
+            NextLine();
+        }
     }
 
     // Called by StoryDirector via UnityEvent
@@ -42,32 +68,12 @@ public class DialougeHUD : MonoBehaviour
 
         // 2. Show UI via Alpha
         ShowUI();
-        StartCoroutine(TypeLine());
-    }
-
-    // Broadcast Message: Triggered when 'E' is pressed in UI Map
-    public void OnClose()
-    {
-        if (!_isActive) return;
-
-        if (_isTyping)
-        {
-            // Instant skip typing
-            StopAllCoroutines();
-            _textDisplay.text = _currentDialogueLines[_lineIndex];
-            _isTyping = false;
-            _continuePrompt.SetActive(true);
-        }
-        else
-        {
-            NextLine();
-        }
+        _typingRoutine = StartCoroutine(TypeLine());
     }
 
     private IEnumerator TypeLine()
     {
         _isTyping = true;
-        _continuePrompt.SetActive(false);
         _textDisplay.text = "";
 
         foreach (char c in _currentDialogueLines[_lineIndex].ToCharArray())
@@ -77,7 +83,14 @@ public class DialougeHUD : MonoBehaviour
         }
 
         _isTyping = false;
-        _continuePrompt.SetActive(true);
+    }
+
+    private void FinishLineInstantly()
+    {
+        if (_typingRoutine != null) StopCoroutine(_typingRoutine);
+
+        _textDisplay.text = _currentDialogueLines[_lineIndex];
+        _isTyping = false;
     }
 
     private void NextLine()
@@ -96,6 +109,9 @@ public class DialougeHUD : MonoBehaviour
     private void EndDialogue()
     {
         _isActive = false;
+        // Clean up any running typing
+        if (_typingRoutine != null) StopCoroutine(_typingRoutine);
+
         HideUI();
 
         // 1. Switch back to Gameplay state

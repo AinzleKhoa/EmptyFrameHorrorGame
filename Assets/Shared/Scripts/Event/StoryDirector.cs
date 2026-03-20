@@ -4,8 +4,6 @@ using UnityEngine.Events;
 
 public class StoryDirector : MonoBehaviour
 {
-    [SerializeField] private string _stageTitle;
-
     [Header("Level Flow")]
     [SerializeField] private List<Act> _storyActs = new List<Act>();
     [System.Serializable]
@@ -31,8 +29,6 @@ public class StoryDirector : MonoBehaviour
 
     private void OnEnable()
     {
-        GameBroadcast.OnStageNameUpdateHUD?.Invoke(_stageTitle);
-
         foreach (var act in _storyActs)
             foreach (var obj in act.Objectives)
                 foreach (var sig in obj.GetAllRequiredSignals())

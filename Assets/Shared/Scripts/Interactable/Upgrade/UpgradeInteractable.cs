@@ -29,6 +29,8 @@ public class UpgradeInteractable : InteractableBase
 
     public override void Interact(PlayerInteractor interactor)
     {
+        base.Interact(interactor);
+
         PlayerInventory inventory = interactor.GetComponentInParent<PlayerInventory>();
 
         // 1. Handle Player-Targeted Upgrades

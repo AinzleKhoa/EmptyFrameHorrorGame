@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7168751720623024174
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2487
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2487
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2487
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.686707
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.33609962
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.057006836
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6395279
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.76876795
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 100.487
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c2b4b498a698ffd48accd50bad5da697, type: 2}
+    - target: {fileID: 919132149155446097, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_Name
+      value: L5_Upgrade_EmergencySupplies
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1303295412861154340}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2633079391805503803}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3936159079747306544}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9196573168942504572}
+  m_SourcePrefab: {fileID: 100100000, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+--- !u!1 &8051851625913488767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 59d14c082410af141b5582c842bf5886, type: 3}
+  m_PrefabInstance: {fileID: 7168751720623024174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1303295412861154340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8051851625913488767}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &2633079391805503803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8051851625913488767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c318f6706c483144696ce35610c49f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineManager
+  _detectionRange: 8
+--- !u!114 &3936159079747306544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8051851625913488767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b282cba51d5115d42a3011e41f336cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeInteractable
+  _targetItemName: Lighter
+  _readyPrompt: 'Increases the active candle count from 4 to 8 (Max) per spawn cycle.
+    [E to upgrade]'
+  _missingPrompt: Require Lighter
+--- !u!114 &9196573168942504572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8051851625913488767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69947be280a483b45b6f11a11ad58fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Upgrade_EmergencySupplies
+  _upgradeName: Emergency Supplies
+  _upgradeLore: Increases the active candle count from 4 to 8 per spawn cycle.

@@ -49,7 +49,11 @@ public class TheOverexposed : MonoBehaviour
     private float _noiseCheckTimer;
 
     [Header("Jumpscare Setup")]
-    [SerializeField] private Camera _jumpscareCamera; // Drag the new Camera here
+    [SerializeField] private Camera _jumpscareCamera;
+
+    [Header("HUD: Threat Naming (Index 0 = 1st Fragment)")]
+    [SerializeField] private List<string> _threatLevelNames = new List<string>();
+    private MonsterStateHUD _monsterHUD;
 
     private NavMeshAgent agent;
     private Animator anim;
@@ -63,12 +67,18 @@ public class TheOverexposed : MonoBehaviour
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         SetNextDestination();
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            _monsterHUD = playerObj.GetComponentInChildren<MonsterStateHUD>();
+        }
     }
 
     private void HandleMusic()
     {
         // If the monster is chasing, make sure the music is playing
-        if (currentState == MonsterState.Chasing)
+        if (currentState == MonsterState.Chasing || currentState == MonsterState.Investigating || currentState == MonsterState.Stalking)
         {
             if (!_musicSource.isPlaying)
             {
@@ -289,7 +299,7 @@ public class TheOverexposed : MonoBehaviour
                 Debug.Log("<color=yellow>Monster hit by light from: </color>" + hit.name);
 
                 // 3. Trigger the stun
-                TakeDamage(1f);
+                TakeDamage(3f);
 
                 // 4. DESTROY the candle so it cannot be used again
                 Destroy(candle.gameObject);
@@ -312,7 +322,7 @@ public class TheOverexposed : MonoBehaviour
             // Range cap for hearing
             if (dist > _detectionRange) return;
 
-            float baseChance = (_currentPlayerMovementState == "Sprinting") ? 0.1f : 0.05f;
+            float baseChance = (_currentPlayerMovementState == "Sprinting") ? 0.5f : 0.05f;
 
             // 4. THE SMOOTH CURVE (InverseLerp + Power)
             // 20m = 0.0 (Silent), 0m = 1.0 (Maximum volume)
@@ -402,7 +412,7 @@ public class TheOverexposed : MonoBehaviour
         agent.SetDestination(_roomWaypoints[targetIndex].position);
     }
 
-    public void TakeDamage(float stunDuration = 6f)
+    public void TakeDamage(float stunDuration = 8f)
     {
         if (currentState == MonsterState.Stunned) return;
 
@@ -596,7 +606,7 @@ public class TheOverexposed : MonoBehaviour
         switch (count)
         {
             case 1: // 1/5: Walk speed increase
-                _walkSpeed += 1.5f;
+                _walkSpeed += 1f;
                 Debug.Log("<color=orange>Monster: Walking Faster...</color>");
                 break;
 
@@ -618,6 +628,22 @@ public class TheOverexposed : MonoBehaviour
                     _screamSource.PlayOneShot(_investigateClip);
                 Debug.Log("<color=purple>Monster: I SEE YOU EVERYWHERE.</color>");
                 break;
+        }
+
+        if (_monsterHUD != null)
+        {
+            int index = count - 1;
+
+            // Check if we actually have text for this level in the Inspector
+            if (_threatLevelNames != null && index >= 0 && index < _threatLevelNames.Count)
+            {
+                _monsterHUD.UpdateThreatDisplay(count, _threatLevelNames[index]);
+            }
+            else
+            {
+                // If the list is empty or missing this index, hide the HUD
+                _monsterHUD.UpdateThreatDisplay(count, "");
+            }
         }
     }
 }

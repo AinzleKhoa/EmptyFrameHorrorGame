@@ -59,9 +59,11 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleRotation()
     {
-        // We use the stored _lookInput instead of hardware Mouse.current
-        float mouseX = _lookInput.x * _mouseSensitivity * 0.1f;
-        float mouseY = _lookInput.y * _mouseSensitivity * 0.1f;
+        // Change 0.1f to a smaller number for more precise control
+        float sensitivityMultiplier = 0.05f;
+
+        float mouseX = _lookInput.x * _mouseSensitivity * sensitivityMultiplier;
+        float mouseY = _lookInput.y * _mouseSensitivity * sensitivityMultiplier;
 
         _yaw = transform.root.localEulerAngles.y + mouseX;
         _pitch -= mouseY;
@@ -79,12 +81,10 @@ public class PlayerCamera : MonoBehaviour
         if (fovOverride > 0)
         {
             targetFOV = fovOverride;
-            Debug.Log($"FOV Overridden to: {targetFOV}");
         }
         else if (fovCamera > 0)
         {
             targetFOV = fovCamera;
-            Debug.Log($"FOV Overridden to: {targetFOV}");
         }
         // Exhausted (From Movement Script)
         else if (_movement != null && _movement.isExhausted)

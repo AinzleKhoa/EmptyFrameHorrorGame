@@ -39,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Upgrade Status")]
     public bool isSilenced = false; // Set by Upgrade
 
+    [Header("Physics Layers")]
+    [SerializeField] private LayerMask _groundLayer; // Set this to "Default" or "Map" in the Inspector
+
     // Internal States (Other scripts like HeadBob or UI can read these)
     [HideInInspector] public bool isWalking, isSprinting, isCrouched, isGrounded;
     private bool _isUsingCamera = false; // Local state updated by events
@@ -97,7 +100,9 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 origin = new Vector3(transform.position.x, transform.position.y - (transform.localScale.y * 0.5f), transform.position.z);
         // Cast a ray sightly below player's feet
-        isGrounded = Physics.Raycast(origin, Vector3.down, 0.75f);
+        // 2. We use a SphereCast (like a thick pipe) to look for the floor.
+        // Since your feet end at -1.0, we check down to -1.1.
+        isGrounded = Physics.SphereCast(origin, 0.4f, Vector3.down, out _, 1.1f, _groundLayer);
     }
 
     private void ToggleCrouch()
