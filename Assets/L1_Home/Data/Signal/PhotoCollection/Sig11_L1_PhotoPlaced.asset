@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f402b186ebe4e84f8ec6f0ad8266abb, type: 3}
-  m_Name: Sig_L1_ExitKitchen
+  m_Name: Sig11_L1_PhotoPlaced
   m_EditorClassIdentifier: Assembly-CSharp::GameSignal

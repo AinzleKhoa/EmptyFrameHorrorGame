@@ -6,8 +6,12 @@ public class L1H_CountdownSignalTimer : MonoBehaviour
     [SerializeField] private float _timeLimitSeconds = 120f;
     [SerializeField] private bool _startOnStart = true;
 
-    [Header("Signal")]
+    [Header("Optional Signal")]
     [SerializeField] private GameSignal _timeUpSignal;
+
+    [Header("Story Jump On Time Up")]
+    [SerializeField] private StoryDirector _storyDirector;
+    [SerializeField] private string _timeUpTargetActName = "LoseAct";
 
     private float _remainingTime;
     private bool _isRunning;
@@ -43,8 +47,16 @@ public class L1H_CountdownSignalTimer : MonoBehaviour
 
             if (_timeUpSignal != null)
                 _timeUpSignal.Raise();
+
+            if (_storyDirector != null && !string.IsNullOrEmpty(_timeUpTargetActName))
+            {
+                Debug.Log($"[L1 Timer] Jumping to act: {_timeUpTargetActName}");
+                _storyDirector.JumpToAct(_timeUpTargetActName);
+            }
             else
-                Debug.LogWarning("[L1 Timer] No time-up signal assigned.");
+            {
+                Debug.LogWarning("[L1 Timer] StoryDirector or target act name is missing.");
+            }
         }
     }
 
