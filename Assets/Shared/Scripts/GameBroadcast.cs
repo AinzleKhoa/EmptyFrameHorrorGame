@@ -46,5 +46,6 @@ public static class GameBroadcast
     public static Action<string> OnPlayerMovementState;
     // Player State
     public static Action<string> OnInputStateChange;
+    public static Action<bool> OnPauseMenuToggle;    // true = Show Pause Menu graphics
     public static Action<bool> isPlayerFreezed;
 }

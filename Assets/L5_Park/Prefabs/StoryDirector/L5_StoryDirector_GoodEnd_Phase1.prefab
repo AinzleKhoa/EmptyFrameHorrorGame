@@ -304,7 +304,19 @@ MonoBehaviour:
     - rid: 2300694463364989003
     OnActStarted:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnActFinished:
       m_PersistentCalls:
         m_Calls: []
@@ -332,7 +344,7 @@ MonoBehaviour:
       data:
         _objectiveName: Pick up the Camera
         _objectiveDescription: Pick up the Camera on the bench
-        _interactionSignal: {fileID: 11400000, guid: 60c03f77ae3016942a65f87eedb4f2d6, type: 2}
+        _interactionSignal: {fileID: 11400000, guid: 9f0b4059e1ad79e429209ae7d0461599, type: 2}
         _targetCount: 1
     - rid: 2300694394403553368
       type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}

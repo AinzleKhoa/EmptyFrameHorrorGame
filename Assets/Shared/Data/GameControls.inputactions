@@ -122,6 +122,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "33e65d55-5b09-4a4c-bcdf-a7f3bfe6701f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -311,6 +320,17 @@
                     "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43ecdc2b-e1e1-462a-b03d-e9f170194ea0",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -337,7 +357,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Esc",
+                    "name": "Resume",
                     "type": "Button",
                     "id": "c819baa5-bd68-4adf-b52a-2018cf1951e3",
                     "expectedControlType": "",
@@ -403,7 +423,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Esc",
+                    "action": "Resume",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

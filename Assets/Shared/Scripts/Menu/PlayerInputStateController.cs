@@ -13,21 +13,15 @@ public class PlayerInputStateController : MonoBehaviour
         // 1. Switch the actual Action Map
         _playerInput.SwitchCurrentActionMap(stateName);
 
-        // 2. Handle Cursor Logic based on the state
         switch (stateName)
         {
             case "Player":
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 break;
-            case "UI":
-            case "Menu":
+            case "UI": // Both Menu and Documents use this
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                break;
-
-            default:
-                Debug.LogWarning($"Input state '{stateName}' not recognized!");
                 break;
         }
 

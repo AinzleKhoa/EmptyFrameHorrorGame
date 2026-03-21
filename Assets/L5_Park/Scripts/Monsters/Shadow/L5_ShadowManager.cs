@@ -4,7 +4,11 @@ using System.Collections.Generic;
 public class L5_ShadowManager : MonoBehaviour
 {
     [SerializeField] private L5_ShadowMonster _shadowPrefab;
+    private static L5_ShadowMonster _sharedShadow; // Static so all phase managers share ONE monster
     [SerializeField] private List<Transform> _spawnPoints;
+
+    [Header("Difficulty Settings")]
+    [SerializeField] private float _shadowDamageTime = 10f;
     [SerializeField] private float _minSpawnInterval = 20f;
     [SerializeField] private float _maxSpawnInterval = 40f;
 
@@ -16,7 +20,15 @@ public class L5_ShadowManager : MonoBehaviour
 
     private void Start()
     {
-        _activeShadow = Instantiate(_shadowPrefab);
+        // THE FIX: Only instantiate if a shadow doesn't exist in the scene yet
+        if (_sharedShadow == null)
+        {
+            _sharedShadow = Instantiate(_shadowPrefab);
+            Debug.Log("<color=cyan>Manager:</color> Global Shadow Created.");
+        }
+        // Link this specific phase manager to the shared monster
+        _activeShadow = _sharedShadow;
+        _activeShadow.SetDamageInterval(_shadowDamageTime);
         PrepareNextSpawn(); // Starts the very first countdown
         Debug.Log("<color=cyan>Manager:</color> Initialized.");
     }
@@ -41,6 +53,8 @@ public class L5_ShadowManager : MonoBehaviour
         if (_spawnPoints.Count == 0) return;
         int randomIndex = Random.Range(0, _spawnPoints.Count);
 
+        // Refresh the stat in case you changed it in the inspector during play
+        _activeShadow.SetDamageInterval(_shadowDamageTime);
         _activeShadow.Manifest(_spawnPoints[randomIndex].position);
 
         // NOTE: We do NOT call PrepareNextSpawn here. 
@@ -64,8 +78,11 @@ public class L5_ShadowManager : MonoBehaviour
         {
             // Force it to hide/stop damage immediately
             _activeShadow.TakeFlash();
+            Destroy(_activeShadow.gameObject, 0.5f);
         }
 
         Debug.Log("<color=green>Phase 1 Manager:</color> Shutdown complete. Shadow destroyed.");
     }
+
+    public static void ResetSharedShadow() => _sharedShadow = null;
 }

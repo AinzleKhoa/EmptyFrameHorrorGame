@@ -29,8 +29,7 @@ public class L5_TheOverexposedBoss : MonoBehaviour
     [SerializeField] private AudioClip _chaseMusic;
     [SerializeField] private AudioClip[] _footstepClips;
 
-    [Header("Speeds")]
-    [SerializeField] private float _chaseSpeed = 10f;
+    private float _chaseSpeed = 10f;
 
     [Header("Jumpscare Setup")]
     [SerializeField] private Camera _jumpscareCamera;
@@ -38,6 +37,9 @@ public class L5_TheOverexposedBoss : MonoBehaviour
     private NavMeshAgent agent;
     private Animator anim;
     private Transform player;
+
+    // --- NEW: Reference to the collider ---
+    private Collider _myCollider;
 
     private Vector3 _lockPos;
     // 2. Add LateUpdate below your Update method
@@ -58,6 +60,8 @@ public class L5_TheOverexposedBoss : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
 
+        _myCollider = GetComponent<Collider>();
+
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) player = playerObj.transform;
     }
@@ -66,6 +70,9 @@ public class L5_TheOverexposedBoss : MonoBehaviour
     {
         // Stop any leftover logic from the last time he was active
         StopAllCoroutines();
+
+        // --- NEW: Safety - Disable collider on spawn ---
+        if (_myCollider != null) _myCollider.enabled = false;
 
         // Reset state to Alerting every single time he appears/reactivates
         currentState = MonsterState.Alerting;
@@ -169,24 +176,20 @@ public class L5_TheOverexposedBoss : MonoBehaviour
         if (currentState == MonsterState.Stunned) return;
 
         // 1. Scan for any colliders near the monster's chest
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position + Vector3.up, 3f);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position + Vector3.up, 3.5f);
 
         foreach (var hit in hitColliders)
         {
             // 2. Look for the script on the hit object OR any of its parents
             CandleInteractable candle = hit.GetComponentInParent<CandleInteractable>();
 
-            if (candle != null && candle.IsLit)
+            // 2. Check for the Candle OR check for the LightSource tag
+            if ((candle != null && candle.IsLit) || hit.CompareTag("LightSource"))
             {
                 Debug.Log("<color=yellow>Monster hit by light from: </color>" + hit.name);
 
                 // 3. Trigger the banish
-                Banish();
-                if (_stunnedClip != null)
-                {
-                    _screamSource.Stop();
-                    _screamSource.PlayOneShot(_stunnedClip);
-                }
+                TakeDamage();
                 break;
             }
         }
@@ -196,9 +199,12 @@ public class L5_TheOverexposedBoss : MonoBehaviour
 
     #region Helper & Navigation Methods
 
-    public void TakeDamage(float stunDuration = 1f)
+    public void TakeDamage()
     {
         if (currentState == MonsterState.Stunned) return;
+
+        // --- NEW: Disable collider immediately when hit ---
+        if (_myCollider != null) _myCollider.enabled = false;
 
         Debug.Log("Monster hit by camera! Interrupting current state: " + currentState);
 
@@ -215,7 +221,7 @@ public class L5_TheOverexposedBoss : MonoBehaviour
         agent.velocity = Vector3.zero;
         agent.ResetPath();
 
-        StartCoroutine(StunnedRoutine(stunDuration));
+        StartCoroutine(StunnedRoutine());
     }
 
     #endregion
@@ -234,11 +240,15 @@ public class L5_TheOverexposedBoss : MonoBehaviour
 
         anim.SetTrigger("Scream");
         yield return new WaitForSeconds(2f);
+
+        // --- THE FIX: Only enable collider when Chasing starts ---
+        if (_myCollider != null) _myCollider.enabled = true;
+
         agent.isStopped = false;
         currentState = MonsterState.Chasing;
     }
 
-    IEnumerator StunnedRoutine(float duration)
+    IEnumerator StunnedRoutine()
     {
         currentState = MonsterState.Stunned;
         agent.isStopped = true;
@@ -250,13 +260,13 @@ public class L5_TheOverexposedBoss : MonoBehaviour
             _screamSource.PlayOneShot(_stunnedClip);
         }
 
-        yield return new WaitForSeconds(duration);
-        anim.SetTrigger("isRecovered");
         yield return new WaitForSeconds(2f);
         agent.isStopped = false;
 
+        Banish();
+
         // Always scream after stunned
-        StartCoroutine(AlertScream());
+        // StartCoroutine(AlertScream());
     }
 
     #endregion
@@ -334,5 +344,11 @@ public class L5_TheOverexposedBoss : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         // Add your SceneManager.LoadScene here or show your Game Over UI
         Debug.Log("Reloading Level...");
+    }
+
+    public void SetChaseSpeed(float newSpeed)
+    {
+        _chaseSpeed = newSpeed;
+        if (agent != null) agent.speed = _chaseSpeed;
     }
 }

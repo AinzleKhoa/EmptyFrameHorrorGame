@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2845704942848625347
+--- !u!1 &3479665134322656413
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1442559776785371754}
-  - component: {fileID: 2231208552478302100}
+  - component: {fileID: 6587882671288143916}
+  - component: {fileID: 5635347766961547896}
   m_Layer: 0
-  m_Name: L5_StoryDirector_GoodEnd_Phase2
+  m_Name: L5_StoryDirector_TEST_START
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1442559776785371754
+  m_IsActive: 1
+--- !u!4 &6587882671288143916
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2845704942848625347}
+  m_GameObject: {fileID: 3479665134322656413}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.017211914, y: -0.77208996, z: 0.23220825}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2231208552478302100
+--- !u!114 &5635347766961547896
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2845704942848625347}
+  m_GameObject: {fileID: 3479665134322656413}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43de3246923dfab4a9076ea951a0419b, type: 3}
@@ -63,19 +63,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    OnActFinished:
-      m_PersistentCalls:
-        m_Calls: []
-    IsActive: 0
-  - ActName: Read the Notes
-    Objectives:
-    - rid: 4932521947925577799
-    OnActStarted:
-      m_PersistentCalls:
-        m_Calls:
         - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
+          m_TargetAssemblyTypeName: OutlineManager, Assembly-CSharp
+          m_MethodName: SetOutlineActive
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -83,70 +73,11 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-    OnActFinished:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-    IsActive: 0
-  - ActName: Pick up the Lighter
-    Objectives:
-    - rid: 2300694412224626763
-    OnActStarted:
-      m_PersistentCalls:
-        m_Calls: []
-    OnActFinished:
-      m_PersistentCalls:
-        m_Calls: []
-    IsActive: 0
-  - ActName: Preparation
-    Objectives:
-    - rid: 2300694394403553366
-    OnActStarted:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
+            m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-    OnActFinished:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
+          m_TargetAssemblyTypeName: OutlineManager, Assembly-CSharp
+          m_MethodName: SetOutlineActive
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -166,25 +97,6 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    IsActive: 0
-  - ActName: Fix the fragment
-    Objectives:
-    - rid: 2300694394403553368
-    OnActStarted:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
         - m_Target: {fileID: 0}
@@ -215,8 +127,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: L5_ShadowManager, Assembly-CSharp
-          m_MethodName: CompletePhase
+          m_TargetAssemblyTypeName: SkyboxDirector, Assembly-CSharp
+          m_MethodName: ApplySkybox
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -227,8 +139,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: L5_TheOverexposedManager, Assembly-CSharp
-          m_MethodName: CompletePhase
+          m_TargetAssemblyTypeName: VolumeDirector, Assembly-CSharp
+          m_MethodName: ApplyVolume
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -237,26 +149,38 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: LightingDirector, Assembly-CSharp
+          m_MethodName: ApplyLight
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
           m_CallState: 2
     IsActive: 0
   - ActName: Stage changes
     Objectives:
-    - rid: 2300694473568682059
+    - rid: 2300694463364989003
     OnActStarted:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     OnActFinished:
       m_PersistentCalls:
         m_Calls: []
@@ -271,39 +195,10 @@ MonoBehaviour:
         _objectiveDescription: The Final Exposure
         _interactionSignal: {fileID: 11400000, guid: 1b6f4cec8a98a754d86a5e5426425b41, type: 2}
         _targetCount: 1
-    - rid: 2300694394403553366
-      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
-      data:
-        _objectiveName: Preparation
-        _objectiveDescription: Choose one upgrade item, this upgrade will aid you
-          throughout the fight.
-        _interactionSignal: {fileID: 11400000, guid: 95d8f333e0055f446a31a002b2bdd6c6, type: 2}
-        _targetCount: 1
-    - rid: 2300694394403553368
-      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
-      data:
-        _objectiveName: Fix the fragment
-        _objectiveDescription: Fix the fragment while fighting back the shadow
-        _interactionSignal: {fileID: 11400000, guid: b242825af6ebfed44986d3a4fea02cf3, type: 2}
-        _targetCount: 1
-    - rid: 2300694412224626763
-      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
-      data:
-        _objectiveName: Pick up the Lighter
-        _objectiveDescription: Pick up the Lighter
-        _interactionSignal: {fileID: 11400000, guid: 60c03f77ae3016942a65f87eedb4f2d6, type: 2}
-        _targetCount: 1
-    - rid: 2300694473568682059
+    - rid: 2300694463364989003
       type: {class: L0_SwitchDirectorObjective, ns: , asm: Assembly-CSharp}
       data:
-        _objectiveName: Pick up the Lighter
-        _objectiveDescription: Pick up the Lighter
+        _objectiveName: Stage changes
+        _objectiveDescription: Stage changes
         _nextDirector: {fileID: 0}
         _disableSelf: 1
-    - rid: 4932521947925577799
-      type: {class: L0_CountObjective, ns: , asm: Assembly-CSharp}
-      data:
-        _objectiveName: Read the Notes
-        _objectiveDescription: Read the Notes
-        _interactionSignal: {fileID: 11400000, guid: 77c9176338e843d448d54cd1ccdd8852, type: 2}
-        _targetCount: 1

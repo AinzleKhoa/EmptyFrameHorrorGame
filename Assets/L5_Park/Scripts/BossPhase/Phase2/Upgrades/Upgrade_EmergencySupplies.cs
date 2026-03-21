@@ -14,7 +14,6 @@ public class Upgrade_EmergencySupplies : MonoBehaviour, IUpgradeEffect
         }
 
         // 2. Record the upgrade in PlayerData for status tracking
-        GameObject playerObj = GameObject.FindWithTag("Player");
         if (target.TryGetComponent<ItemData>(out var data))
         {
             data.AddUpgrade($"{_upgradeName}: {_upgradeLore}");

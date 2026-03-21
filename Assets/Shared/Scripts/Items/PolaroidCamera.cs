@@ -71,6 +71,13 @@ public class PolaroidCamera : MonoBehaviour
 
         if (_mainCam == null) _mainCam = Camera.main;
 
+        // 2. SYNC THE COOLDOWN HERE
+        if (_cooldown != null)
+        {
+            // This takes the 2.0f from the camera and sets it in the cooldown script
+            _cooldown.SetBaseCooldown(_photoCooldown);
+        }
+
         ResetLogic();
     }
 
@@ -94,35 +101,6 @@ public class PolaroidCamera : MonoBehaviour
     private void Awake()
     {
         _cooldown = GetComponent<ItemCooldown>();
-
-        if (_cooldown != null)
-        {
-            _cooldown.setBaseCooldown(_photoCooldown);
-        }
-
-        if (_pointLight != null)
-        {
-            _pointLight.enabled = false;
-            _pointLight.intensity = _pointIntensity;
-            _pointLight.range = _pointRange;
-            _pointLight.color = _flashColor;
-        }
-
-        if (_pointLightViewfinder != null)
-        {
-            _pointLightViewfinder.enabled = false;
-            _pointLightViewfinder.intensity = _pointIntensityViewfinder;
-            _pointLightViewfinder.range = _pointRangeViewfinder;
-            _pointLightViewfinder.color = _flashColor;
-        }
-
-        if (_spotLight != null)
-        {
-            _spotLight.enabled = false;
-            _spotLight.intensity = _spotIntensity;
-            _spotLight.range = _spotRange;
-            _spotLight.color = _flashColor;
-        }
     }
 
     private void Update()

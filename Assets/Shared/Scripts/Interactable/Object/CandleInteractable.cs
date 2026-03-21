@@ -31,6 +31,13 @@ public class CandleInteractable : InteractableBase
         _isAlreadyLit = false;
         if (_candleFlame != null) _candleFlame.SetActive(false);
         if (_pointLight != null) _pointLight.enabled = false;
+
+        // Check the Manager's upgrade status immediately
+        if (L5_CandleManager.Instance != null && L5_CandleManager.Instance.IsLitFlameUnlocked)
+        {
+            SetLit(true);
+            Debug.Log("<color=yellow>Candle:</color> Auto-ignited via Lit Flame upgrade.");
+        }
     }
     private void OnDisable()
     {

@@ -4,11 +4,13 @@ using System.Collections.Generic;
 public class L5_TheOverexposedManager : MonoBehaviour
 {
     [SerializeField] private L5_TheOverexposedBoss _bossPrefab;
+    private static L5_TheOverexposedBoss _sharedBoss;
     [SerializeField] private List<Transform> _spawnPoints;
 
-    [Header("Spawn Intervals")]
-    [SerializeField] private float _minSpawnInterval = 45f; // Boss usually takes longer
-    [SerializeField] private float _maxSpawnInterval = 90f;
+    [Header("Difficulty Settings")]
+    [SerializeField] private float _bossChaseSpeed = 7.5f;
+    [SerializeField] private float _minSpawnInterval = 25f;
+    [SerializeField] private float _maxSpawnInterval = 30f;
 
     private float _currentSpawnTimer;
     private L5_TheOverexposedBoss _activeBoss;
@@ -19,10 +21,18 @@ public class L5_TheOverexposedManager : MonoBehaviour
 
     private void Start()
     {
-        _activeBoss = Instantiate(_bossPrefab);
+        if (_sharedBoss == null)
+        {
+            _sharedBoss = Instantiate(_bossPrefab);
+            // Hide it immediately so the timer can take over
+            _sharedBoss.gameObject.SetActive(false);
+            Debug.Log("<color=red>Manager:</color> Global Boss Created.");
+        }
+        // 3. Link this specific phase manager to the shared boss
+        _activeBoss = _sharedBoss;
 
-        // Ensure he is OFF so the timer can start
-        _activeBoss.gameObject.SetActive(false);
+        // Push speed early
+        _activeBoss.SetChaseSpeed(_bossChaseSpeed);
 
         PrepareNextSpawn();
         Debug.Log("<color=yellow>Overexposed Manager:</color> Initialized.");
@@ -48,6 +58,9 @@ public class L5_TheOverexposedManager : MonoBehaviour
         if (_spawnPoints.Count == 0) return;
         int randomIndex = Random.Range(0, _spawnPoints.Count);
 
+
+        // Apply speed right before he manifests
+        _activeBoss.SetChaseSpeed(_bossChaseSpeed);
         _activeBoss.Manifest(_spawnPoints[randomIndex].position);
 
         // --- ADDED: Spawn the candles when the boss appears ---
@@ -76,4 +89,6 @@ public class L5_TheOverexposedManager : MonoBehaviour
             Destroy(_activeBoss.gameObject, 0.5f);
         }
     }
+
+    public static void ResetSharedBoss() => _sharedBoss = null;
 }

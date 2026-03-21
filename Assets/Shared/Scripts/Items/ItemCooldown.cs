@@ -37,7 +37,7 @@ public class ItemCooldown : MonoBehaviour
         GameBroadcast.OnItemStatusUpdate?.Invoke(itemName, Progress);
     }
 
-    public void setBaseCooldown(float cooldown)
+    public void SetBaseCooldown(float cooldown)
     {
         _baseCooldown = cooldown;
         SyncCooldown(cooldown);

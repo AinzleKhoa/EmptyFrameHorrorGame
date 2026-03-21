@@ -10,8 +10,10 @@ public class L5_CandleManager : MonoBehaviour
     [SerializeField] private List<GameObject> _groupB; // Second 4 candles
 
     [Header("Upgrade Status (View Only)")]
-    private bool _emergencySupplies = false;
-    private bool _litFlame = false;
+    private static bool _emergencySupplies = false;
+    private static bool _litFlame = false;
+
+    public bool IsLitFlameUnlocked => _litFlame;
 
     private List<GameObject> _allCandles = new List<GameObject>();
 
@@ -77,4 +79,11 @@ public class L5_CandleManager : MonoBehaviour
     // --- Upgrade Hooks ---
     public void UnlockEmergencySupplies() => _emergencySupplies = true;
     public void UnlockLitFlame() => _litFlame = true;
+
+    // Call this only at the very start of the level, not every phase
+    public static void GlobalResetUpgrades()
+    {
+        _emergencySupplies = false;
+        _litFlame = false;
+    }
 }

@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Reflection; // Bắt buộc phải có để dùng Reflection
 
-public class PlayerSpeedUpgrade : MonoBehaviour, IUpgradeEffect
+public class Upgrade_PlayerSpeed : MonoBehaviour, IUpgradeEffect
 {
     [Header("Upgrade Identity")]
-    [SerializeField] private string _upgradeName = "Overclocked Servos";
-    [SerializeField] private string _upgradeLore = "Can thiệp vào hệ thống motor để tăng tốc độ di chuyển.";
+    [SerializeField] private string _upgradeName = "Reinforced Soles";
+    [SerializeField] private string _upgradeLore = "Permanently increases walking and sprinting velocity.";
 
     [Header("Values")]
     [SerializeField] private float _walkBoost = 2f;

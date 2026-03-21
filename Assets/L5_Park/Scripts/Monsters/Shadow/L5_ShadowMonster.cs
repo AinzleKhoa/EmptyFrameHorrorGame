@@ -10,7 +10,7 @@ public class L5_ShadowMonster : MonoBehaviour
     [SerializeField] private ShadowState _currentState = ShadowState.Idle;
     public bool IsManifested => _currentState == ShadowState.Manifested;
 
-    [SerializeField] private float _timeToDamage = 10f;
+    private float _timeToDamage = 30f;
     private float _dwellTimer;
     private Renderer[] _renderers;
     private Collider[] _colliders;
@@ -62,5 +62,10 @@ public class L5_ShadowMonster : MonoBehaviour
         foreach (var c in _colliders) c.enabled = active;
         L5_GameBroadcast.OnL5ShadowSpawned?.Invoke(active);
         _dwellTimer = 0;
+    }
+
+    public void SetDamageInterval(float newTime)
+    {
+        _timeToDamage = newTime;
     }
 }
