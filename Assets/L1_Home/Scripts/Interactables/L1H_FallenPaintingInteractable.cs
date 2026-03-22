@@ -57,6 +57,16 @@ public class L1H_FallenPaintingInteractable : MonoBehaviour, IInteractable
             Debug.Log($"Signal Raised: {_photoPlacedSignal.name}");
             _photoPlacedSignal.Raise();
         }
+
+        var levelManager = FindFirstObjectByType<LevelCompleteManager>();
+        if (levelManager != null)
+        {
+            levelManager.CompleteLevel();
+        }
+        else
+        {
+            Debug.LogWarning("LevelCompleteManager not found.");
+        }
     }
 
     private bool CanInspectYet()

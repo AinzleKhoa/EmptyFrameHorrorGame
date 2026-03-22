@@ -48,14 +48,14 @@ public class L1H_CountdownSignalTimer : MonoBehaviour
             if (_timeUpSignal != null)
                 _timeUpSignal.Raise();
 
-            if (_storyDirector != null && !string.IsNullOrEmpty(_timeUpTargetActName))
+            var flow = FindFirstObjectByType<GameFlowController>();
+            if (flow != null)
             {
-                Debug.Log($"[L1 Timer] Jumping to act: {_timeUpTargetActName}");
-                _storyDirector.JumpToAct(_timeUpTargetActName);
+                flow.KillPlayer();
             }
             else
             {
-                Debug.LogWarning("[L1 Timer] StoryDirector or target act name is missing.");
+                Debug.LogWarning("[L1 Timer] GameFlowController not found.");
             }
         }
     }

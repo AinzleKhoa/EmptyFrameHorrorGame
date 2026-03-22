@@ -2,8 +2,9 @@
 
 public class L1H_FragmentProgressionCounter : MonoBehaviour
 {
-    [Header("Fragment Settings")]
+    [Header("Stage Settings")]
     [SerializeField] private int _totalRequired = 3;
+    [SerializeField] private string _stageTitle = "Once my Home";
 
     [Header("Signal")]
     [SerializeField] private GameSignal _allFragmentsCollectedSignal;
@@ -15,6 +16,7 @@ public class L1H_FragmentProgressionCounter : MonoBehaviour
 
     private void Start()
     {
+        GameBroadcast.OnStageNameUpdateHUD?.Invoke(_stageTitle);
         GameBroadcast.OnProgressionCountUpdateHUD?.Invoke(_currentCount, _totalRequired);
     }
 

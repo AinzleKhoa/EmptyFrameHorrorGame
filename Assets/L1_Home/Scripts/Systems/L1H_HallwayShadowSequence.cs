@@ -10,6 +10,10 @@ public class L1H_HallwayShadowSequence : MonoBehaviour
     [SerializeField] private Light[] _hallwayLights;
     [SerializeField] private GameObject[] _lightVisuals;
 
+    [Header("Red Warning Light")]
+    [SerializeField] private Light _redLight;
+    [SerializeField] private GameObject _redLightVisual;
+
     [Header("Shadow Figure")]
     [SerializeField] private GameObject _shadowFigure;
 
@@ -28,6 +32,8 @@ public class L1H_HallwayShadowSequence : MonoBehaviour
     {
         if (_shadowFigure != null)
             _shadowFigure.SetActive(false);
+
+        SetRedLight(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,12 +54,16 @@ public class L1H_HallwayShadowSequence : MonoBehaviour
         if (_shadowFigure != null)
             _shadowFigure.SetActive(true);
 
+        SetRedLight(true);
+
         yield return new WaitForSeconds(_shadowVisibleTime);
 
         yield return StartCoroutine(FlickerOnceFast());
 
         if (_shadowFigure != null)
             _shadowFigure.SetActive(false);
+
+        SetRedLight(false);
     }
 
     private IEnumerator FlickerOnceFast()
@@ -89,5 +99,14 @@ public class L1H_HallwayShadowSequence : MonoBehaviour
                     _lightVisuals[i].SetActive(isOn);
             }
         }
+    }
+
+    private void SetRedLight(bool isOn)
+    {
+        if (_redLight != null)
+            _redLight.enabled = isOn;
+
+        if (_redLightVisual != null)
+            _redLightVisual.SetActive(isOn);
     }
 }
