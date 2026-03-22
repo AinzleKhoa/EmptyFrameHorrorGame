@@ -17,6 +17,10 @@ public class L1H_HallwayShadowSequence : MonoBehaviour
     [Header("Shadow Figure")]
     [SerializeField] private GameObject _shadowFigure;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _shadowAppearSfx;
+
     [Header("Timing")]
     [SerializeField] private float _delayBeforeShadowAppears = 0.1f;
     [SerializeField] private float _shadowVisibleTime = 0.8f;
@@ -54,6 +58,7 @@ public class L1H_HallwayShadowSequence : MonoBehaviour
         if (_shadowFigure != null)
             _shadowFigure.SetActive(true);
 
+        PlayShadowAppearSfx();
         SetRedLight(true);
 
         yield return new WaitForSeconds(_shadowVisibleTime);
@@ -64,6 +69,12 @@ public class L1H_HallwayShadowSequence : MonoBehaviour
             _shadowFigure.SetActive(false);
 
         SetRedLight(false);
+    }
+
+    private void PlayShadowAppearSfx()
+    {
+        if (_audioSource != null && _shadowAppearSfx != null)
+            _audioSource.PlayOneShot(_shadowAppearSfx);
     }
 
     private IEnumerator FlickerOnceFast()
