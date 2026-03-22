@@ -6636,8 +6636,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   bangDenText: {fileID: 2491195616077334197}
   noiDung:
-  - "H\xE3y nh\u1EDB c\xE1c quy t\u1EAFc!"
-  - "\u0110\u1EEBng nh\xECn l\u1EA1i ph\xEDa sau..."
+  - Rules for Survival
+  - 1. Identity is a biological network.
+  - 2. When two pieces fit together, dreams double.
+  - 3. Run away; when time runs out, they'll know where you are.
+  - 4. Memories are merely a place of escape.
   tocDoViet: 0.1
   thoiGianCho: 3
 --- !u!1 &8392247333529221711

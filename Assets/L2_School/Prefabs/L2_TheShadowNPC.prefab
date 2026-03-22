@@ -1340,12 +1340,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8840723788719491422}
   - component: {fileID: 3193232071623791396}
-  - component: {fileID: 257212977153772063}
   - component: {fileID: 8221377568279620258}
   - component: {fileID: 8606706636664393102}
-  - component: {fileID: 5896073276746521686}
+  - component: {fileID: 6261771946907917605}
+  - component: {fileID: 4960513507276797260}
+  - component: {fileID: 6698468648699290190}
   m_Layer: 7
-  m_Name: L4_TheShadowNPC
+  m_Name: L2_TheShadowNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1391,19 +1392,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &257212977153772063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8213263754897970148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d765ea10bc39b794aabd85c3c9b9f479, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCInteractable
-  _promptMessage: Press [E] to Talk
 --- !u!114 &8221377568279620258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,7 +1404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0b54651af81a346a2c85075ad39adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SignalTrigger
-  _signalToRaise: {fileID: 11400000, guid: 877b197ab5fe3d740a02274d740b240f, type: 2}
+  _signalToRaise: {fileID: 11400000, guid: 3cd5dd09b74477145af9e4ec2c93bacb, type: 2}
 --- !u!65 &8606706636664393102
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1438,7 +1426,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 3.9910467, z: 1}
   m_Center: {x: 0, y: 2.0250561, z: 0}
---- !u!114 &5896073276746521686
+--- !u!114 &6261771946907917605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8213263754897970148}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &4960513507276797260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1447,11 +1453,81 @@ MonoBehaviour:
   m_GameObject: {fileID: 8213263754897970148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c03a7163db8a24445877fe6c7614631b, type: 3}
+  m_Script: {fileID: 11500000, guid: c318f6706c483144696ce35610c49f97, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  _dialogueManager: {fileID: 0}
-  _data: {fileID: 11400000, guid: 6c7f885da0eac9d48b359cb758689386, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineManager
+  _detectionRange: 8
+--- !u!114 &6698468648699290190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8213263754897970148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a401a1ed92fba874da0d7b390e3f72d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::L2_ShadowNPC
+  MissingItemMessage: I dropped my pencil... I can't finish the test. The Monitor
+    is coming!
+  SuccessMessage: Thank you... but it's too late. The bell has rung.
+  FinalEndingMessage: 'Minh: I''ve collected all 4 fragments... What the hell are
+    you?
+
+    TheShadow: I am not a monster. I am the truth you are always running
+    from.'
+  OnItemDelivered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &8232358652353786047
 GameObject:
   m_ObjectHideFlags: 0
