@@ -7,6 +7,8 @@ public class PlayerHUDManager : BaseHUD
     [SerializeField] private GameObject _cameraStateGroup;
     [SerializeField] private GameObject _pauseStateGroup;
     [SerializeField] private GameObject _gameOverStateGroup;
+    [SerializeField] private GameObject _goodEndStateGroup;
+    [SerializeField] private GameObject _badEndStateGroup;
 
     private bool _isCurrentlyOnCamera = false;
 
@@ -30,6 +32,8 @@ public class PlayerHUDManager : BaseHUD
         _cameraStateGroup.SetActive(false);
         _pauseStateGroup.SetActive(false);
         _gameOverStateGroup.SetActive(false);
+        _goodEndStateGroup.SetActive(false);
+        _badEndStateGroup.SetActive(false);
 
         // 2. Turn on only what we need
         switch (newState)
@@ -44,6 +48,14 @@ public class PlayerHUDManager : BaseHUD
 
             case HUDState.GameOver:
                 _gameOverStateGroup.SetActive(true);
+                break;
+
+            case HUDState.GoodEnd:
+                _goodEndStateGroup.SetActive(true);
+                break;
+
+            case HUDState.BadEnd:
+                _badEndStateGroup.SetActive(true);
                 break;
         }
     }

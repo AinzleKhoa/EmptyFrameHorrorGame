@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c5cbb483bddf4c478998c8960188805, type: 3}
-  m_Name: L5_ShadowGoodEndIntro
+  m_Name: L5_ShadowGoodEndPhase_0
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   Lines:
   - (His voice turns cold, sharp, and trembling with betrayal.)

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5cbb483bddf4c478998c8960188805, type: 3}
+  m_Name: L5_ShadowGoodEndPhase_2.5
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  Lines:
+  - (Breathing heavily, his silhouette flickering like a damaged film reel)
+  - "He\u2019s loud, isn't he? The Overexposed... the screaming judgment of everyone
+    who told you to 'just smile.'"
+  - "You're fighting both of us now\u2014your own sadness and their expectations.
+    It\u2019s exhausting, isn't it? To be caught between a past that won't let go
+    and a future that wants to erase you."
+  - "You\u2019re shaking, Minh. Your grip on that camera is slipping. Why keep fighting?
+    Even if you win, she\u2019s still gone! Even if you step out of this park, the
+    bench stays empty!"
+  - "I\u2019m trying to save you from that emptiness!"
+  - "But fine... if you want to see the end of this reel so badly, let\u2019s see
+    if you can handle the glare when the film finally snaps!"

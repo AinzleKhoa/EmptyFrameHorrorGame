@@ -58,4 +58,6 @@ public enum HUDState
     Gameplay,
     Pause,
     GameOver,
+    GoodEnd,
+    BadEnd
 }

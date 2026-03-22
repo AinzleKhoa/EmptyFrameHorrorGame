@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5cbb483bddf4c478998c8960188805, type: 3}
+  m_Name: L5_ShadowGoodEndPhase_1.5
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  Lines:
+  - Still snapping away, huh? You think a few flashes of light make you 'better'?
+    All you're doing is hurting your eyes.
+  - "You\u2019re trying to burn me out of the frame, but I\u2019m the one who kept
+    you company when the house went quiet!"
+  - "I\u2019m the one who understood the weight in your chest! And look... you think
+    I'm the only thing you have to fear?"
+  - "Look at the horizon, Minh. Do you hear it? The 'real' world is coming. The world
+    that thinks you\u2019re a burden. The world that wants you to 'get over it' before
+    you've even had a chance to say goodbye."
+  - "Now... He\u2019s coming for you, 'shutter-bug.' And he doesn't care about your
+    grief... he only cares about your 'progress.'"
+  - ... The Overexposed.

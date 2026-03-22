@@ -59,11 +59,16 @@ public class PlayerCamera : MonoBehaviour
 
     private void HandleRotation()
     {
-        // Change 0.1f to a smaller number for more precise control
+        // Fetch from PlayerPrefs every frame (very fast)
+        float playerPrefSens = PlayerPrefs.GetFloat("MouseSensitivity", 1.0f);
+
+        // Your base sensitivity from the inspector (set this to 1 or 2)
+        // Your fine-tuning multiplier (0.05f)
         float sensitivityMultiplier = 0.05f;
 
-        float mouseX = _lookInput.x * _mouseSensitivity * sensitivityMultiplier;
-        float mouseY = _lookInput.y * _mouseSensitivity * sensitivityMultiplier;
+        // 3. Multiply your input by BOTH the script setting and the Player's preference
+        float mouseX = _lookInput.x * _mouseSensitivity * playerPrefSens * sensitivityMultiplier;
+        float mouseY = _lookInput.y * _mouseSensitivity * playerPrefSens * sensitivityMultiplier;
 
         _yaw = transform.root.localEulerAngles.y + mouseX;
         _pitch -= mouseY;

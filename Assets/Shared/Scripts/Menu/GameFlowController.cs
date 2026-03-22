@@ -44,7 +44,19 @@ public class GameFlowController : MonoBehaviour
         Time.timeScale = 0f;
         GameBroadcast.OnInputStateChange?.Invoke("UI");
         GameBroadcast.OnHUDStateChanged?.Invoke(HUDState.GameOver);
+    }
 
-        // Now you have a central place to add "Save death count" or "Log analytics"
+    public void GoodEnd()
+    {
+        Time.timeScale = 0f;
+        GameBroadcast.OnInputStateChange?.Invoke("UI");
+        GameBroadcast.OnHUDStateChanged?.Invoke(HUDState.GoodEnd);
+    }
+
+    public void BadEnd()
+    {
+        Time.timeScale = 0f;
+        GameBroadcast.OnInputStateChange?.Invoke("UI");
+        GameBroadcast.OnHUDStateChanged?.Invoke(HUDState.BadEnd);
     }
 }

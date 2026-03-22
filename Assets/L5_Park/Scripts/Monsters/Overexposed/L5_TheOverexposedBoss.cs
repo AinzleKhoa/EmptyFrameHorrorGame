@@ -342,8 +342,7 @@ public class L5_TheOverexposedBoss : MonoBehaviour
     IEnumerator GameOverSequence()
     {
         yield return new WaitForSeconds(2.5f);
-        // Add your SceneManager.LoadScene here or show your Game Over UI
-        Debug.Log("Reloading Level...");
+        FindFirstObjectByType<GameFlowController>().KillPlayer();
     }
 
     public void SetChaseSpeed(float newSpeed)

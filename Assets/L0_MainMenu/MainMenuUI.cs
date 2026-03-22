@@ -8,6 +8,7 @@ public class MainMenuUI : MonoBehaviour
     [Header("Hierarchy Containers")]
     [SerializeField] private CanvasGroup _mainMenuCanvas;
     [SerializeField] private CanvasGroup _levelSelectCanvas;
+    [SerializeField] private CanvasGroup _settingsCanvas;
 
     [Header("Buttons to Control")]
     [SerializeField] private Button _btnContinue;
@@ -50,6 +51,7 @@ public class MainMenuUI : MonoBehaviour
         // 3. Initial state
         SetCanvasState(_mainMenuCanvas, true);
         SetCanvasState(_levelSelectCanvas, false);
+        SetCanvasState(_settingsCanvas, false);
     }
 
     private void SetButtonState(Button btn, string sceneName, GameSaveData data)
@@ -70,17 +72,25 @@ public class MainMenuUI : MonoBehaviour
         }
     }
 
-    public void PlayTransition(bool openingLevelSelect)
+    // This method is now universal for both Levels and Settings
+    public void PlayTransition(CanvasGroup targetCanvas)
     {
         StopAllCoroutines();
-        StartCoroutine(TransitionRoutine(openingLevelSelect));
+        // If the target is not main menu, fade out main menu. If target IS main menu, find whatever is open and fade it.
+        if (targetCanvas != _mainMenuCanvas)
+        {
+            StartCoroutine(TransitionToSubMenu(_mainMenuCanvas, targetCanvas));
+        }
+        else
+        {
+            // Figure out which menu is open right now and fade it back to main
+            CanvasGroup currentOpenMenu = _levelSelectCanvas.gameObject.activeSelf ? _levelSelectCanvas : _settingsCanvas;
+            StartCoroutine(TransitionToSubMenu(currentOpenMenu, _mainMenuCanvas));
+        }
     }
 
-    private IEnumerator TransitionRoutine(bool openingLevelSelect)
+    private IEnumerator TransitionToSubMenu(CanvasGroup toHide, CanvasGroup toShow)
     {
-        CanvasGroup toHide = openingLevelSelect ? _mainMenuCanvas : _levelSelectCanvas;
-        CanvasGroup toShow = openingLevelSelect ? _levelSelectCanvas : _mainMenuCanvas;
-
         yield return StartCoroutine(Fade(toHide, 0f));
         toHide.gameObject.SetActive(false);
 
