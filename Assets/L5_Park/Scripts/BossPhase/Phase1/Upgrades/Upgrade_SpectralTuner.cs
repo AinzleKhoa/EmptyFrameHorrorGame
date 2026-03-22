@@ -10,11 +10,9 @@ public class Upgrade_SpectralTuner : MonoBehaviour, IUpgradeEffect
         // Simple, clean, and works even if no shadow is spawned yet!
         L5_OutlineShadowManager.IsPassiveEnabled = true;
 
-        GameObject playerObj = GameObject.FindWithTag("Player");
-        if (playerObj == null) return;
-        if (playerObj.TryGetComponent<PlayerData>(out var data))
+        if (target.TryGetComponent<ItemData>(out var data))
         {
-            data.AddPermanentUpgrade($"{_upgradeName}: {_upgradeLore}");
+            data.AddUpgrade($"{_upgradeName}: {_upgradeLore}");
         }
 
         Debug.Log("<color=purple>Upgrade Applied:</color> Spectral Vision unlocked.");
