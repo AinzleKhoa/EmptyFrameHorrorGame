@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ItemStatusHUD : MonoBehaviour
+public class ItemStatusHUD : BaseHUD // Inherit from BaseHUD
 {
     [SerializeField] private CanvasGroup _module;
     [SerializeField] private Image _icon;
@@ -11,27 +11,43 @@ public class ItemStatusHUD : MonoBehaviour
 
     private string _currentEquippedName;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
         GameBroadcast.OnItemEquipped += HandleEquipped;
         GameBroadcast.OnItemStatusUpdate += HandleStatus;
     }
 
+    protected override void OnDisable()
+    {
+        GameBroadcast.OnItemEquipped -= HandleEquipped;
+        GameBroadcast.OnItemStatusUpdate -= HandleStatus;
+    }
+
     private void HandleEquipped(string name, Sprite icon)
     {
+        // 1. Universal Safeguard
+        if (!IsValid) return;
+
         _currentEquippedName = name;
 
-        // Get the item from your inventory helper
-        var inventory = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerInventory>();
+        // 2. Player Search Safeguard: During scene load, FindWithTag might fail
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player == null) return;
+
+        var inventory = player.GetComponentInChildren<PlayerInventory>();
+        if (inventory == null) return;
+
         var heldItem = inventory.GetCurrentlyEquippedItem();
 
-        // Does it have a cooldown script?
+        // 3. Component Safeguard
         bool shouldShow = heldItem != null && heldItem.GetComponent<ItemCooldown>() != null;
 
-        // Apply to the HUD
-        _module.alpha = shouldShow ? 1f : 0f;
+        if (_module != null)
+        {
+            _module.alpha = shouldShow ? 1f : 0f;
+        }
 
-        if (shouldShow)
+        if (shouldShow && _icon != null)
         {
             _icon.sprite = icon;
         }
@@ -39,15 +55,28 @@ public class ItemStatusHUD : MonoBehaviour
 
     private void HandleStatus(string itemName, float progress)
     {
+        // 1. Universal Safeguard
+        if (!IsValid) return;
+
+        // 2. Component Safeguard: Ensure the CanvasGroup still exists
+        if (_module == null) return;
+
         // FILTER: If the message is from a different item, ignore it!
         if (itemName != _currentEquippedName || _module.alpha <= 0) return;
 
-        _fill.fillAmount = progress;
+        // 3. UI Element Safeguards
+        if (_fill != null)
+        {
+            _fill.fillAmount = progress;
+            bool isReady = progress >= 1f;
+            _fill.color = isReady ? Color.green : Color.red;
+        }
 
-        // Visual Logic
-        bool isReady = progress >= 1f;
-        _fill.color = isReady ? Color.green : Color.red;
-        _statusText.color = isReady ? Color.green : Color.red;
-        _statusText.text = isReady ? "READY" : "CHARGING...";
+        if (_statusText != null)
+        {
+            bool isReady = progress >= 1f;
+            _statusText.color = isReady ? Color.green : Color.red;
+            _statusText.text = isReady ? "READY" : "CHARGING...";
+        }
     }
 }

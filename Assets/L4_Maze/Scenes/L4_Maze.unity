@@ -4538,6 +4538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Upgrade_PlayerStamina
       objectReference: {fileID: 0}
+    - target: {fileID: 7779953559899396335, guid: 2bf0a834c7ebaf1449785dc590ddbb3f, type: 3}
+      propertyPath: _readyPrompt
+      value: 'Permanently increases stamina capacity and recovery. [E to upgrade]'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6238,6 +6242,11 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!4 &525088557 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+  m_PrefabInstance: {fileID: 8636511359673210224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &526662385
 Mesh:
   m_ObjectHideFlags: 0
@@ -10140,6 +10149,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1401128927419545097, guid: f24a1a8dc2d927844bc16703e666817f, type: 3}
+      propertyPath: _stageTitle
+      value: Maze of Memories
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401128927419545097, guid: f24a1a8dc2d927844bc16703e666817f, type: 3}
       propertyPath: _totalRequired
       value: 5
       objectReference: {fileID: 0}
@@ -11552,6 +11565,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 549420808}
     m_Modifications:
+    - target: {fileID: 525951310175326163, guid: 9b2670a69a00fee4bb43ea71dfeb7fc3, type: 3}
+      propertyPath: _readyPrompt
+      value: 'Reveals important items through the viewfinder, including the fragments.
+        [E to upgrade]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1533591702241683127, guid: 9b2670a69a00fee4bb43ea71dfeb7fc3, type: 3}
+      propertyPath: _upgradeLore
+      value: Reveals important items through the viewfinder, including the fragments.
+      objectReference: {fileID: 0}
     - target: {fileID: 6322759899613263850, guid: 9b2670a69a00fee4bb43ea71dfeb7fc3, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.2896757
@@ -11903,6 +11925,7 @@ Transform:
   - {fileID: 178714984}
   - {fileID: 325723813}
   - {fileID: 658125753}
+  - {fileID: 525088557}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &981995106 stripped
@@ -20527,6 +20550,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1080293456294104105, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080293456294104105, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080293456294104105, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080293456294104105, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1410332470355150651, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.7130003
@@ -20588,12 +20627,48 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2610263898750949002, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2610263898750949002, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 629.1747
+      value: -0.00018310547
       objectReference: {fileID: 0}
     - target: {fileID: 3935287583868644108, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251642786635822068, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251642786635822068, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251642786635822068, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251642786635822068, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176076212685584342, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176076212685584342, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176076212685584342, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176076212685584342, guid: 3d247664b30e52c4fbbf4dcf8aa1a094, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21635,6 +21710,10 @@ PrefabInstance:
     - target: {fileID: 4320498656095654106, guid: c415e5b0f419dd3478802369e3d4a7a2, type: 3}
       propertyPath: m_Name
       value: Upgrade_PlayerFootstep
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099993784294259276, guid: c415e5b0f419dd3478802369e3d4a7a2, type: 3}
+      propertyPath: _readyPrompt
+      value: 'Running and walking no longer emits noise. [E to upgrade]'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23214,6 +23293,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Upgrade_CameraBattery
       objectReference: {fileID: 0}
+    - target: {fileID: 3264023454210653523, guid: c9cc602186ab0d141abe187674051c45, type: 3}
+      propertyPath: _upgradeLore
+      value: Cooldown of polaroid camera's photo shot reduced to 15s.
+      objectReference: {fileID: 0}
     - target: {fileID: 3451330011896336614, guid: c9cc602186ab0d141abe187674051c45, type: 3}
       propertyPath: m_LocalPosition.x
       value: -50.379047
@@ -23253,6 +23336,10 @@ PrefabInstance:
     - target: {fileID: 3451330011896336614, guid: c9cc602186ab0d141abe187674051c45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871014671309149697, guid: c9cc602186ab0d141abe187674051c45, type: 3}
+      propertyPath: _readyPrompt
+      value: 'Cooldown of polaroid camera''s photo shot reduced to 15s. [E to upgrade]'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -55891,6 +55978,56 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1039049966}
     m_Modifications:
+    - target: {fileID: 767681851554003319, guid: 643ff6d61e5655a4186cac03cae970b8, type: 3}
+      propertyPath: _content
+      value: "<align=center><b><b><size=110%>SURVIVAL GUIDE</size></b></align>\r\n\r\n<color=#00FFC0><b>MOVEMENT
+        & STAMINA</b></color>\r\n\u2022 <b>Running:</b> Hold <b><color=#C0C0C0>[Shift]</color></b>
+        to sprint. This drains your <b><color=green>Stamina</color></b>. If it hits
+        zero, you become <b><color=red>Exhausted</color></b>\u2014moving slowly until
+        you recover.\r\n\u2022 <b>Crouching:</b> Press <b><color=#C0C0C0>[Ctrl]</color></b>
+        to toggle. Crouching makes you <b>Silent</b> and significantly reduces the
+        <b>Monster's Vision</b>.\r\n\r\n<color=#00FFC0><b>INVENTORY & INTERACTION</b></color>\r\n\u2022
+        <b>Storage:</b> You can carry up to <b>3 items</b>. Swap between them using
+        <b><color=#C0C0C0>[1]</color></b>, <b><color=#C0C0C0>[2]</color></b>, and
+        <b><color=#C0C0C0>[3]</color></b>.\r\n\u2022 <b>Pickup:</b> Press <b><color=#C0C0C0>[E]</color></b>
+        when looking at an item to add it to your inventory.\r\n\u2022 <b>Drop:</b>
+        Press <b><color=#C0C0C0>[Q]</color></b> to drop the item currently in your
+        hand.\r\n\u2022 <b>Interact:</b> Watch your <b><color=#C0C0C0>Cursor</color></b>.
+        A text prompt will appear underneath it whenever an object can be used or
+        picked up. <b><color=#C0C0C0>[E]</color></b>\r\n\r\n<align=center><b><b><size=120%>MAZE
+        OF MEMORIES</size></b></align>\r\n\r\n<voffset=0.5em><b><color=#00FFC0>THE
+        OBJECTIVE</color></b>\r\nFind <b><color=#FF00FF>5 Fragments (Purple outline)</color></b>
+        to open the exit.\r\n\r\n<color=#00FFC0><b>THE THREAT: OVEREXPOSED</b></color>\r\n\u2022
+        <b><color=#C0C0C0>Listen:</color></b> Use headphones. Your footsteps can
+        drown out his. Crouch or stand still to pinpoint his location.\r\n\u2022
+        <b><color=#C0C0C0>Sound Trap:</color></b> If footsteps are very close, <b>STOP
+        MOVING</b>. Walking or running alerts him instantly.\r\n\u2022 <b><color=#C0C0C0>The
+        Scream:</color></b> If he screams, he has spotted you. <b>RUN.</b> He is
+        faster than you\u2014reach a <b><color=yellow>Lit Candle</color></b> or use
+        your <b>Camera Flash</b>.\r\n\u2022 <b><color=#C0C0C0>Stealth:</color></b>
+        Crouching is your best defense. Use it to sneak past him or hide in dark
+        corners.\r\n\r\n<color=#00FFC0><b>DEFENSE TOOLS</b></color>\r\n\u2022 <b>Camera:</b>
+        Flash to <b>Stun</b> him for <b>10 seconds</b> (30s Cooldown). Toggle Viewfinder
+        with <b><color=#C0C0C0>[Right-Click]</color></b>.\r\n\u2022 <b>Lighter:</b>
+        Provides basic light and is used to ignite candles.\r\n\u2022 <b><color=yellow>Candles:</color></b>
+        Create <b>Safe Zones</b>. He is stunned for <b>3 seconds</b> if he touches
+        the light.\r\n\r\n<i>(Can be found scattered around the maze)</i>\r\n<color=#00FFC0><b>PERMANENT
+        UPGRADES</b></color>\r\n\u2022 <b><color=#C0C0C0>Silent Boots:</color></b>
+        Running and walking no longer emits noise.\r\n\u2022 <b><color=#C0C0C0>Adrenaline
+        Shot:</color></b> Increases max stamina and recovery speed.\r\n\u2022 <b><color=#C0C0C0>Industrial
+        Battery:</color></b> Reduces Camera Cooldown to 15 seconds.\r\n\u2022 <b><color=#C0C0C0>Spectral
+        Lens:</color></b> Highlights items through the Viewfinder.\r\n\r\n<color=#00FFC0><b>GLOWING
+        OUTLINES</b></color>\r\n\u2022 <b><color=#00C8FF>BLUE:</color></b> Upgrades
+        (Priority #1)\r\n\u2022 <b><color=#FF00FF>PURPLE:</color></b> Mission Progress\r\n\u2022
+        <b><color=yellow>YELLOW:</color></b> Candles & Interactive Objects\r\n\u2022
+        <b><color=white>WHITE:</color></b> General Items\r\n\u2022 <b><color=#FF6400>ORANGE:</color></b>
+        Story Records\r\n\r\n<color=#00FFC0><b>DANGER LEVELS</b></color>\r\n\u2022
+        <b>1-2 Shards:</b> Faster movement. <b>(Agile)</b>\r\n\u2022 <b>3 Shards:</b>
+        Extreme speeds. <b>(Lethal)</b>\r\n\u2022 <b>4 Shards:</b> <b>OMNISCIENT.</b>
+        He always sees you. <b>KEEP RUNNING.</b>\r\n\r\n<color=red><b>!!! CRITICAL
+        ADVICE !!!</b></color>\r\n<b>Collect <color=#00C8FF>BLUE UPGRADES</color>
+        first.</b> If you progress too fast without them, you <b>will</b> be caught."
+      objectReference: {fileID: 0}
     - target: {fileID: 1007924897203214126, guid: 643ff6d61e5655a4186cac03cae970b8, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -57808,6 +57945,71 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!1001 &8636511359673210224
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 963372674}
+    m_Modifications:
+    - target: {fileID: 886456141576268388, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_Name
+      value: LevelCompleteManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564814455938044012, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: _targetLevel
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564814455938044012, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: _goToMenuAfterSave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207625994718781229, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 61c0a878d68ee324bb4160941423f51a, type: 3}
 --- !u!1 &8637563845750300762
 GameObject:
   m_ObjectHideFlags: 0
@@ -60096,12 +60298,12 @@ SceneRoots:
   - {fileID: 8244880825915899011}
   - {fileID: 929477097}
   - {fileID: 1039049966}
+  - {fileID: 549420808}
   - {fileID: 963372674}
   - {fileID: 1799620604}
   - {fileID: 645369557}
   - {fileID: 2125752837112097969}
   - {fileID: 703787231}
   - {fileID: 7839592289072627052}
-  - {fileID: 549420808}
   - {fileID: 1699720742}
   - {fileID: 254613284345043544}

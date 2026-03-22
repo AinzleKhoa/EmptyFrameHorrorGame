@@ -44,8 +44,18 @@ public static class GameBroadcast
     // Monster interactions
     public static Action<bool> OnMonsterIsHit;
     public static Action<string> OnPlayerMovementState;
+    public static Action<bool> isPlayerFreezed;
+
+
     // Player State
     public static Action<string> OnInputStateChange;
-    public static Action<bool> OnPauseMenuToggle;    // true = Show Pause Menu graphics
-    public static Action<bool> isPlayerFreezed;
+    // The new "Universal" event
+    public static Action<HUDState> OnHUDStateChanged;
+}
+
+public enum HUDState
+{
+    Gameplay,
+    Pause,
+    GameOver,
 }

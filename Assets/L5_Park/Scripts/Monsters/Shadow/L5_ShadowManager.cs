@@ -8,7 +8,6 @@ public class L5_ShadowManager : MonoBehaviour
     [SerializeField] private List<Transform> _spawnPoints;
 
     [Header("Difficulty Settings")]
-    [SerializeField] private float _shadowDamageTime = 10f;
     [SerializeField] private float _minSpawnInterval = 20f;
     [SerializeField] private float _maxSpawnInterval = 40f;
 
@@ -28,7 +27,6 @@ public class L5_ShadowManager : MonoBehaviour
         }
         // Link this specific phase manager to the shared monster
         _activeShadow = _sharedShadow;
-        _activeShadow.SetDamageInterval(_shadowDamageTime);
         PrepareNextSpawn(); // Starts the very first countdown
         Debug.Log("<color=cyan>Manager:</color> Initialized.");
     }
@@ -54,7 +52,6 @@ public class L5_ShadowManager : MonoBehaviour
         int randomIndex = Random.Range(0, _spawnPoints.Count);
 
         // Refresh the stat in case you changed it in the inspector during play
-        _activeShadow.SetDamageInterval(_shadowDamageTime);
         _activeShadow.Manifest(_spawnPoints[randomIndex].position);
 
         // NOTE: We do NOT call PrepareNextSpawn here. 
@@ -73,12 +70,15 @@ public class L5_ShadowManager : MonoBehaviour
         // 1. Stop this script from running any more Update logic
         this.enabled = false;
 
-        // 2. Clean up the monster
+        // Unsubscribe here as a safety net if the object isn't disabled normally
+        L5_ShadowMonster.OnShadowBanished -= PrepareNextSpawn;
+
         if (_activeShadow != null)
         {
-            // Force it to hide/stop damage immediately
             _activeShadow.TakeFlash();
-            Destroy(_activeShadow.gameObject, 0.5f);
+            Destroy(_activeShadow.gameObject, 0.1f);
+            _activeShadow = null;
+            ResetSharedShadow(); // Ensure the static reference is cleared for the next phase
         }
 
         Debug.Log("<color=green>Phase 1 Manager:</color> Shutdown complete. Shadow destroyed.");

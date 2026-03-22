@@ -1,52 +1,62 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class PlayerHUDManager : MonoBehaviour
+public class PlayerHUDManager : BaseHUD
 {
     [Header("HUD Groups")]
     [SerializeField] private GameObject _normalStateGroup;
     [SerializeField] private GameObject _cameraStateGroup;
-    [SerializeField] private GameObject _menuStateGroup; // Add your Menu here
+    [SerializeField] private GameObject _pauseStateGroup;
+    [SerializeField] private GameObject _gameOverStateGroup;
 
     private bool _isCurrentlyOnCamera = false;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        GameBroadcast.OnCameraToggle += HandleCameraStateChange;
-        GameBroadcast.OnPauseMenuToggle += ShowMenu; // Listens for specific Pause events
+        GameBroadcast.OnHUDStateChanged += HandleHUDStateChange;
+        GameBroadcast.OnCameraToggle += (isOn) => { _isCurrentlyOnCamera = isOn; UpdateGameplayLayer(); };
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
-        GameBroadcast.OnCameraToggle -= HandleCameraStateChange;
-        GameBroadcast.OnPauseMenuToggle -= ShowMenu;
+        GameBroadcast.OnHUDStateChanged -= HandleHUDStateChange;
     }
 
-    // This handles switching between Normal and Camera during gameplay
-    private void HandleCameraStateChange(bool isOnCamera)
+    private void HandleHUDStateChange(HUDState newState)
     {
-        _isCurrentlyOnCamera = isOnCamera;
-        UpdateGameplayUI();
-    }
+        if (!IsValid) return;
 
-    private void ShowMenu(bool isMenuOpen)
-    {
-        _menuStateGroup.SetActive(isMenuOpen);
+        // 1. Hide EVERYTHING first (Reset to clean slate)
+        _normalStateGroup.SetActive(false);
+        _cameraStateGroup.SetActive(false);
+        _pauseStateGroup.SetActive(false);
+        _gameOverStateGroup.SetActive(false);
 
-        if (isMenuOpen)
+        // 2. Turn on only what we need
+        switch (newState)
         {
-            _normalStateGroup.SetActive(false);
-            _cameraStateGroup.SetActive(false);
-        }
-        else
-        {
-            UpdateGameplayUI();
+            case HUDState.Gameplay:
+                UpdateGameplayLayer(); // Logic to choose between Normal or Camera
+                break;
+
+            case HUDState.Pause:
+                _pauseStateGroup.SetActive(true);
+                break;
+
+            case HUDState.GameOver:
+                _gameOverStateGroup.SetActive(true);
+                break;
         }
     }
 
-    private void UpdateGameplayUI()
+    private void UpdateGameplayLayer()
     {
-        _normalStateGroup.SetActive(!_isCurrentlyOnCamera);
-        _cameraStateGroup.SetActive(_isCurrentlyOnCamera);
+        // CRITICAL: If the scene is changing or this object is destroyed, STOP.
+        if (!IsValid) return;
+
+        if (_normalStateGroup != null)
+            _normalStateGroup.SetActive(!_isCurrentlyOnCamera);
+
+        if (_cameraStateGroup != null)
+            _cameraStateGroup.SetActive(_isCurrentlyOnCamera);
     }
 }

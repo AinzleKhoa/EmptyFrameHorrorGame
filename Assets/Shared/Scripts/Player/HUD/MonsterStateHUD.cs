@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class MonsterStateHUD : MonoBehaviour
+public class MonsterStateHUD : BaseHUD // Inherit from BaseHUD
 {
     [SerializeField] private CanvasGroup _group;
     [SerializeField] private TextMeshProUGUI _displayText;
@@ -11,27 +11,42 @@ public class MonsterStateHUD : MonoBehaviour
 
     private void Awake()
     {
-        _group.alpha = 0f;
-        _displayText.text = "";
+        // Safety check for initialization
+        if (_group != null) _group.alpha = 0f;
+        if (_displayText != null) _displayText.text = "";
+    }
+
+    // Standard BaseHUD overrides 
+    // Even if not using GameBroadcast here, we must implement them.
+    protected override void OnEnable() { }
+    protected override void OnDisable()
+    {
+        _activeTraits.Clear(); // Clear traits on disable for scene restarts
     }
 
     // This is called by the Monster
     public void UpdateThreatDisplay(int count, string newTrait)
     {
-        // 1. Safety check: If the monster sends empty text, hide the HUD
+        // 1. Universal Safeguard: Is the HUD alive?
+        if (!IsValid) return;
+
+        // 2. Component Safeguard
+        if (_group == null || _displayText == null) return;
+
+        // 3. Logic check: If the monster sends empty text, hide the HUD
         if (string.IsNullOrEmpty(newTrait))
         {
             _group.alpha = 0f;
             return;
         }
 
-        // 2. Add to our active list if we don't have it yet
+        // 4. Add to our active list if we don't have it yet
         if (!_activeTraits.Contains(newTrait))
         {
             _activeTraits.Add(newTrait);
         }
 
-        // 3. Render
+        // 5. Render string construction
         string header = $"<color=#FF4500><b>MONSTER THREAT: {count}/5</b></color>";
         string traitList = "";
 
@@ -40,7 +55,11 @@ public class MonsterStateHUD : MonoBehaviour
             traitList += $"\n• {t}";
         }
 
-        _displayText.text = $"{header}{traitList}";
-        _group.alpha = 1f;
+        // 6. Final safety check before setting text
+        if (_displayText != null)
+        {
+            _displayText.text = $"{header}{traitList}";
+            _group.alpha = 1f;
+        }
     }
 }

@@ -64,6 +64,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // If the scene is changing, Unity might set enabled to false
+        if (!enabled) return;
+
         CheckGround();
         MovePlayer();
         HandleNoiseEmission(); // Moved from Update for better physics sync
@@ -86,6 +89,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
+        // Stop all movement/logic immediately when the scene starts changing
+        CancelInvoke();
+
         // Unsubscribe to prevent memory leaks
         GameBroadcast.OnCameraToggle -= HandleCameraStateChange;
     }

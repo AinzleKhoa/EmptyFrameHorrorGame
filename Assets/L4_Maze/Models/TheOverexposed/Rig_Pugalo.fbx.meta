@@ -35,7 +35,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -87,8 +87,296 @@ ModelImporter:
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
-    human: []
-    skeleton: []
+    human:
+    - boneName: rutG
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ng_l_1
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ng_r_1
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ng_l_2
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ng_r_2
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ng_l_3
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ng_r_3
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: rutgr
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ruth
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: rutgl
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: pl_1_l
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: pl_1_r
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: pl_2_l
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: pl_2_r
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: pl_3_l
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: pl_3_r
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: pl_4_l
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: pl_4_r
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ng_l_4
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: ng_r_4
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: rutrt
+      humanName: Jaw
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Rig_Pugalo(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: f1
+      parentName: Rig_Pugalo(Clone)
+      position: {x: -0, y: 0.86576384, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rutG
+      parentName: Rig_Pugalo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rutt
+      parentName: rutG
+      position: {x: -0, y: 0.9324721, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rutgr
+      parentName: rutt
+      position: {x: -0, y: 0.4434036, z: -0.035563905}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ruth
+      parentName: rutgr
+      position: {x: -0, y: 0.122811645, z: 0.019828217}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rutgl
+      parentName: ruth
+      position: {x: -0, y: 0.11557397, z: 0.023292204}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rutrt
+      parentName: rutgl
+      position: {x: -0, y: -0.11194291, z: 0.05953527}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pl_1_r
+      parentName: rutgr
+      position: {x: 0.19430542, y: -0.030792909, z: 0}
+      rotation: {x: -0.00005193788, y: -0.01361101, z: 0.14161794, w: 0.9898278}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pl_2_r
+      parentName: pl_1_r
+      position: {x: 0.17856878, y: -0.122774504, z: -0.0117344605}
+      rotation: {x: 0.0056014895, y: 0.13256493, z: -0.13792898, w: 0.9815146}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pl_3_r
+      parentName: pl_2_r
+      position: {x: 0.28599337, y: -0.016093563, z: 0.083568476}
+      rotation: {x: 0.12327381, y: -0.12666929, z: -0.0014906422, w: 0.9842541}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pl_4_r
+      parentName: pl_3_r
+      position: {x: 0.078637466, y: -0.0030023328, z: 0.0014020865}
+      rotation: {x: -0.000000029802322, y: 0.07102209, z: 0.000000029802322, w: 0.99747473}
+      scale: {x: 0.9999999, y: 1, z: 1}
+    - name: pl_1_l
+      parentName: rutgr
+      position: {x: -0.19789606, y: -0.024304682, z: 0}
+      rotation: {x: 0.00005177609, y: 0.013890501, z: -0.14117709, w: 0.98988694}
+      scale: {x: 1, y: 1, z: 1}
+    - name: pl_2_l
+      parentName: pl_1_l
+      position: {x: -0.18096904, y: -0.124193676, z: -0.012285864}
+      rotation: {x: 0.0076848897, y: -0.13515352, z: 0.12678222, w: 0.98264986}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: pl_3_l
+      parentName: pl_2_l
+      position: {x: -0.2835956, y: -0.021794824, z: 0.08471564}
+      rotation: {x: -0.032575343, y: 0.13714328, z: 0.05314845, w: 0.9885878}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: pl_4_l
+      parentName: pl_3_l
+      position: {x: -0.08333974, y: 0.00009484302, z: -0.0017585573}
+      rotation: {x: -0, y: -0, z: -0.000000004656613, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ng_r_1
+      parentName: rutt
+      position: {x: 0.11096801, y: -0.113549694, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ng_r_2
+      parentName: ng_r_1
+      position: {x: 0.017657809, y: -0.2860347, z: -0.026893297}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ng_r_3
+      parentName: ng_r_2
+      position: {x: 0.035368934, y: -0.44859043, z: -0.043667812}
+      rotation: {x: -0, y: 0.14390807, z: -0, w: 0.98959106}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ng_r_4
+      parentName: ng_r_3
+      position: {x: 0.0036332293, y: -0.06232909, z: 0.13371126}
+      rotation: {x: -0, y: 0.02114144, z: -0, w: 0.99977654}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: ng_l_1
+      parentName: rutt
+      position: {x: -0.110307135, y: -0.113549694, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ng_l_2
+      parentName: ng_l_1
+      position: {x: -0.015667764, y: -0.2860347, z: -0.026893297}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ng_l_3
+      parentName: ng_l_2
+      position: {x: -0.039382644, y: -0.44859043, z: -0.043667812}
+      rotation: {x: -0, y: -0.20493115, z: -0, w: 0.9787764}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ng_l_4
+      parentName: ng_l_3
+      position: {x: 0.010797171, y: -0.06232909, z: 0.13406764}
+      rotation: {x: -0, y: 0.04788688, z: -0, w: 0.99885285}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5

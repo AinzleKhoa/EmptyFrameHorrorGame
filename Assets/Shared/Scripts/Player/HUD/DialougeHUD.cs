@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class DialougeHUD : MonoBehaviour
+public class DialougeHUD : BaseHUD
 {
     [Header("UI References")]
     [SerializeField] private CanvasGroup _canvasGroup;
@@ -30,7 +30,7 @@ public class DialougeHUD : MonoBehaviour
 
     public void OnSkip()
     {
-        if (!_isActive) return;
+        if (!_isActive || !IsValid) return;
 
         Debug.Log("Dialogue fully skipped via Input Message");
         EndDialogue();
@@ -39,7 +39,7 @@ public class DialougeHUD : MonoBehaviour
     // Broadcast Message: Triggered when 'E' is pressed in UI Map
     public void OnClose()
     {
-        if (!_isActive) return;
+        if (!_isActive || !IsValid) return;
 
         if (_isTyping)
         {
@@ -57,7 +57,7 @@ public class DialougeHUD : MonoBehaviour
     // Called by StoryDirector via UnityEvent
     public void StartDialogue(DialogueData data)
     {
-        if (data == null || data.Lines.Count == 0) return;
+        if (data == null || data.Lines.Count == 0 || !IsValid) return;
 
         _isActive = true;
         _currentDialogueLines = data.Lines;
@@ -78,6 +78,8 @@ public class DialougeHUD : MonoBehaviour
 
         foreach (char c in _currentDialogueLines[_lineIndex].ToCharArray())
         {
+            // Safety check inside the loop in case of sudden destruction
+            if (!IsValid) yield break;
             _textDisplay.text += c;
             yield return new WaitForSeconds(_typingSpeed);
         }
@@ -134,4 +136,17 @@ public class DialougeHUD : MonoBehaviour
         _canvasGroup.blocksRaycasts = false;
         _canvasGroup.interactable = false;
     }
+
+    // SAFEGUARD: If the scene changes while someone is talking, 
+    // we must stop the typing routine and clear the state.
+    protected override void OnDisable()
+    {
+        if (_typingRoutine != null) StopCoroutine(_typingRoutine);
+        _isActive = false;
+        _isTyping = false;
+    }
+
+    // Since this script is called manually by StartDialogue, 
+    // we don't need to subscribe to GameBroadcast here.
+    protected override void OnEnable() { }
 }

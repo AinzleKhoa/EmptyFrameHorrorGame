@@ -23,9 +23,16 @@ public class ShadowStaticLogic : MonoBehaviour
     private void Update()
     {
         var shadow = L5_ShadowMonster.Instance;
+        // FIX: If the shadow is destroyed or not yet spawned, stop sound and exit
+        if (shadow == null)
+        {
+            if (_staticAudioSource.isPlaying) _staticAudioSource.Stop();
+            return;
+        }
+
         if (!shadow.IsManifested)
         {
-            _staticAudioSource.Stop();
+            if (_staticAudioSource.isPlaying) _staticAudioSource.Stop();
             return;
         }
 

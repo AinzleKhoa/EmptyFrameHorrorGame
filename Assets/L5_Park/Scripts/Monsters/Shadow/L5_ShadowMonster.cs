@@ -10,7 +10,6 @@ public class L5_ShadowMonster : MonoBehaviour
     [SerializeField] private ShadowState _currentState = ShadowState.Idle;
     public bool IsManifested => _currentState == ShadowState.Manifested;
 
-    private float _timeToDamage = 30f;
     private float _dwellTimer;
     private Renderer[] _renderers;
     private Collider[] _colliders;
@@ -21,21 +20,16 @@ public class L5_ShadowMonster : MonoBehaviour
         _renderers = GetComponentsInChildren<Renderer>();
         _colliders = GetComponentsInChildren<Collider>();
     }
-
-    private void Start() => SetState(ShadowState.Idle);
-
-    private void Update()
+    private void OnDestroy()
     {
-        if (_currentState == ShadowState.Manifested)
+        // Clear the instance so ShadowStaticLogic sees 'null' and stops
+        if (Instance == this)
         {
-            _dwellTimer += Time.deltaTime;
-            if (_dwellTimer >= _timeToDamage)
-            {
-                Debug.Log("<color=red>Shadow Drained Health!</color>");
-                _dwellTimer = 0;
-            }
+            Instance = null;
         }
     }
+
+    private void Start() => SetState(ShadowState.Idle);
 
     public void Manifest(Vector3 position)
     {
@@ -62,10 +56,5 @@ public class L5_ShadowMonster : MonoBehaviour
         foreach (var c in _colliders) c.enabled = active;
         L5_GameBroadcast.OnL5ShadowSpawned?.Invoke(active);
         _dwellTimer = 0;
-    }
-
-    public void SetDamageInterval(float newTime)
-    {
-        _timeToDamage = newTime;
     }
 }

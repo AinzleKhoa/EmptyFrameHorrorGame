@@ -23,8 +23,8 @@ public class GameFlowController : MonoBehaviour
         _isPaused = true;
 
         Time.timeScale = 0f;
-        GameBroadcast.OnInputStateChange?.Invoke("UI");   // Unlocks Mouse/Switches Map
-        GameBroadcast.OnPauseMenuToggle?.Invoke(true);    // Shows the Menu Graphics
+        GameBroadcast.OnInputStateChange?.Invoke("UI");
+        GameBroadcast.OnHUDStateChanged?.Invoke(HUDState.Pause);
     }
 
     public void ResumeGame()
@@ -34,6 +34,17 @@ public class GameFlowController : MonoBehaviour
 
         Time.timeScale = 1f;
         GameBroadcast.OnInputStateChange?.Invoke("Player"); // Locks Mouse/Switches Map
-        GameBroadcast.OnPauseMenuToggle?.Invoke(false);    // Hides the Menu Graphics
+        GameBroadcast.OnHUDStateChanged?.Invoke(HUDState.Gameplay);    // Hides the Menu Graphics
+    }
+
+    public void KillPlayer()
+    {
+        if (_isPaused) ResumeGame(); // Safety: don't double-dip states
+
+        Time.timeScale = 0f;
+        GameBroadcast.OnInputStateChange?.Invoke("UI");
+        GameBroadcast.OnHUDStateChanged?.Invoke(HUDState.GameOver);
+
+        // Now you have a central place to add "Save death count" or "Log analytics"
     }
 }

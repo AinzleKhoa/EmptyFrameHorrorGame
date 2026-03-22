@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class DocumentHUD : MonoBehaviour
+public class DocumentHUD : BaseHUD
 {
     [SerializeField] private CanvasGroup _module;
     [SerializeField] private TextMeshProUGUI _contentText;
@@ -14,16 +14,18 @@ public class DocumentHUD : MonoBehaviour
 
     private bool _isOpen = false;
 
-    private void OnEnable() => GameBroadcast.OnShowReadableContent += HandleShow;
-    private void OnDisable() => GameBroadcast.OnShowReadableContent -= HandleShow;
-
     private void HandleShow(string content, bool shouldShow)
     {
-        if (shouldShow) OpenDocument(content);
-    }
+        // Use IsValid check from BaseHUD
+        if (!IsValid) return;
 
+        if (shouldShow) OpenDocument(content);
+        else if (_isOpen) CloseDocument();
+    }
     private void OpenDocument(string content)
     {
+        if (!IsValid || _module == null) return;
+
         _isOpen = true;
         _contentText.text = content;
         _module.alpha = 1f;
@@ -40,15 +42,21 @@ public class DocumentHUD : MonoBehaviour
     // TRIGGERED BY PLAYER INPUT: The "UI" Map has a "Close" action bound to [E]
     public void OnClose()
     {
-        if (_isOpen) CloseDocument();
+        // If the object was destroyed mid-frame, don't execute
+        if (!IsValid || !_isOpen) return;
+        CloseDocument();
     }
 
     public void CloseDocument()
     {
         _isOpen = false;
-        _module.alpha = 0f;
-        _module.blocksRaycasts = false;
-        _module.interactable = false;
+        // Safety check before accessing component
+        if (_module != null)
+        {
+            _module.alpha = 0f;
+            _module.blocksRaycasts = false;
+            _module.interactable = false;
+        }
 
         // BROADCAST: This switches back to "Player" map and re-locks the cursor
         GameBroadcast.OnInputStateChange?.Invoke("Player");
@@ -60,6 +68,23 @@ public class DocumentHUD : MonoBehaviour
         {
             Canvas.ForceUpdateCanvases();
             _scrollRect.verticalNormalizedPosition = 1f;
+        }
+    }
+
+    // Standard BaseHUD overrides for event safety
+    protected override void OnEnable() => GameBroadcast.OnShowReadableContent += HandleShow;
+
+    protected override void OnDisable()
+    {
+        GameBroadcast.OnShowReadableContent -= HandleShow;
+
+        // SAFEGUARD: If the scene is destroyed while the document is open,
+        // we reset the state so the next scene starts clean.
+        if (_isOpen)
+        {
+            _isOpen = false;
+            // We don't invoke OnInputStateChange here because the Broadcast 
+            // system might already be shutting down during a scene load.
         }
     }
 }

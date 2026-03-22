@@ -7,7 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(AudioSource))]
 public class TheOverexposed : MonoBehaviour
 {
-    public enum MonsterState { Roaming, Investigating, Alerting, Chasing, Stunned, Stalking }
+    public enum MonsterState { Roaming, Investigating, Alerting, Chasing, Stunned, Stalking, Jumpscare }
 
     [Header("Status")]
     public MonsterState currentState = MonsterState.Roaming;
@@ -111,6 +111,7 @@ public class TheOverexposed : MonoBehaviour
     {
         // SAFETY CHECK: If the agent is disabled (e.g., during jumpscare), skip all logic
         if (!agent.enabled) return;
+        if (currentState == MonsterState.Jumpscare) return;
 
         // 1. Always Sync Animation
         anim.SetFloat("Speed", agent.velocity.magnitude);
@@ -299,7 +300,7 @@ public class TheOverexposed : MonoBehaviour
                 Debug.Log("<color=yellow>Monster hit by light from: </color>" + hit.name);
 
                 // 3. Trigger the stun
-                TakeDamage(3f);
+                TakeDamage(1f);
 
                 // 4. DESTROY the candle so it cannot be used again
                 Destroy(candle.gameObject);
@@ -549,8 +550,11 @@ public class TheOverexposed : MonoBehaviour
         // Stop the monster and the player logic
         agent.isStopped = true;
         agent.enabled = false; // Stop navigation entirely
-
-        GameBroadcast.isPlayerFreezed?.Invoke(true);
+        currentState = MonsterState.Jumpscare;
+        if (_musicSource.isPlaying)
+        {
+            _musicSource.Stop();
+        }
 
         // Look at player immediately
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
@@ -596,8 +600,12 @@ public class TheOverexposed : MonoBehaviour
     IEnumerator GameOverSequence()
     {
         yield return new WaitForSeconds(2.5f);
-        // Add your SceneManager.LoadScene here or show your Game Over UI
-        Debug.Log("Reloading Level...");
+
+        // Call the boss to handle the state change
+        // If you don't have a Singleton, use FindFirstObjectByType
+        FindFirstObjectByType<GameFlowController>().KillPlayer();
+
+        Debug.Log("Monster handed off control to GameFlowController.");
     }
 
     // Progression Logic

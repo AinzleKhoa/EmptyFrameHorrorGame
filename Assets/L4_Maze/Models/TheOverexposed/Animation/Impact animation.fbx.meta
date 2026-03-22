@@ -17,15 +17,7 @@ ModelImporter:
     removeConstantScaleCurves: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'rutgr' has translation animation that will
-      be discarded.\n\t'ruth' has translation animation that will be discarded.\n\t'rutrt'
-      has translation animation that will be discarded.\n\t'pl_1_r' has translation
-      animation that will be discarded.\n\t'pl_2_r' has translation animation that
-      will be discarded.\n\t'ng_r_2' has translation animation that will be discarded.\n\t'ng_r_3'
-      has translation animation that will be discarded.\n\t'ng_l_2' has translation
-      animation that will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -38,7 +30,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
