@@ -39,19 +39,18 @@ public class L2_MonsterAI : MonoBehaviour
 
     private float _stuckTimer = 0f;
     private float _stuckThresholdTime = 1.5f;
-    private Vector3 _previousPosition;
+
+    private bool _alreadyProcessedHitThisStun = false;
+    private float _lastHitTime = 0f;
 
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) _player = playerObj.transform;
-
         if (MonsterAnimator == null) MonsterAnimator = GetComponentInChildren<Animator>();
 
         _idleTimer = Random.Range(MinIdleTime, MaxIdleTime);
-        _previousPosition = transform.position;
         GotoRandomPoint();
     }
 
@@ -59,34 +58,22 @@ public class L2_MonsterAI : MonoBehaviour
     {
         if (_player == null || _agent == null || !_agent.isOnNavMesh || _isStunned) return;
 
-        // --- 1. CƠ CHẾ VÀO CUA AAA ---
-        float targetSpeed = _isChasing ? RunSpeed : WalkSpeed;
+        if (MonsterAnimator != null) MonsterAnimator.SetFloat("Speed", _agent.velocity.magnitude);
 
+        float targetSpeed = _isChasing ? RunSpeed : WalkSpeed;
         if (_agent.hasPath && _agent.remainingDistance > 0.5f)
         {
             Vector3 targetDir = _agent.steeringTarget - transform.position;
             targetDir.y = 0;
-
             if (targetDir.sqrMagnitude > 0.1f)
             {
                 float angle = Vector3.Angle(transform.forward, targetDir);
-
-                if (angle > 40f)
-                {
-                    _agent.speed = Mathf.Lerp(_agent.speed, 0.5f, Time.deltaTime * 10f);
-                }
-                else
-                {
-                    _agent.speed = Mathf.Lerp(_agent.speed, targetSpeed, Time.deltaTime * 4f);
-                }
+                if (angle > 40f) _agent.speed = Mathf.Lerp(_agent.speed, 0.5f, Time.deltaTime * 10f);
+                else _agent.speed = Mathf.Lerp(_agent.speed, targetSpeed, Time.deltaTime * 4f);
             }
         }
-        else
-        {
-            _agent.speed = targetSpeed;
-        }
+        else { _agent.speed = targetSpeed; }
 
-        // --- 2. HỆ THỐNG CHỐNG KẸT ---
         if (_agent.hasPath && _agent.remainingDistance > 1f)
         {
             if (_agent.velocity.magnitude < 0.2f && _agent.speed > 1f)
@@ -94,15 +81,11 @@ public class L2_MonsterAI : MonoBehaviour
                 _stuckTimer += Time.deltaTime;
                 if (_stuckTimer >= _stuckThresholdTime)
                 {
-                    Debug.Log(gameObject.name + " IS STUCK! Warping...");
                     _stuckTimer = 0f;
                     _isChasing = false;
                     _agent.ResetPath();
-
-                    Vector3 randomEscapeDir = Random.insideUnitSphere * 2.5f;
-                    randomEscapeDir += transform.position;
-                    NavMeshHit escapeHit;
-                    if (NavMesh.SamplePosition(randomEscapeDir, out escapeHit, 4f, NavMesh.AllAreas))
+                    Vector3 randomEscapeDir = Random.insideUnitSphere * 2.5f + transform.position;
+                    if (NavMesh.SamplePosition(randomEscapeDir, out NavMeshHit escapeHit, 4f, NavMesh.AllAreas))
                     {
                         _agent.Warp(escapeHit.position);
                     }
@@ -113,14 +96,14 @@ public class L2_MonsterAI : MonoBehaviour
         }
         else { _stuckTimer = 0f; }
 
-        // --- 3. LOGIC NHÌN THẤY VÀ RƯỢT ĐUỔI ---
         float distToPlayer = Vector3.Distance(transform.position, _player.position);
         bool canSeePlayer = false;
-
         if (distToPlayer <= SightDistance)
         {
-            Vector3 dirToPlayer = (_player.position - transform.position).normalized;
-            if (!Physics.Raycast(transform.position + Vector3.up, dirToPlayer, distToPlayer, ObstacleMask))
+            Vector3 eyePos = transform.position + Vector3.up * 1.5f;
+            Vector3 targetPos = _player.position + Vector3.up * 1.0f;
+            Vector3 dirToPlayer = (targetPos - eyePos).normalized;
+            if (!Physics.Raycast(eyePos, dirToPlayer, distToPlayer, ObstacleMask))
             {
                 canSeePlayer = true;
             }
@@ -131,14 +114,13 @@ public class L2_MonsterAI : MonoBehaviour
             _isChasing = true;
             _chaseTimer = _maxChaseTime;
             _lastKnownPosition = _player.position;
-
             _pathUpdateTimer -= Time.deltaTime;
             if (_pathUpdateTimer <= 0f)
             {
+                _agent.isStopped = false;
                 _agent.SetDestination(_player.position);
                 _pathUpdateTimer = 0.2f;
             }
-
             if (MonsterAnimator) MonsterAnimator.SetBool("IsChasing", true);
             PlayAudio(ChaseAudioSource);
         }
@@ -151,8 +133,6 @@ public class L2_MonsterAI : MonoBehaviour
                 _agent.SetDestination(_lastKnownPosition);
                 _pathUpdateTimer = 0.2f;
             }
-
-            // 👉 FIX TỬ HUYỆT 1 FRAME TẠI ĐÂY: Thêm !_agent.pathPending để đợi nó nghĩ xong!
             if (_chaseTimer <= 0f || (!_agent.pathPending && _agent.remainingDistance < 1f))
             {
                 _isChasing = false;
@@ -166,7 +146,6 @@ public class L2_MonsterAI : MonoBehaviour
                 GotoRandomPoint();
                 if (MonsterAnimator) MonsterAnimator.SetBool("IsChasing", false);
             }
-
             _idleTimer -= Time.deltaTime;
             if (_idleTimer <= 0f)
             {
@@ -179,19 +158,12 @@ public class L2_MonsterAI : MonoBehaviour
     private void GotoRandomPoint()
     {
         if (_agent == null || !_agent.isOnNavMesh) return;
-
-        Vector3 randomDir = Random.insideUnitSphere * PatrolRadius;
-        randomDir += transform.position;
-        NavMeshHit hit;
-
-        if (NavMesh.SamplePosition(randomDir, out hit, PatrolRadius, NavMesh.AllAreas))
+        Vector3 randomDir = Random.insideUnitSphere * PatrolRadius + transform.position;
+        if (NavMesh.SamplePosition(randomDir, out NavMeshHit hit, PatrolRadius, NavMesh.AllAreas))
         {
             NavMeshPath path = new NavMeshPath();
             _agent.CalculatePath(hit.position, path);
-            if (path.status == NavMeshPathStatus.PathComplete)
-            {
-                _agent.SetDestination(hit.position);
-            }
+            if (path.status == NavMeshPathStatus.PathComplete) _agent.SetDestination(hit.position);
         }
     }
 
@@ -204,47 +176,43 @@ public class L2_MonsterAI : MonoBehaviour
     private IEnumerator StunRoutine()
     {
         _isStunned = true;
+        _alreadyProcessedHitThisStun = true;
+
+        // 👉 Ép con quái đứng im tại chỗ 100%
         if (_agent != null && _agent.isOnNavMesh)
         {
             _agent.isStopped = true;
             _agent.velocity = Vector3.zero;
         }
 
-        if (MonsterAnimator) MonsterAnimator.SetTrigger("HitReaction");
+        if (MonsterAnimator) MonsterAnimator.SetTrigger("Stun");
         PlayAudio(StunAudioSource);
 
+        // Đợi đủ 4 giây sếp chạy
         yield return new WaitForSeconds(StunDuration);
 
         _isStunned = false;
-        if (_agent != null && _agent.isOnNavMesh)
-        {
-            _agent.isStopped = false;
-        }
+        _alreadyProcessedHitThisStun = false;
+
+        // Quái tỉnh lại tiếp tục đi tuần
+        if (_agent != null && _agent.isOnNavMesh) _agent.isStopped = false;
         _isChasing = false;
         GotoRandomPoint();
     }
 
     public void ForceInvestigate(Vector3 targetPosition, float customChaseTime = -1f)
     {
-        if (_isStunned) return;
-
-        if (_agent == null) _agent = GetComponent<NavMeshAgent>();
-        if (_agent == null || !_agent.isOnNavMesh) return;
-
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(targetPosition, out hit, 5f, NavMesh.AllAreas))
+        if (_isStunned || _agent == null || !_agent.isOnNavMesh) return;
+        if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 5f, NavMesh.AllAreas))
         {
             NavMeshPath path = new NavMeshPath();
             _agent.CalculatePath(hit.position, path);
-
             if (path.status == NavMeshPathStatus.PathComplete || path.status == NavMeshPathStatus.PathPartial)
             {
                 _isChasing = true;
                 _chaseTimer = customChaseTime > 0 ? customChaseTime : (_maxChaseTime * 2f);
                 _lastKnownPosition = hit.position;
-
                 _agent.SetDestination(hit.position);
-
                 if (MonsterAnimator) MonsterAnimator.SetBool("IsChasing", true);
                 PlayAudio(ChaseAudioSource);
             }
@@ -253,19 +221,32 @@ public class L2_MonsterAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_isStunned) return;
+        // Đang choáng thì đứng im, không làm gì cả
+        if (_isStunned || _alreadyProcessedHitThisStun) return;
 
         if (other.CompareTag("Player"))
         {
-            if (L2_StudentCardManager.Instance != null && L2_StudentCardManager.Instance.ConsumeCard())
+            // Chống lỗi va chạm liên hoàn (đợi ít nhất 4.5 giây mới bị chạm tiếp)
+            if (Time.time - _lastHitTime < (StunDuration + 0.5f)) return;
+            _lastHitTime = Time.time;
+
+            L2_StudentCardManager cardManager = L2_StudentCardManager.Instance;
+            if (cardManager == null) cardManager = FindObjectOfType<L2_StudentCardManager>();
+
+            // NẾU CÒN THẺ -> TRỪ 1 THẺ VÀ ĐỨNG IM CHỜ SẾP CHẠY
+            if (cardManager != null && cardManager.ConsumeCard())
             {
-                GameBroadcast.OnUpdateItemDescription?.Invoke("<color=red>-1 STUDENT CARD! RUN!</color>");
+                _alreadyProcessedHitThisStun = true;
+                GameBroadcast.OnUpdateItemDescription?.Invoke("<color=yellow>-1 STUDENT CARD! RUN!</color>");
                 ApplyFlashStun();
             }
+            // NẾU HẾT THẺ -> GAME OVER
             else
             {
-                GameBroadcast.OnUpdateItemDescription?.Invoke("<color=red>DETENTION! GAME OVER!</color>");
-                StartCoroutine(GameOverRoutine());
+                GameBroadcast.OnUpdateItemDescription?.Invoke("<color=red>GAME OVER!</color>");
+                GameFlowController gameFlow = FindObjectOfType<GameFlowController>();
+                if (gameFlow != null) gameFlow.KillPlayer();
+                else StartCoroutine(GameOverRoutine());
             }
         }
     }
@@ -279,9 +260,6 @@ public class L2_MonsterAI : MonoBehaviour
 
     private void PlayAudio(AudioSource sourceToPlay)
     {
-        if (sourceToPlay != null && !sourceToPlay.isPlaying)
-        {
-            sourceToPlay.Play();
-        }
+        if (sourceToPlay != null && !sourceToPlay.isPlaying) sourceToPlay.Play();
     }
 }

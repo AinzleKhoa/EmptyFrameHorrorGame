@@ -3,21 +3,17 @@ using System.Collections.Generic;
 using System.Collections;
 using TMPro;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement; // Thêm thư viện này để chuyển màn
 
 public class L2_MazeProgression : MonoBehaviour
 {
     [Header("Tiến trình")]
     public int FragmentsCollected = 0;
-    public int TotalFragments = 4; // Vẫn để 4 vì mảnh 5 là ngoại lệ
 
     [Header("Quản lý Mảnh Vỡ (Fragments)")]
     [Tooltip("Kéo 4 mảnh đầu tiên vào đây để nó tự động ẩn/hiện")]
     public GameObject[] Fragments_1_to_4;
     [Tooltip("Kéo mảnh thứ 5 (mảnh kết thúc) vào đây")]
     public GameObject Fragment_5;
-    [Tooltip("Tên của màn chơi tiếp theo (Map 3)")]
-    public string NextSceneName = "L3_TênMapCủaBạn";
 
     [Header("Quái Vật & NPC")]
     public GameObject MonsterPrefab;
@@ -39,6 +35,9 @@ public class L2_MazeProgression : MonoBehaviour
     private float currentWalkSpeed = 3.5f;
     private float currentRunSpeed = 7.0f;
 
+    // 👉 Biến để kết nối với hệ thống chuyển màn của team
+    private LevelCompleteManager _levelCompleteManager;
+
     private void Start()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -48,6 +47,13 @@ public class L2_MazeProgression : MonoBehaviour
         // TẮT HẾT CÁC MẢNH VỠ KHI MỚI VÀO GAME
         foreach (var f in Fragments_1_to_4) { if (f != null) f.SetActive(false); }
         if (Fragment_5 != null) Fragment_5.SetActive(false);
+
+        // 👉 Tìm hệ thống LevelCompleteManager của team đang có trên Scene
+        _levelCompleteManager = FindObjectOfType<LevelCompleteManager>();
+        if (_levelCompleteManager == null)
+        {
+            Debug.LogWarning("CHÚ Ý: Không tìm thấy LevelCompleteManager! Việc chuyển màn và Save game sẽ không hoạt động. Hãy kéo prefab LevelCompleteManager vào Scene!");
+        }
     }
 
     // Hàm này sẽ được con Shadow gọi khi Minh trả bút chì
@@ -55,13 +61,18 @@ public class L2_MazeProgression : MonoBehaviour
     {
         foreach (var f in Fragments_1_to_4) { if (f != null) f.SetActive(true); }
         Debug.Log("Đã kích hoạt 4 mảnh vỡ đầu tiên!");
+
+        // 👉 ĐÃ FIX: Chuyển sang kênh HUD Objective (Góc trái)
+        GameBroadcast.OnObjectiveUpdateHUD?.Invoke("Find 4 memory fragments.");
     }
 
     // Hàm này sẽ được gọi khi Shadow nói xong câu cuối cùng
     public void ActivateFragment5()
     {
         if (Fragment_5 != null) Fragment_5.SetActive(true);
-        GameBroadcast.OnUpdateItemDescription?.Invoke("<color=yellow>A new fragment has appeared...</color>");
+
+        // 👉 ĐÃ FIX: Chuyển sang kênh HUD Objective
+        GameBroadcast.OnObjectiveUpdateHUD?.Invoke("Pick up the final fragment.");
     }
 
     public void OnFragmentPickedUp()
@@ -72,14 +83,14 @@ public class L2_MazeProgression : MonoBehaviour
         switch (FragmentsCollected)
         {
             case 1:
-                GameBroadcast.OnUpdateItemDescription?.Invoke("It's getting faster...");
+                GameBroadcast.OnObjectiveUpdateHUD?.Invoke("It's getting faster...");
                 currentWalkSpeed += 1.5f;
                 currentRunSpeed += 2.0f;
                 SyncAllMonsters();
                 break;
 
             case 2:
-                GameBroadcast.OnUpdateItemDescription?.Invoke("I hear... more footsteps!");
+                GameBroadcast.OnObjectiveUpdateHUD?.Invoke("I hear... more footsteps!");
                 L2_MonsterAI originalMonster = FindObjectOfType<L2_MonsterAI>();
                 if (originalMonster != null && SpawnPointClone != null)
                 {
@@ -96,7 +107,7 @@ public class L2_MazeProgression : MonoBehaviour
                 break;
 
             case 3:
-                GameBroadcast.OnUpdateItemDescription?.Invoke("<color=red>THEY CAN SMELL YOU!</color>");
+                GameBroadcast.OnObjectiveUpdateHUD?.Invoke("<color=red>THEY CAN SMELL YOU!</color>");
                 if (YellAudioSource) YellAudioSource.Play();
 
                 currentWalkSpeed += 1.0f;
@@ -108,16 +119,24 @@ public class L2_MazeProgression : MonoBehaviour
                 break;
 
             case 4:
-                GameBroadcast.OnUpdateItemDescription?.Invoke("Everything... has stopped.");
+                GameBroadcast.OnObjectiveUpdateHUD?.Invoke("Everything... has stopped.");
                 _isHuntCycleActive = false;
                 if (CountdownText != null) CountdownText.text = "";
                 StartCoroutine(EndMazeSequence());
                 break;
 
             case 5:
-                // NHẶT MẢNH THỨ 5 -> QUA MÀN!
-                GameBroadcast.OnUpdateItemDescription?.Invoke("Escaping the maze...");
-                SceneManager.LoadScene(NextSceneName);
+                GameBroadcast.OnObjectiveUpdateHUD?.Invoke("Escaping the maze...");
+
+                if (_levelCompleteManager != null)
+                {
+                    // Chuyển màn mượt mà + Save game tự động
+                    _levelCompleteManager.CompleteLevel();
+                }
+                else
+                {
+                    Debug.LogError("LỖI: Chưa có LevelCompleteManager trên Scene để chuyển màn!");
+                }
                 break;
         }
     }

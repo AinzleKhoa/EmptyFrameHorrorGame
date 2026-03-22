@@ -2,7 +2,7 @@
 
 public class L2_StudentCardManager : MonoBehaviour
 {
-    public static L2_StudentCardManager Instance; // Singleton để gọi ở mọi nơi cực nhanh
+    public static L2_StudentCardManager Instance;
 
     [Header("Status")]
     public int CardCount = 0;
@@ -15,19 +15,23 @@ public class L2_StudentCardManager : MonoBehaviour
     public void AddCard()
     {
         CardCount++;
-        // Mượn tạm cái bảng mô tả vật phẩm của bạn để thông báo lên màn hình!
-        GameBroadcast.OnUpdateItemDescription?.Invoke($"<color=yellow>Student ID Collected!</color>\nTotal IDs: {CardCount}");
+        GameBroadcast.OnUpdateItemDescription?.Invoke($"<color=#00FF00>+1 Student ID!</color> (Total: {CardCount})");
+
+        // In ra Console để sếp dễ kiểm tra
+        Debug.Log("ĐÃ NHẶT THẺ! Số lượng hiện tại: " + CardCount);
     }
 
-    // Hàm này sau này Quái vật và Bảng danh dự sẽ gọi để xài thẻ
     public bool ConsumeCard()
     {
         if (CardCount > 0)
         {
             CardCount--;
-            GameBroadcast.OnUpdateItemDescription?.Invoke($"<color=red>-1 Student ID</color>\nRemaining IDs: {CardCount}");
-            return true; // Trả về true tức là xài thành công (cứu 1 mạng)
+            GameBroadcast.OnUpdateItemDescription?.Invoke($"<color=yellow>Monster Attack! -1 ID!</color> (Left: {CardCount})");
+
+            // In ra Console khi bị quái vả
+            Debug.Log("QUÁI CẮN! Đã dùng 1 thẻ cứu mạng. Thẻ còn lại: " + CardCount);
+            return true;
         }
-        return false; // Hết thẻ rồi!
+        return false;
     }
 }
