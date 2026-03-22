@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShatteredFragment : InteractableBase, IHoldable
+public class L5_ShatteredFragmentInteractable : InteractableBase, IHoldable
 {
     public override string PromptMessage => _isLocked ? "The Shadow is jamming the memory..." : $"Hold [E]\nFixing Fragment:\n<size=120%>{Mathf.RoundToInt(_currentProgress)}%</size>";
 
@@ -64,7 +64,7 @@ public class ShatteredFragment : InteractableBase, IHoldable
         Debug.Log($"<color=yellow>{gameObject.name} Restored!</color> Signal sent.");
 
         // NEW: Reset and hide the object after a delay so the player can see the success
-        Invoke(nameof(ResetAndDeactivate), 1.5f);
+        ResetAndDeactivate();
     }
 
     // NEW METHOD: Resets the state and deactivates the object for reuse in later phases
@@ -73,7 +73,7 @@ public class ShatteredFragment : InteractableBase, IHoldable
         _currentProgress = 0f;
         _isComplete = false;
 
-        if (_outline != null) _outline.OutlineColor = Color.white;
+        if (_outline != null) _outline.OutlineColor = Color.red;
 
         // Deactivate the object so your Director can reactivate it for Phase 2 or 3
         gameObject.SetActive(false);

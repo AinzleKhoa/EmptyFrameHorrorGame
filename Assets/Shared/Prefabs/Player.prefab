@@ -348,7 +348,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0.00012207031, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 80.02448}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2264810205141385178
 MonoBehaviour:
@@ -772,7 +772,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0.00012207031, y: 0}
-  m_SizeDelta: {x: 0, y: 80.02448}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &3611267492501779641
 MonoBehaviour:
@@ -1525,7 +1525,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3105,7 +3105,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1808088280606273639}
   m_Direction: 2
   m_Value: 1.0000002
-  m_Size: 0.56229746
+  m_Size: 0.53969026
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3597,9 +3597,9 @@ RectTransform:
   - {fileID: 4934200385241536488}
   m_Father: {fileID: 6733763229318417687}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 481.28815, y: -40.01224}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 367.03195, y: 0}
   m_SizeDelta: {x: 280.9055, y: 80.02448}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5654690214967975028
@@ -3661,11 +3661,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.65882355, g: 0.9019608, b: 0.8117647, a: 1}
-    m_PressedColor: {r: 0.35686275, g: 0.5411765, b: 0.44705883, a: 1}
-    m_SelectedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
-    m_DisabledColor: {r: 0.2, g: 0.2, b: 0.2, a: 0.5019608}
+    m_NormalColor: {r: 0.101960786, g: 0.101960786, b: 0.101960786, a: 1}
+    m_HighlightedColor: {r: 0.85490197, g: 0.64705884, b: 0.1254902, a: 1}
+    m_PressedColor: {r: 0.54509807, g: 0.27058825, b: 0.07450981, a: 1}
+    m_SelectedColor: {r: 1, g: 0.84313726, b: 0, a: 1}
+    m_DisabledColor: {r: 0.827451, g: 0.827451, b: 0.827451, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4442,9 +4442,9 @@ RectTransform:
   - {fileID: 2772351538433828641}
   m_Father: {fileID: 1886786905666840327}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1121.0958, y: -40.01224}
   m_SizeDelta: {x: 280.9055, y: 80.02448}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &708657655404114001
@@ -5940,16 +5940,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5654182378668555283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0003163331}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0009338843}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6622476137900082728}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_SizeDelta: {x: 0, y: 848.4863}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &558883422401906189
 CanvasRenderer:
@@ -6703,17 +6703,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6312830762142890445}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0011859412}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0015989211}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5407254976315077461}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.00048828125, y: 0}
-  m_SizeDelta: {x: 388.9001, y: 50}
-  m_Pivot: {x: 1, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0.00030517578, y: -28.679691}
+  m_SizeDelta: {x: 114.3596, y: 107.3594}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &8225276521202086898
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7060,7 +7060,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7570,16 +7570,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7131322218144657562}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0003163331}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0013176952}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4803919678092645020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0.000015258789}
+  m_SizeDelta: {x: 0, y: 929.4419}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7128651459229842012
 CanvasRenderer:
@@ -7612,14 +7612,13 @@ MonoBehaviour:
   m_text: "The gate of the park clicks shut behind you. The sun has finally set,
     and for the first time in a long time, the air feels cold\u2014and that\u2019s
     okay. The world doesn't look like a masterpiece today; it looks like a Tuesday.
-    There are bills to pay, awkward conversations to have, and a bed that feels a
-    little too empty. But as you walk down the street, the camera hanging around
-    your neck feels lighter. You haven't 'cured' your grief\u2014you\u2019ve simply
-    integrated it. Grandma is gone, and the future is a terrifying, blank roll of
-    film, unexposed and uncertain. But as you look at the city lights beginning to
-    flicker on, you realize that you don't need to see the whole picture anymore.
-    You just need to be there to witness the next frame. You take a breath. A real
-    one. And you keep walking."
+    There are awkward conversations to have, and a bed that feels a little too empty.
+    But as you walk down the street, the camera hanging around your neck feels lighter.
+    You haven't 'cured' your grief\u2014you\u2019ve simply integrated it. Grandma
+    is gone, and the future is a terrifying, blank roll of film, unexposed and uncertain.
+    But as you look at the city lights beginning to flicker on, you realize that
+    you don't need to see the whole picture anymore. You just need to be there to
+    witness the next frame. You take a breath. A real one. And you keep walking."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ef09b0aab353c440b69f15e14fd87ce, type: 2}
   m_sharedMaterial: {fileID: -4749353540993623812, guid: 9ef09b0aab353c440b69f15e14fd87ce, type: 2}
@@ -8106,9 +8105,9 @@ RectTransform:
   - {fileID: 5687582475417782309}
   m_Father: {fileID: 6733763229318417687}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1463.8644, y: -40.01224}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1121.0958, y: 0}
   m_SizeDelta: {x: 280.9055, y: 80.02448}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4312080439376011031
@@ -8170,11 +8169,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.65882355, g: 0.9019608, b: 0.8117647, a: 1}
-    m_PressedColor: {r: 0.35686275, g: 0.5411765, b: 0.44705883, a: 1}
-    m_SelectedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
-    m_DisabledColor: {r: 0.2, g: 0.2, b: 0.2, a: 0.5019608}
+    m_NormalColor: {r: 0.101960786, g: 0.101960786, b: 0.101960786, a: 1}
+    m_HighlightedColor: {r: 0.85490197, g: 0.64705884, b: 0.1254902, a: 1}
+    m_PressedColor: {r: 0.54509807, g: 0.27058825, b: 0.07450981, a: 1}
+    m_SelectedColor: {r: 1, g: 0.84313726, b: 0, a: 1}
+    m_DisabledColor: {r: 0.827451, g: 0.827451, b: 0.827451, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -8942,9 +8941,9 @@ RectTransform:
   - {fileID: 1086657572373988566}
   m_Father: {fileID: 1886786905666840327}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 367.03195, y: -40.01224}
   m_SizeDelta: {x: 280.9055, y: 80.02448}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &57935838942452228
