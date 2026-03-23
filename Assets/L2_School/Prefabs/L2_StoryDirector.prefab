@@ -45,11 +45,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43de3246923dfab4a9076ea951a0419b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StoryDirector
-  _stageTitle: OUTDOOR HALLWAYS
-  _storyActs: []
+  _storyActs:
+  - ActName: The Awakening
+    Objectives:
+    - rid: 9158584882569412701
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
+  - ActName: The Notebook
+    Objectives:
+    - rid: 9158584882569412702
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
+  - ActName: The Shadow
+    Objectives:
+    - rid: 9158584882569412703
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
+  - ActName: Broken Memory
+    Objectives:
+    - rid: 9158584882569412704
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
+  - ActName: Guidance
+    Objectives:
+    - rid: 2300694527551471691
+    OnActStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    OnActFinished:
+      m_PersistentCalls:
+        m_Calls: []
+    IsActive: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2300694527551471691
+      type: {class: L1_CountObjective, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: Guidance
+        _objectiveDescription: 'The monitors are here! Find the fragment while avoiding
+          the monsters.
+
+
+          (Refers to the note on the ground near the shadow
+          for more clues).'
+        _countSignal: {fileID: 0}
+        _goalAmount: 1
+    - rid: 9158584882569412701
+      type: {class: L2_Objective_WaitSignal, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: 
+        _objectiveDescription: Near where you are, pick up the flashlight on the
+          ground.
+        _requiredSignal: {fileID: 11400000, guid: 90111fbc0a715bd4782cd15b9e1cb712, type: 2}
+    - rid: 9158584882569412702
+      type: {class: L2_Objective_WaitSignal, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: 
+        _objectiveDescription: Go to the classroom near the stairs, find the notebook
+          inside.
+        _requiredSignal: {fileID: 11400000, guid: f246a664c87bca3448ae3541c09738c9, type: 2}
+    - rid: 9158584882569412703
+      type: {class: L2_Objective_WaitSignal, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: 
+        _objectiveDescription: There is someone upstair, investigate the upper floor.
+          Talk to him.
+        _requiredSignal: {fileID: 11400000, guid: 3cd5dd09b74477145af9e4ec2c93bacb, type: 2}
+    - rid: 9158584882569412704
+      type: {class: L2_Objective_WaitSignal, ns: , asm: Assembly-CSharp}
+      data:
+        _objectiveName: 
+        _objectiveDescription: 'The pencil is lost, find it. It is located in one
+          of the classroom. Find it, then bring it back to the shadow.
+
+
+          You
+          can open the minimpa by pressing M'
+        _requiredSignal: {fileID: 11400000, guid: a0141c784335be24db971e18e8dad29d, type: 2}
 --- !u!114 &8201268104227301988
 MonoBehaviour:
   m_ObjectHideFlags: 0

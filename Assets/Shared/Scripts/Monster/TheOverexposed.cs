@@ -380,6 +380,11 @@ public class TheOverexposed : MonoBehaviour
 
     private void SetNextDestination()
     {
+        // 1. SAFETY GUARD: If you forgot to assign waypoints, don't crash!
+        if (_roomWaypoints == null || _roomWaypoints.Length == 0)
+        {
+            return;
+        }
         if (_roomWaypoints.Length < _memorySize + 1) return;
 
         int targetIndex = -1;
