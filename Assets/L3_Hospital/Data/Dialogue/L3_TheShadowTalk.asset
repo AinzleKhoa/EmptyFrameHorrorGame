@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5cbb483bddf4c478998c8960188805, type: 3}
+  m_Name: L3_TheShadowTalk
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  Lines:
+  - '...You came back.
+
+    I wondered how long it would take before curiosity dragged
+    you here again.'
+  - 'Listen carefully, Minh.
+
+    This place is not empty.
+
+    It only pretends
+    to be.'
+  - 'The hospital remembers everything that happened here.
+
+    Every scream.
+
+    Every
+    shadow that learned how to move without a body.'
+  - 'And now they wander the halls...
+
+    looking for something that still breathes.'
+  - 'But they are not fearless.
+
+    They hate the light.
+
+    Especially the violent
+    burst of a camera flash.'
+  - 'Take this camera.
+
+    When one of them comes too close...
+
+    look at it
+    through the lens and strike with light.'
+  - 'It won''t destroy them.
+
+    Nothing truly disappears here.
+
+    But it will
+    make them stumble... long enough for you to run.'
+  - 'If you want to leave this place,
+
+    you must find the three fragments scattered
+    through the hospital.'
+  - 'Pieces of a photograph.
+
+    Or maybe pieces of a memory this place refuses
+    to forget.'
+  - 'Somewhere in the halls you''ll find locked chests.
+
+    Inside them are puzzles
+    left behind by those who tried to escape.'
+  - 'Solve them if you can.
+
+    But don''t celebrate too early.
+
+    Not every
+    chest rewards hope.
+
+    Sometimes... it only wastes your time.'
+  - 'And time is the one thing you don''t have.
+
+    The longer you stay here,
+
+    the
+    more the shadows begin to notice you.'
+  - 'Find the fragments.
+
+    Keep the camera ready.
+
+    And whatever you hear
+    behind you...'
+  - Don't turn around unless you're ready to see it.
