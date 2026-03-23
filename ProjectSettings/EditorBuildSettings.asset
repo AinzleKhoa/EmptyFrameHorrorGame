@@ -24,6 +24,12 @@ EditorBuildSettings:
     path: Assets/L4_Maze/Scenes/L4_Maze.unity
     guid: b7f6891ed7805ec4a8bfc7e9fe020eb1
   - enabled: 1
+    path: Assets/L2_School/Scenes/L2_School.unity
+    guid: 1a3b8204cb00d2f43ad31dc9fe52c1a7
+  - enabled: 1
+    path: Assets/L3_Hospital/Scenes/L3_Hospital.unity
+    guid: 716a1dc8ab02c4b4daca9678b2e3f726
+  - enabled: 1
     path: Assets/L5_Park/Scenes/L5_Park.unity
     guid: 1d811255436468f46a87e33bc26871ec
   m_configObjects:
