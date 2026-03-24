@@ -2,7 +2,6 @@
 
 public class L3_PhotoProgression : MonoBehaviour
 {
-    // 👉 VŨ KHÍ BÍ MẬT: Khai báo Instance để các bức ảnh gọi trực tiếp
     public static L3_PhotoProgression Instance;
 
     [Header("Tiến trình Màn 3")]
@@ -13,11 +12,15 @@ public class L3_PhotoProgression : MonoBehaviour
     [Tooltip("Kéo điểm đến (Sảnh) vào đây!")]
     public Transform LobbySpawnPoint;
 
+    [Header("NPC Shadow Cuối Cùng")]
+    [Tooltip("Kéo NPC Shadow ở Sảnh vào đây")]
+    public GameObject FinalShadowNPC;
+
     private GameObject _player;
 
     private void Awake()
     {
-        Instance = this; // Bật cờ đánh dấu vị trí lãnh đạo
+        Instance = this;
     }
 
     private void Start()
@@ -25,7 +28,10 @@ public class L3_PhotoProgression : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         if (_player == null) Debug.LogWarning("MÀN 3: Không tìm thấy Player!");
 
-        GameBroadcast.OnObjectiveUpdateHUD?.Invoke($"Find {TotalPhotosNeeded} photos.");
+        GameBroadcast.OnObjectiveUpdateHUD?.Invoke($"Find {TotalPhotosNeeded} photo fragments.");
+
+        // Tắt NPC Shadow cuối cùng lúc mới vào game
+        if (FinalShadowNPC != null) FinalShadowNPC.SetActive(false);
     }
 
     public void OnPhotoPickedUp()
@@ -35,11 +41,16 @@ public class L3_PhotoProgression : MonoBehaviour
 
         if (PhotosCollected < TotalPhotosNeeded)
         {
-            GameBroadcast.OnObjectiveUpdateHUD?.Invoke($"Photos collected: {PhotosCollected}/{TotalPhotosNeeded}");
+            GameBroadcast.OnObjectiveUpdateHUD?.Invoke($"Fragments collected: {PhotosCollected}/{TotalPhotosNeeded}");
         }
         else
         {
-            GameBroadcast.OnObjectiveUpdateHUD?.Invoke("All photos found! Returning to the lobby...");
+            // --- KHI ĐỦ 5 MẢNH ---
+            GameBroadcast.OnObjectiveUpdateHUD?.Invoke("Talk to Shadow in the Lobby.");
+
+            // Hiện NPC Shadow lên để người chơi ra nói chuyện
+            if (FinalShadowNPC != null) FinalShadowNPC.SetActive(true);
+
             TeleportPlayerToLobby();
         }
     }
